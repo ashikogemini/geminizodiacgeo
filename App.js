@@ -308,7 +308,7 @@ function HomeScreen() {
 
           {/* 2. 8 ინდიკატორი (4 ზევით, 4 ქვევით) ხაზების გარეშე */}
           <View style={styles.card}>
-            <Text style={styles.cardTitle}>✨ ტყუპები დღეს</Text>
+            <Text style={[styles.cardTitle, { color: "#ffd700", fontSize: 19, fontWeight: "bold" }]}>✨ ტყუპების ვარსკვლავური დღე</Text>
             <DailyHoroscopeCard />
             <View style={styles.indicatorsGrid}>
               {percentages.map((item, idx) => (

@@ -29,7 +29,7 @@ const renderFormattedHoroscope = (rawText) => {
 };
 
 import { useState } from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Dimensions, Modal , TextInput} from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Dimensions, Modal , TextInput, Linking} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { getMoonData } from './MoonComponent';
@@ -290,13 +290,24 @@ function HomeScreen() {
     <SafeAreaView style={styles.container} edges={['top', 'left', 'right', 'bottom']}>
       {/* Header */}
       <View style={styles.header}>
-        <View style={styles.headerLeft}>
-          <View style={styles.badge}><MaterialCommunityIcons name="zodiac-gemini" size={24} color="#d4af37" /></View>
-          <Text style={styles.brand}>@geminizodiacgeo</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Text style={{ fontSize: 22, marginRight: 6 }}>♊</Text>
+          <Text style={{ color: '#ffd700', fontSize: 14, fontWeight: 'bold' }}>@geminizodiacgeo</Text>
         </View>
-        <TouchableOpacity style={styles.iconBtn} onPress={() => alert('🔔 შეტყობინებები არ არის')}>
-          <Ionicons name="notifications-outline" size={20} color="#d4af37" />
-        </TouchableOpacity>
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+          <TouchableOpacity onPress={() => Linking.openURL('https://www.facebook.com/geminizodiacgeo')}>
+            <Ionicons name="logo-facebook" size={20} color="#ffd700" />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => Linking.openURL('https://www.instagram.com/geminizodiacgeo')}>
+            <Ionicons name="logo-instagram" size={20} color="#ffd700" />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => Linking.openURL('https://www.tiktok.com/@geminizodiacgeo')}>
+            <Ionicons name="logo-tiktok" size={20} color="#ffd700" />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => Linking.openURL('https://www.youtube.com/@geminizodiacgeo')}>
+            <Ionicons name="logo-youtube" size={20} color="#ffd700" />
+          </TouchableOpacity>
+        </View>
       </View>
 
       {/* TAB 1: მთავარი */}
@@ -1358,7 +1369,7 @@ function HomeScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#070913' },
-  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 16, paddingVertical: 12 },
+  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 16, paddingTop: 12, paddingBottom: 8 },
   headerLeft: { flexDirection: 'row', alignItems: 'center' },
   badge: { width: 36, height: 36, borderRadius: 18, backgroundColor: 'rgba(212,175,55,0.15)', justifyContent: 'center', alignItems: 'center', marginRight: 10 },
   brand: { color: '#d4af37', fontSize: 16, fontWeight: 'bold' },

@@ -1407,10 +1407,10 @@ function HomeScreen() {
 
               {/* კვირის, თვის, წლის პროგნოზების ღილაკები */}
               {[
-                { key: 'week', title: 'კვირის პროგნოზი', icon: 'calendar-outline', desc: 'მიმდინარე კვირის მთავარი ასტროლოგიური ტენდენციები' },
-                { key: 'month', title: 'თვის პროგნოზი', icon: 'time-outline', desc: 'ფინანსური, პირადი და საქმიანი პროგნოზი თვისთვის' },
-                { key: 'year', title: 'წლის პროგნოზი', icon: 'sparkles-outline', desc: 'მნიშვნელოვანი პერიოდები და ტრანსფორმაციები წელს' }
-              ].map((item) => (
+    { key: 'week', title: 'კვირის პროგნოზი', icon: 'calendar' },
+    { key: 'month', title: 'თვის პროგნოზი', icon: 'time' },
+    { key: 'year', title: 'წლის პროგნოზი', icon: 'sparkles' }
+  ].map((item) => (
                 <TouchableOpacity 
                   key={item.key} 
                   onPress={() => setSelectedForecast(item.key)}
@@ -1420,7 +1420,7 @@ function HomeScreen() {
                     <Ionicons name={item.icon} size={24} color="#d4af37" style={{ marginRight: 12 }} />
                     <View style={{ flex: 1 }}>
                       <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold', marginBottom: 2 }}>{item.title}</Text>
-                      <Text style={{ color: '#aaa', fontSize: 12 }} numberOfLines={1}>{item.desc}</Text>
+                      
                     </View>
                   </View>
                   <Ionicons name="chevron-forward" size={20} color="#d4af37" />
@@ -1437,7 +1437,7 @@ function HomeScreen() {
                   • მთვარის და მერკურის სექსტილი — აძლიერებს კონტაქტებსა და მეგობრულ ურთიერთობებს.
                 </Text>
                 <Text style={{ color: '#d1d5db', fontSize: 14, lineHeight: 18 }}>
-                  • ვენერას ტრანზიტი — მოაქვს ჰარმონია და ესთეტიკური სიამოვნება.
+                  
                 </Text>
               </View>
 
@@ -1451,7 +1451,7 @@ function HomeScreen() {
                   • იუპიტერის პოზიცია — ქმნის ზრდისა და ახალი ჰორიზონტების ათვისების შესაძლებლობას.
                 </Text>
                 <Text style={{ color: '#d1d5db', fontSize: 14, lineHeight: 18 }}>
-                  • სატურნის გავლენა — ავითარებს დისციპლინასა და მიზანმიმართულებას.
+                  
                 </Text>
               </View>
             </View>

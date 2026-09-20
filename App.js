@@ -1354,13 +1354,16 @@ function HomeScreen() {
                 </Text>
 
                 {/* ვიდეო ფლეიერი */}
-                <View style={{ width: '100%', height: 220, backgroundColor: '#000', borderRadius: 12, overflow: 'hidden', marginBottom: 16 }}>
+                <View style={{ width: '100%', height: 480, backgroundColor: '#000', borderRadius: 12, overflow: 'hidden', marginBottom: 16 }}>
                   <WebView
+    allowsFullscreenVideo={true}
+    javaScriptEnabled={true}
+    domStorageEnabled={true}
                     source={{ html: `
                       <html>
                         <body style="margin:0;background:#000;display:flex;justify-content:center;align-items:center;height:100vh;">
-                          <video width="100%" height="100%" controls autoplay playsinline style="object-fit:cover;">
-                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                          <video width="100%" height="100%" controls autoplay playsinline style="object-fit: contain; background: #000;">
+                            <source src="https://files.catbox.moe/5ghg7v.mp4" type="video/mp4">
                           </video>
                         </body>
                       </html>

@@ -1,0 +1,25 @@
+name: Daily Horoscope Update
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+jobs:
+  update-database:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Generate Horoscope
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: node generate_daily.js
+      - name: Save & Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add dailyHoroscopeData.js
+          git commit -m "🤖 ავტომატური განახლება: დღევანდელი ჰოროსკოპი" || echo "No changes"
+          git push

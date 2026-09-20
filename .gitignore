@@ -1,0 +1,6 @@
+key.txt
+my_key.txt
+*.txt
+.env*
+node_modules/
+.expo/

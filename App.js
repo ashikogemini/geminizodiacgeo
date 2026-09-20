@@ -136,7 +136,7 @@ function HomeScreen() {
     if (strengthsAiText || loadingStrengthsAi) return;
     setLoadingStrengthsAi(true);
     try {
-      const prompt = "დაწერე ტყუპებისთვის დამახასიათებელი დადებითი თვისებებისა და უნარების აღწერა. უნდა მოიცავდეს მათ სწრაფ აზროვნებას, ცნობისმოყვარეობას, მოქნილობას, ადაპტაციის უნარს, ცოდნის სწრაფად ათვისებას, მრავალფეროვან ინტერესებს, იუმორს, შემოქმედებითობასა და რთულ სიტუაციებში გამოსავლის პოვნის უნარს. თითოეული ძლიერი მხარე უნდა იყოს მოკლედ ახსნილი და არა მხოლოდ ჩამონათვალის სახით.";
+      const prompt = "დაწერე ტყუპებისთვის დამახასიათებელი დადებითი თვისებებისა და უნარების აღწერა. უნდა მოიცავდეს მათ სწრაფ აზროვნებას, ცნობისმოყვარეობას, მოქნილობას, ადაპტაციის უნარს, ცოდნის სწრაფად ათვისებას, მრავალფეროვან ინტერესებს, იუმორს, შემოქმედება";
       
       let res = "";
       if (typeof generateHoroscope === 'function') {
@@ -276,15 +276,15 @@ function HomeScreen() {
   const currentZodiacIcon = zodiacIcons[signIndex];
 
   const percentages = [
-    { label: 'სიყვარული', val: 85, color: '#ff4757', icon: 'heart' },
-    { label: 'იღბალი', val: 92, color: '#d4af37', icon: 'star' },
-    { label: 'კარიერა', val: 78, color: '#2ed573', icon: 'briefcase' },
-    { label: 'ფინანსები', val: 88, color: '#1e90ff', icon: 'wallet' },
-    { label: 'ჯანმრთელობა', val: 95, color: '#ffa502', icon: 'fitness' },
-    { label: 'ენერგია', val: 80, color: '#ff6b81', icon: 'flash' },
-    { label: 'ინტუიცია', val: 90, color: '#9b59b6', icon: 'eye' },
-    { label: 'შემოქმედება', val: 86, color: '#00d2d3', icon: 'color-palette' }
-  ];
+  { label: 'ენერგია', val: 80, color: '#ff4757', icon: 'flash' },
+  { label: 'სიყვარული', val: 85, color: '#ff6b81', icon: 'heart' },
+  { label: 'ფინანსები', val: 88, color: '#2ed573', icon: 'wallet' },
+  { label: 'კარიერა', val: 78, color: '#1e90ff', icon: 'briefcase' },
+  { label: 'იღბალი', val: 92, color: '#ffa502', icon: 'star' },
+  { label: 'ინტუიცია', val: 90, color: '#9b59b6', icon: 'eye' },
+  { label: 'ჯანმრთელობა', val: 95, color: '#ff3838', icon: 'fitness' },
+  { label: 'შემოქმედება', val: 86, color: '#00d2d3', icon: 'color-palette' }
+];
 
   return (
     <SafeAreaView style={styles.container} edges={['top', 'left', 'right', 'bottom']}>
@@ -314,7 +314,7 @@ function HomeScreen() {
               {percentages.map((item, idx) => (
                 <View key={idx} style={styles.indicatorBox}>
                   <Ionicons name={item.icon} size={18} color={item.color} style={{ marginBottom: 4 }} />
-                  <Text style={{ color: '#fff', fontSize: 11, fontWeight: '600', textAlign: 'center', marginBottom: 2 }} numberOfLines={1}>{item.label}</Text>
+                  <Text style={{ color: '#fff', fontSize: 9, fontWeight: '600', textAlign: 'center', marginBottom: 2 }} numberOfLines={1}>{item.label}</Text>
                   <Text style={{ color: item.color, fontSize: 13, fontWeight: 'bold', textAlign: 'center' }}>{item.val}%</Text>
                 </View>
               ))}

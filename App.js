@@ -1428,31 +1428,23 @@ function HomeScreen() {
               ))}
 
               {/* მოკლევადიანი ასპექტები */}
-              <View style={[styles.card, { marginTop: 10 }]}>
-                <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
+              <View style={[styles.card, { marginTop: 10, padding: 12 }]}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                   <Ionicons name="flash-outline" size={22} color="#d4af37" style={{ marginRight: 8 }} />
                   <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>მოკლევადიანი ასპექტები</Text>
                 </View>
-                <Text style={{ color: '#d1d5db', fontSize: 14, lineHeight: 18, marginBottom: 8 }}>
-                  • მთვარის და მერკურის სექსტილი — აძლიერებს კონტაქტებსა და მეგობრულ ურთიერთობებს.
-                </Text>
-                <Text style={{ color: '#d1d5db', fontSize: 14, lineHeight: 18 }}>
-                  
-                </Text>
+                
+                
               </View>
 
               {/* გრძელვადიანი ასპექტები */}
-              <View style={[styles.card, { marginTop: 14 }]}>
-                <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
+              <View style={[styles.card, { marginTop: 14, padding: 12 }]}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                   <Ionicons name="planet-outline" size={22} color="#d4af37" style={{ marginRight: 8 }} />
                   <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>გრძელვადიანი ასპექტები</Text>
                 </View>
-                <Text style={{ color: '#d1d5db', fontSize: 14, lineHeight: 18, marginBottom: 8 }}>
-                  • იუპიტერის პოზიცია — ქმნის ზრდისა და ახალი ჰორიზონტების ათვისების შესაძლებლობას.
-                </Text>
-                <Text style={{ color: '#d1d5db', fontSize: 14, lineHeight: 18 }}>
-                  
-                </Text>
+                
+                
               </View>
             </View>
           )}

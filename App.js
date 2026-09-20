@@ -1,3 +1,4 @@
+import { WebView } from 'react-native-webview';
 import { DailyHoroscopeCard } from "./DailyHoroscopeCard";
 import { FAMOUS_GEMINI_DATA } from './famousGeminiData';
 import { COMPATIBILITY_DATA } from "./compatibilityData";
@@ -38,6 +39,7 @@ import { DAILY_HOROSCOPE } from './data';
 const { width } = Dimensions.get('window');
 
 function HomeScreen() {
+  const [selectedForecast, setSelectedForecast] = useState(null);
 
   const fetchGeminiLive = async (promptText) => {
     const apiKey = process.env.EXPO_PUBLIC_GEMINI_API_KEY;
@@ -1259,77 +1261,137 @@ function HomeScreen() {
 
       {/* TAB 4: პროფილი */}
       
+      
+      
       {activeTab === 'პროგნოზები' && (
         <ScrollView contentContainerStyle={{ padding: 16, paddingBottom: 100 }}>
-          <View style={{ marginBottom: 16 }}>
-            <Text style={{ color: '#fff', fontSize: 20, fontWeight: 'bold', marginBottom: 4 }}>✨ ასტროლოგიური პროგნოზები</Text>
-            <Text style={{ color: '#d4af37', fontSize: 13 }}>აირჩიეთ პერიოდი და გაიგეთ ვარსკვლავების გზავნილი</Text>
-          </View>
+          {selectedForecast ? (
+            /* დეტალური ხედი ვიდეოთი, ლაიქებით და კომენტარებით (მხოლოდ პროგნოზების ტაბის შიგნით) */
+            <View>
+              <TouchableOpacity 
+                onPress={() => setSelectedForecast(null)} 
+                style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 16, backgroundColor: 'rgba(255,255,255,0.05)', padding: 10, borderRadius: 8, alignSelf: 'flex-start' }}
+              >
+                <Ionicons name="arrow-back" size={20} color="#d4af37" style={{ marginRight: 6 }} />
+                <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold' }}>პროგნოზებში დაბრუნება</Text>
+              </TouchableOpacity>
 
-          {/* კვირის პროგნოზი */}
-          <View style={styles.card}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
-              <Ionicons name="calendar-outline" size={22} color="#d4af37" style={{ marginRight: 8 }} />
-              <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>კვირის პროგნოზი</Text>
-            </View>
-            <Text style={{ color: '#d1d5db', fontSize: 14, lineHeight: 20 }}>
-              ამ კვირაში ტყუპებისთვის განსაკუთრებით აქტიური პერიოდია კომუნიკაციისა და ახალი იდეების განხორციელებისთვის. ელოდეთ სასიამოვნო სიურპრიზებს პირად და პროფესიულ სფეროში.
-            </Text>
-          </View>
+              <View style={styles.card}>
+                <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold', marginBottom: 8 }}>
+                  {selectedForecast === 'week' ? '📅 კვირის პროგნოზი' : selectedForecast === 'month' ? '🗓️ თვის პროგნოზი' : '✨ წლის პროგნოზი'}
+                </Text>
+                
+                <Text style={{ color: '#d1d5db', fontSize: 14, lineHeight: 20, marginBottom: 16 }}>
+                  {selectedForecast === 'week' 
+                    ? 'ამ კვირაში ტყუპებისთვის განსაკუთრებით აქტიური პერიოდია კომუნიკაციისა და ახალი იდეების განხორციელებისთვის. ელოდეთ სასიამოვნო სიურპრიზებს პირად და პროფესიულ სფეროში.'
+                    : selectedForecast === 'month'
+                    ? 'მიმდინარე თვე ხელსაყრელია ფინანსური გადაწყვეტილებებისა და ძველი წამოწყებების დასასრულებლად. ენერგია და ინტუიცია პიკზეა.'
+                    : 'ეს წელი ტყუპებისთვის ტრანსფორმაციისა და სულიერი ზრდის წელია. გაბედეთ დიდი ნაბიჯების გადადგმა და სამყარო მხარს დაგიჭერთ.'}
+                </Text>
 
-          {/* თვის პროგნოზი */}
-          <View style={styles.card}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
-              <Ionicons name="time-outline" size={22} color="#d4af37" style={{ marginRight: 8 }} />
-              <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>თვის პროგნოზი</Text>
-            </View>
-            <Text style={{ color: '#d1d5db', fontSize: 14, lineHeight: 20 }}>
-              მიმდინარე თვე ხელსაყრელია ფინანსური გადაწყვეტილებებისა და ძველი წამოწყებების დასასრულებლად. ენერგია და ინტუიცია პიკზეა.
-            </Text>
-          </View>
+                {/* ვიდეო ფლეიერი */}
+                <View style={{ width: '100%', height: 220, backgroundColor: '#000', borderRadius: 12, overflow: 'hidden', marginBottom: 16 }}>
+                  <WebView
+                    source={{ html: `
+                      <html>
+                        <body style="margin:0;background:#000;display:flex;justify-content:center;align-items:center;height:100vh;">
+                          <video width="100%" height="100%" controls autoplay playsinline style="object-fit:cover;">
+                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                          </video>
+                        </body>
+                      </html>
+                    ` }}
+                    style={{ width: '100%', height: '100%', backgroundColor: '#000' }}
+                    javaScriptEnabled={true}
+                    domStorageEnabled={true}
+                    allowsInlineMediaPlayback={true}
+                  />
+                </View>
 
-          {/* წლის პროგნოზი */}
-          <View style={styles.card}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
-              <Ionicons name="sparkles-outline" size={22} color="#d4af37" style={{ marginRight: 8 }} />
-              <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>წლის პროგნოზი</Text>
-            </View>
-            <Text style={{ color: '#d1d5db', fontSize: 14, lineHeight: 20 }}>
-              ეს წელი ტყუპებისთვის ტრანსფორმაციისა და სულიერი ზრდის წელია. გაბედეთ დიდი ნაბიჯების გადადგმა და სამყარო მხარს დაგიჭერთ.
-            </Text>
-          </View>
+                {/* ლაიქი და კომენტარები */}
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderTopWidth: 1, borderTopColor: 'rgba(255,255,255,0.1)', paddingTop: 12, marginBottom: 12 }}>
+                  <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+                    <Ionicons name="heart" size={22} color="#ef4444" />
+                    <Text style={{ color: '#fff', fontSize: 14 }}>142 მოწონება</Text>
+                  </TouchableOpacity>
+                  <Text style={{ color: '#aaa', fontSize: 14 }}>კომენტარები (12)</Text>
+                </View>
 
-          {/* მოკლევადიანი ასპექტები */}
-          <View style={styles.card}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
-              <Ionicons name="flash-outline" size={22} color="#d4af37" style={{ marginRight: 8 }} />
-              <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>მოკლევადიანი ასპექტები</Text>
+                {/* კომენტარის შეყვანის ველი */}
+                <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'rgba(255,255,255,0.05)', borderRadius: 8, paddingHorizontal: 10, paddingVertical: 6 }}>
+                  <TextInput
+                    placeholder="დაწერეთ კომენტარი..."
+                    placeholderTextColor="#888"
+                    style={{ flex: 1, color: '#fff', fontSize: 13 }}
+                  />
+                  <TouchableOpacity style={{ marginLeft: 8, backgroundColor: '#d4af37', paddingHorizontal: 12, paddingVertical: 6, borderRadius: 6 }}>
+                    <Text style={{ color: '#070913', fontSize: 12, fontWeight: 'bold' }}>გაგზავნა</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
             </View>
-            <Text style={{ color: '#d1d5db', fontSize: 14, lineHeight: 18, marginBottom: 8 }}>
-              • მთვარის და მერკურის სექსტილი — აძლიერებს კონტაქტებსა და მეგობრულ ურთიერთობებს.
-            </Text>
-            <Text style={{ color: '#d1d5db', fontSize: 14, lineHeight: 18 }}>
-              • ვენერას ტრანზიტი — მოაქვს ჰარმონია და ესთეტიკური სიამოვნება.
-            </Text>
-          </View>
+          ) : (
+            /* პროგნოზების მთავარი მენიუ თავისი ასპექტებით */
+            <View>
+              <View style={{ marginBottom: 16 }}>
+                <Text style={{ color: '#fff', fontSize: 20, fontWeight: 'bold', marginBottom: 4 }}>✨ ასტროლოგიური პროგნოზები</Text>
+                <Text style={{ color: '#d4af37', fontSize: 13 }}>აირჩიეთ პერიოდი ვიდეო პროგნოზისთვის</Text>
+              </View>
 
-          {/* გრძელვადიანი ასპექტები */}
-          <View style={styles.card}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
-              <Ionicons name="planet-outline" size={22} color="#d4af37" style={{ marginRight: 8 }} />
-              <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>გრძელვადიანი ასპექტები</Text>
+              {/* კვირის, თვის, წლის პროგნოზების ღილაკები */}
+              {[
+                { key: 'week', title: 'კვირის პროგნოზი', icon: 'calendar-outline', desc: 'მიმდინარე კვირის მთავარი ასტროლოგიური ტენდენციები' },
+                { key: 'month', title: 'თვის პროგნოზი', icon: 'time-outline', desc: 'ფინანსური, პირადი და საქმიანი პროგნოზი თვისთვის' },
+                { key: 'year', title: 'წლის პროგნოზი', icon: 'sparkles-outline', desc: 'მნიშვნელოვანი პერიოდები და ტრანსფორმაციები წელს' }
+              ].map((item) => (
+                <TouchableOpacity 
+                  key={item.key} 
+                  onPress={() => setSelectedForecast(item.key)}
+                  style={[styles.card, { marginBottom: 14, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }]}
+                >
+                  <View style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }}>
+                    <Ionicons name={item.icon} size={24} color="#d4af37" style={{ marginRight: 12 }} />
+                    <View style={{ flex: 1 }}>
+                      <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold', marginBottom: 2 }}>{item.title}</Text>
+                      <Text style={{ color: '#aaa', fontSize: 12 }} numberOfLines={1}>{item.desc}</Text>
+                    </View>
+                  </View>
+                  <Ionicons name="chevron-forward" size={20} color="#d4af37" />
+                </TouchableOpacity>
+              ))}
+
+              {/* მოკლევადიანი ასპექტები */}
+              <View style={[styles.card, { marginTop: 10 }]}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
+                  <Ionicons name="flash-outline" size={22} color="#d4af37" style={{ marginRight: 8 }} />
+                  <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>მოკლევადიანი ასპექტები</Text>
+                </View>
+                <Text style={{ color: '#d1d5db', fontSize: 14, lineHeight: 18, marginBottom: 8 }}>
+                  • მთვარის და მერკურის სექსტილი — აძლიერებს კონტაქტებსა და მეგობრულ ურთიერთობებს.
+                </Text>
+                <Text style={{ color: '#d1d5db', fontSize: 14, lineHeight: 18 }}>
+                  • ვენერას ტრანზიტი — მოაქვს ჰარმონია და ესთეტიკური სიამოვნება.
+                </Text>
+              </View>
+
+              {/* გრძელვადიანი ასპექტები */}
+              <View style={[styles.card, { marginTop: 14 }]}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
+                  <Ionicons name="planet-outline" size={22} color="#d4af37" style={{ marginRight: 8 }} />
+                  <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>გრძელვადიანი ასპექტები</Text>
+                </View>
+                <Text style={{ color: '#d1d5db', fontSize: 14, lineHeight: 18, marginBottom: 8 }}>
+                  • იუპიტერის პოზიცია — ქმნის ზრდისა და ახალი ჰორიზონტების ათვისების შესაძლებლობას.
+                </Text>
+                <Text style={{ color: '#d1d5db', fontSize: 14, lineHeight: 18 }}>
+                  • სატურნის გავლენა — ავითარებს დისციპლინასა და მიზანმიმართულებას.
+                </Text>
+              </View>
             </View>
-            <Text style={{ color: '#d1d5db', fontSize: 14, lineHeight: 18, marginBottom: 8 }}>
-              • იუპიტერის პოზიცია — ქმნის ზრდისა და ახალი ჰორიზონტების ათვისების შესაძლებლობას.
-            </Text>
-            <Text style={{ color: '#d1d5db', fontSize: 14, lineHeight: 18 }}>
-              • სატურნის გავლენა — ავითარებს დისციპლინასა და მიზანმიმართულებას.
-            </Text>
-          </View>
+          )}
         </ScrollView>
       )}
-    
-{activeTab === 'პროფილი' && (
+  {activeTab === 'პროფილი' && (
         <ScrollView contentContainerStyle={{ padding: 16, paddingBottom: 35 }}>
           <Text style={styles.pageTitle}>პროფილი</Text>
           <View style={styles.card}>

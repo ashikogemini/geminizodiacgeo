@@ -22,37 +22,37 @@ export const getMoonData = (date = new Date()) => {
   let majorPhase = null; // 'new' ან 'full'
 
   if (phaseAngle >= 345 || phaseAngle < 15) {
-    phaseName = 'ახალი მთვარე 🌑';
+    phaseName = 'ახალი მთვარე';
     statusText = 'ახალი ციკლი';
     dailyPhrase = 'დაისახეთ ახალი მიზნები, გაანთავისუფლეთ გონება და ჩაიფიქრეთ სურვილები.';
     majorPhase = 'new';
   } else if (phaseAngle >= 15 && phaseAngle < 75) {
-    phaseName = 'მზარდი ნამგალი 🌒';
+    phaseName = 'მზარდი ნამგალი';
     statusText = 'მზარდი მთვარე';
     dailyPhrase = 'ენერგია იმატებს. იდეალური დროა ახალი საქმის დასაწყებად და ინფორმაციის მოსაძიებლად.';
   } else if (phaseAngle >= 75 && phaseAngle < 105) {
-    phaseName = 'პირველი მეოთხედი 🌓';
+    phaseName = 'პირველი მეოთხედი';
     statusText = 'მზარდი მთვარე';
     dailyPhrase = 'გადადგით თამამი ნაბიჯები და დაძლიეთ პირველი წინააღმდეგობები იუმორით.';
   } else if (phaseAngle >= 105 && phaseAngle < 165) {
-    phaseName = 'მზარდი მთვარე 🌔';
+    phaseName = 'მზარდი მთვარე';
     statusText = 'მზარდი მთვარე';
     dailyPhrase = 'მოემზადეთ შედეგების მისაღებად. შეინარჩუნეთ ფოკუსი და არ გაიფანტოთ წვრილმანებზე.';
   } else if (phaseAngle >= 165 && phaseAngle < 195) {
-    phaseName = 'სავსემთვარეობა 🌕';
+    phaseName = 'სავსემთვარეობა';
     statusText = 'სრული ენერგია';
     dailyPhrase = 'ემოციების პიკი. გაუშვით ის, რაც აღარ გემსახურებათ და შეინარჩუნეთ სიმშვიდე.';
     majorPhase = 'full';
   } else if (phaseAngle >= 195 && phaseAngle < 255) {
-    phaseName = 'კლებადი მთვარე 🌖';
+    phaseName = 'კლებადი მთვარე';
     statusText = 'კლებადი მთვარე';
     dailyPhrase = 'დაფიქრდით განვლილ გზაზე. კარგი დროა შედეგების ანალიზისა და დასკვნების გამოსატანად.';
   } else if (phaseAngle >= 255 && phaseAngle < 285) {
-    phaseName = 'ბოლო მეოთხედი 🌗';
+    phaseName = 'ბოლო მეოთხედი';
     statusText = 'კლებადი მთვარე';
     dailyPhrase = 'გაათავისუფლეთ სივრცე. დაასრულეთ დაწყებული საქმეები და გადაყარეთ ზედმეტი ნივთები.';
   } else {
-    phaseName = 'კლებადი ნამგალი 🌘';
+    phaseName = 'კლებადი ნამგალი';
     statusText = 'კლებადი მთვარე';
     dailyPhrase = 'დაისვენეთ, აღიდგინეთ ძალები და მოემზადეთ ახალი ენერგეტიკული ციკლისთვის.';
   }
@@ -70,7 +70,18 @@ export const getMoonData = (date = new Date()) => {
 
   const signIndex = Math.floor(moonLon / 30) % 12;
 
-  return {
+  
+        let moonIcon = 'moon-new';
+        if (phaseAngle >= 345 || phaseAngle < 15) moonIcon = 'moon-new';
+        else if (phaseAngle >= 15 && phaseAngle < 75) moonIcon = 'moon-waxing-crescent';
+        else if (phaseAngle >= 75 && phaseAngle < 105) moonIcon = 'moon-first-quarter';
+        else if (phaseAngle >= 105 && phaseAngle < 165) moonIcon = 'moon-waxing-gibbous';
+        else if (phaseAngle >= 165 && phaseAngle < 195) moonIcon = 'moon-full';
+        else if (phaseAngle >= 195 && phaseAngle < 255) moonIcon = 'moon-waning-gibbous';
+        else if (phaseAngle >= 255 && phaseAngle < 285) moonIcon = 'moon-last-quarter';
+        else moonIcon = 'moon-waning-crescent';
+
+        return {
     phaseName,
     statusText,
     illumination,
@@ -78,5 +89,6 @@ export const getMoonData = (date = new Date()) => {
     currentIcon: ZODIAC_ICONS[signIndex],
     dailyPhrase,
     majorPhase
-  };
+  , moonIcon};
+      ;
 };

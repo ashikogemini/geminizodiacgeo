@@ -336,15 +336,24 @@ function HomeScreen() {
             </View>
             
             <View style={styles.moon3dContainer}>
-              <View style={styles.moonCircle}>
-                <MaterialCommunityIcons name={currentZodiacIcon} size={28} color="#d4af37" />
-              </View>
-              <View style={{ flex: 1, marginLeft: 14 }}>
-                <Text style={{ color: '#fff', fontSize: 15, fontWeight: 'bold' }}>{moonInfo?.phaseName || 'მთვარის ფაზა'}</Text>
-                <Text style={{ color: '#d4af37', fontSize: 13, fontWeight: '600', marginTop: 2 }}>📍 ნიშანი: {currentSign}</Text>
-                <Text style={{ color: '#aaa', fontSize: 12, marginTop: 2 }}>განათება: {moonInfo?.illumination || 0}%</Text>
+            <View style={styles.moonCircle}>
+              <MaterialCommunityIcons name={moonInfo?.moonIcon || 'moon-full'} size={38} color="#d4af37" style={{ opacity: 0.9 }} />
+              <View style={{ position: 'absolute', bottom: 3, right: 3, backgroundColor: '#070913', borderRadius: 10, padding: 2 }}>
+                <MaterialCommunityIcons name={currentZodiacIcon} size={18} color="#ffd700" />
               </View>
             </View>
+            <View style={{ flex: 1, marginLeft: 14 }}>
+              <Text style={{ color: '#fff', fontSize: 17, fontWeight: 'bold' }}>
+                {moonInfo?.phaseName ? moonInfo.phaseName.replace(/[🌑🌒🌓🌔🌕🌖🌗🌘]/g, '').trim() : 'მთვარის ფაზა'}
+              </Text>
+              <Text style={{ color: '#ffd700', fontSize: 14, fontWeight: '600', marginTop: 4 }}>
+                📍 ნიშანი: {currentSign}
+              </Text>
+              <Text style={{ color: '#ccc', fontSize: 13, marginTop: 3 }}>
+                განათება: {moonInfo?.illumination ?? '0'}%
+              </Text>
+            </View>
+          </View>
 
             <Text style={[styles.bodyText, { marginTop: 12, fontStyle: 'italic', color: '#d4af37' }]}>
               "{moonInfo?.dailyPhrase || `მთვარე ${currentSign}ის ნიშანშია. ეს პერიოდი გავლენას ახდენს თქვენს ემოციურ ფონსა და შინაგან ინტუიციაზე.`}"
@@ -1294,8 +1303,8 @@ const styles = StyleSheet.create({
   bodyText: { color: '#ccc', fontSize: 14, lineHeight: 20 },
   indicatorsGrid: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' },
   indicatorBox: { width: '23%', backgroundColor: '#131b2e', borderRadius: 12, paddingVertical: 10, paddingHorizontal: 4, marginBottom: 10, alignItems: 'center', borderWidth: 1, borderColor: 'rgba(212,175,55,0.2)' },
-  moon3dContainer: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#131b2e', padding: 12, borderRadius: 12, borderWidth: 1, borderColor: 'rgba(212,175,55,0.3)', marginTop: 8 },
-  moonCircle: { width: 52, height: 52, borderRadius: 26, backgroundColor: '#070913', justifyContent: 'center', alignItems: 'center', borderWidth: 2, borderColor: '#d4af37' },
+  moon3dContainer: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#131b2e', padding: 18, borderRadius: 16, borderWidth: 1.5, borderColor: 'rgba(212,175,55,0.4)', marginTop: 12 },
+  moonCircle: { width: 70, height: 70, borderRadius: 35, backgroundColor: '#070913', justifyContent: 'center', alignItems: 'center', borderWidth: 1.5, borderColor: '#ffd700', position: 'relative' },
   dateNavBtn: { width: 28, height: 28, borderRadius: 14, backgroundColor: '#131b2e', justifyContent: 'center', alignItems: 'center', borderWidth: 1, borderColor: 'rgba(212,175,55,0.3)' },
   moonForecastBtn: { backgroundColor: '#d4af37', borderRadius: 12, padding: 12, marginTop: 12, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' },
   modalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.8)', justifyContent: 'flex-end' },

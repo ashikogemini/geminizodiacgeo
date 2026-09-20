@@ -1247,7 +1247,78 @@ function HomeScreen() {
       )}
 
       {/* TAB 4: პროფილი */}
-      {activeTab === 'პროფილი' && (
+      
+      {activeTab === 'პროგნოზები' && (
+        <ScrollView contentContainerStyle={{ padding: 16, paddingBottom: 100 }}>
+          <View style={{ marginBottom: 16 }}>
+            <Text style={{ color: '#fff', fontSize: 20, fontWeight: 'bold', marginBottom: 4 }}>✨ ასტროლოგიური პროგნოზები</Text>
+            <Text style={{ color: '#d4af37', fontSize: 13 }}>აირჩიეთ პერიოდი და გაიგეთ ვარსკვლავების გზავნილი</Text>
+          </View>
+
+          {/* კვირის პროგნოზი */}
+          <View style={styles.card}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
+              <Ionicons name="calendar-outline" size={22} color="#d4af37" style={{ marginRight: 8 }} />
+              <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>კვირის პროგნოზი</Text>
+            </View>
+            <Text style={{ color: '#d1d5db', fontSize: 14, lineHeight: 20 }}>
+              ამ კვირაში ტყუპებისთვის განსაკუთრებით აქტიური პერიოდია კომუნიკაციისა და ახალი იდეების განხორციელებისთვის. ელოდეთ სასიამოვნო სიურპრიზებს პირად და პროფესიულ სფეროში.
+            </Text>
+          </View>
+
+          {/* თვის პროგნოზი */}
+          <View style={styles.card}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
+              <Ionicons name="time-outline" size={22} color="#d4af37" style={{ marginRight: 8 }} />
+              <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>თვის პროგნოზი</Text>
+            </View>
+            <Text style={{ color: '#d1d5db', fontSize: 14, lineHeight: 20 }}>
+              მიმდინარე თვე ხელსაყრელია ფინანსური გადაწყვეტილებებისა და ძველი წამოწყებების დასასრულებლად. ენერგია და ინტუიცია პიკზეა.
+            </Text>
+          </View>
+
+          {/* წლის პროგნოზი */}
+          <View style={styles.card}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
+              <Ionicons name="sparkles-outline" size={22} color="#d4af37" style={{ marginRight: 8 }} />
+              <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>წლის პროგნოზი</Text>
+            </View>
+            <Text style={{ color: '#d1d5db', fontSize: 14, lineHeight: 20 }}>
+              ეს წელი ტყუპებისთვის ტრანსფორმაციისა და სულიერი ზრდის წელია. გაბედეთ დიდი ნაბიჯების გადადგმა და სამყარო მხარს დაგიჭერთ.
+            </Text>
+          </View>
+
+          {/* მოკლევადიანი ასპექტები */}
+          <View style={styles.card}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
+              <Ionicons name="flash-outline" size={22} color="#d4af37" style={{ marginRight: 8 }} />
+              <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>მოკლევადიანი ასპექტები</Text>
+            </View>
+            <Text style={{ color: '#d1d5db', fontSize: 14, lineHeight: 18, marginBottom: 8 }}>
+              • მთვარის და მერკურის სექსტილი — აძლიერებს კონტაქტებსა და მეგობრულ ურთიერთობებს.
+            </Text>
+            <Text style={{ color: '#d1d5db', fontSize: 14, lineHeight: 18 }}>
+              • ვენერას ტრანზიტი — მოაქვს ჰარმონია და ესთეტიკური სიამოვნება.
+            </Text>
+          </View>
+
+          {/* გრძელვადიანი ასპექტები */}
+          <View style={styles.card}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
+              <Ionicons name="planet-outline" size={22} color="#d4af37" style={{ marginRight: 8 }} />
+              <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>გრძელვადიანი ასპექტები</Text>
+            </View>
+            <Text style={{ color: '#d1d5db', fontSize: 14, lineHeight: 18, marginBottom: 8 }}>
+              • იუპიტერის პოზიცია — ქმნის ზრდისა და ახალი ჰორიზონტების ათვისების შესაძლებლობას.
+            </Text>
+            <Text style={{ color: '#d1d5db', fontSize: 14, lineHeight: 18 }}>
+              • სატურნის გავლენა — ავითარებს დისციპლინასა და მიზანმიმართულებას.
+            </Text>
+          </View>
+        </ScrollView>
+      )}
+    
+{activeTab === 'პროფილი' && (
         <ScrollView contentContainerStyle={{ padding: 16, paddingBottom: 35 }}>
           <Text style={styles.pageTitle}>პროფილი</Text>
           <View style={styles.card}>

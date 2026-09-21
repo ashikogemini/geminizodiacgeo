@@ -1501,7 +1501,7 @@ function HomeScreen() {
               <TouchableOpacity onPress={() => { setModalSource('tab'); setIsShortModalVisible(true); }} activeOpacity={0.8} style={[styles.card, { marginTop: 10, padding: 12 }]}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Ionicons name="chevron-forward" size={22} color="#d4af37" style={{ marginRight: 8 }} />
+                    <Ionicons name="flash" size={22} color="#d4af37" style={{ marginRight: 8 }} />
                     <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>მოკლევადიანი ასპექტები</Text>
                   </View>
                   <Ionicons name="chevron-forward" size={20} color="#d4af37" />

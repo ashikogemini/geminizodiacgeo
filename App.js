@@ -341,16 +341,28 @@ function HomeScreen() {
   const currentSign = zodiacSigns[signIndex];
   const currentZodiacIcon = zodiacIcons[signIndex];
 
+  // დინამიური პროცენტების გენერატორი (იცვლება ყოველდღე და ზოდიაქოს მიხედვით)
+  const getDynamicPercent = (label) => {
+    const today = new Date().toISOString().split('T')[0];
+    const sign = zodiacSigns[signIndex] || '';
+    const str = label + sign + today;
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    return 70 + (Math.abs(hash) % 29); // აბრუნებს 70%-დან 98%-მდე
+  };
+
   const percentages = [
-  { label: 'ენერგია', val: 80, color: '#ff4757', icon: 'flash' },
-  { label: 'სიყვარული', val: 85, color: '#ff6b81', icon: 'heart' },
-  { label: 'ფინანსები', val: 88, color: '#2ed573', icon: 'wallet' },
-  { label: 'კარიერა', val: 78, color: '#1e90ff', icon: 'briefcase' },
-  { label: 'იღბალი', val: 92, color: '#ffa502', icon: 'star' },
-  { label: 'ინტუიცია', val: 90, color: '#9b59b6', icon: 'eye' },
-  { label: 'ჯანმრთელობა', val: 95, color: '#ff3838', icon: 'fitness' },
-  { label: 'შემოქმედება', val: 86, color: '#00d2d3', icon: 'color-palette' }
-];
+    { label: 'ენერგია', val: getDynamicPercent('ენერგია'), color: '#ff4757', icon: 'flash' },
+    { label: 'სიყვარული', val: getDynamicPercent('სიყვარული'), color: '#ff6b81', icon: 'heart' },
+    { label: 'ფინანსები', val: getDynamicPercent('ფინანსები'), color: '#2ed573', icon: 'wallet' },
+    { label: 'კარიერა', val: getDynamicPercent('კარიერა'), color: '#1e90ff', icon: 'briefcase' },
+    { label: 'იღბალი', val: getDynamicPercent('იღბალი'), color: '#ffa502', icon: 'star' },
+    { label: 'ინტუიცია', val: getDynamicPercent('ინტუიცია'), color: '#9b59b6', icon: 'eye' },
+    { label: 'ჯანმრთელობა', val: getDynamicPercent('ჯანმრთელობა'), color: '#ff4757', icon: 'heart-pulse' },
+    { label: 'შემოქმედება', val: getDynamicPercent('შემოქმედება'), color: '#00cec9', icon: 'palette' }
+  ];
 
   return (
     <SafeAreaView style={styles.container} edges={['top', 'left', 'right', 'bottom']}>

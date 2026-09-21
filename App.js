@@ -419,7 +419,7 @@ function HomeScreen() {
                   <Ionicons name="chevron-back" size={18} color="#d4af37" />
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.dateNavBtn, { marginLeft: 6 }]} onPress={() => setSelectedDateOffset(selectedDateOffset + 1)}>
-                  <Ionicons name="chevron-forward" size={18} color="#d4af37" />
+                  <Ionicons name="flash-outline" size={18} color="#d4af37" />
                 </TouchableOpacity>
               </View>
             </View>

@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState, useEffect } from 'react';
 
 import { shortTermAspects, longTermAspects } from './dailyHoroscopeData';
@@ -181,6 +182,20 @@ function HomeScreen() {
   const fetchAllHoroscopeData = async () => {
     setIsAiLoading(true);
     try {
+      // 1. ამოწმებს დღევანდელ თარიღს და ლოკალურ მეხსიერებას
+      const todayDate = new Date().toISOString().split('T')[0];
+      const cachedKey = `daily_horo_${todayDate}`;
+      const cachedData = await AsyncStorage.getItem(cachedKey);
+
+      // თუ მონაცემები უკვე შენახულია, ტვირთავს მყისიერად!
+      if (cachedData) {
+        console.log("💾 დღევანდელი ჰოროსკოპი უკვე გენერირებულია. მოგვაქვს ლოკალური მეხსიერებიდან!");
+        setAiHoroscopeData(JSON.parse(cachedData));
+        setIsAiLoading(false);
+        return; // წყვეტს მუშაობას, AI აღარ იძახება
+      }
+
+      // 2. თუ მეხსიერება ცარიელია (ან ახალი დღეა), იძახებს AI-ს
       const apiKey = process.env.EXPO_PUBLIC_GEMINI_API_KEY ? process.env.EXPO_PUBLIC_GEMINI_API_KEY.trim() : null;
       if (!apiKey) {
         console.warn("⚠️ API Key ვერ მოიძებნა!");
@@ -190,7 +205,6 @@ function HomeScreen() {
 
       const promptText = "შენ ხარ პროფესიონალი ასტროლოგი. მოგვცე ზუსტი და აბსოლუტურად სანდო ასტროლოგიური მონაცემები ტყუპების (Gemini) ნიშნისთვის მიმდინარე პლანეტარული ტრანზიტების მიხედვით.\nგთხოვ, მოამზადო ტექსტები შემდეგი 10 კატეგორიისთვის მკაცრად JSON ფორმატში (გამოიყენე მხოლოდ JSON ობიექტი სავალდებულო გასაღებებით):\n- dailyHoroscope (დღის ჰოროსკოპის მთავარი ტექსტი)\n- overview (ზოგადი მიმოხილვა)\n- personality (პიროვნული ენერგია)\n- strengths (ძლიერი მხარეები)\n- challenges (გამოწვევები)\n- communication (კომუნიკაცია)\n- love (სიყვარული)\n- friendship (მეგობრობა)\n- career (კარიერა)\n- shortAspects (მოკლევადიანი ასპექტები)\n- longAspects (გრძელვადიანი ასპექტები)\n- indicators (ობიექტი 8 მაჩვენებლით პროცენტებში 0-100: energy, love, finance, career, luck, intuition, health, creativity)";
 
-      // პირდაპირ მივმართავთ უახლეს gemini-3.6-flash მოდელს
       const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=" + apiKey, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -203,7 +217,7 @@ function HomeScreen() {
       const data = await response.json();
       if (data.error) {
         console.error("❌ API შეცდომა:", data.error.message);
-        setIsAiLoading(false); // სერვერი დაკავებულია -> მყისიერად ვრთავთ სათადარიგო ტექსტს
+        setIsAiLoading(false);
         return;
       }
 
@@ -218,16 +232,25 @@ function HomeScreen() {
             const parsedData = JSON.parse(jsonString);
             
             setAiHoroscopeData(parsedData);
+            
+            // 3. წარმატებული AI პასუხის შენახვა ლოკალურად!
+            await AsyncStorage.setItem(cachedKey, JSON.stringify(parsedData));
+            console.log("✅ ახალი პროგნოზი წარმატებით შეინახა მთელი დღისთვის!");
+            
             setIsAiLoading(false);
-            console.log("✅ 3.6-flash მოდელმა წარმატებით დააბრუნა მონაცემები!");
+          } else {
+             setIsAiLoading(false);
           }
         } catch (parseError) {
           console.error("❌ JSON-ის პარსინგის შეცდომა:", parseError);
+          setIsAiLoading(false);
         }
+      } else {
+          setIsAiLoading(false);
       }
     } catch (error) {
       console.error("❌ ქსელის შეცდომა:", error.message);
-      setIsAiLoading(false); // ინტერნეტი გაწყდა -> მყისიერად ვრთავთ სათადარიგო ტექსტს
+      setIsAiLoading(false);
     }
   };
 

@@ -360,8 +360,8 @@ function HomeScreen() {
     { label: 'კარიერა', val: getDynamicPercent('კარიერა'), color: '#1e90ff', icon: 'briefcase' },
     { label: 'იღბალი', val: getDynamicPercent('იღბალი'), color: '#ffa502', icon: 'star' },
     { label: 'ინტუიცია', val: getDynamicPercent('ინტუიცია'), color: '#9b59b6', icon: 'eye' },
-    { label: 'ჯანმრთელობა', val: getDynamicPercent('ჯანმრთელობა'), color: '#ff4757', icon: 'heart-pulse' },
-    { label: 'შემოქმედება', val: getDynamicPercent('შემოქმედება'), color: '#00cec9', icon: 'palette' }
+    { label: 'ჯანმრთელობა', val: getDynamicPercent('ჯანმრთელობა'), color: '#ff4757', icon: 'fitness' },
+    { label: 'შემოქმედება', val: getDynamicPercent('შემოქმედება'), color: '#00cec9', icon: 'color-palette' }
   ];
 
   return (

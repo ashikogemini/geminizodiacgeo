@@ -530,8 +530,8 @@ function HomeScreen() {
       
       {activeTab === 'ტყუპები' && (
         <ScrollView contentContainerStyle={{ padding: 16, paddingBottom: 100 }}>
-          <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 6, textAlign: 'center' }}>♊ ტყუპების ჰიბრიდული ენციკლოპედია</Text>
-          <Text style={{ color: '#888', fontSize: 12, textAlign: 'center', marginBottom: 16 }}>ასტროლოგიური ტრადიცია და თანამედროვე ანალიზი</Text>
+          <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 6, textAlign: 'center' }}>♊ ტყუპების სამყარო</Text>
+          <Text style={{ color: '#888', fontSize: 12, textAlign: 'center', marginBottom: 16 }}>ხასიათი, ენერგია და ასტროლოგიური პორტრეტი</Text>
 
           
       {/* ♊ ზოგადი მიმოხილვის ღილაკი და ფანჯარა */}

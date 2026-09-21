@@ -433,7 +433,7 @@ function HomeScreen() {
                   <Ionicons name="chevron-back" size={18} color="#d4af37" />
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.dateNavBtn, { marginLeft: 6 }]} onPress={() => setSelectedDateOffset(selectedDateOffset + 1)}>
-                  <Ionicons name="flash-outline" size={18} color="#d4af37" />
+                  <Ionicons name="chevron-forward" size={18} color="#d4af37" />
                 </TouchableOpacity>
               </View>
             </View>
@@ -1456,7 +1456,7 @@ function HomeScreen() {
               <TouchableOpacity onPress={() => setIsShortModalVisible(true)} activeOpacity={0.8} style={[styles.card, { marginTop: 10, padding: 12 }]}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Ionicons name="flash-outline" size={22} color="#d4af37" style={{ marginRight: 8 }} />
+                    <Ionicons name="chevron-forward" size={22} color="#d4af37" style={{ marginRight: 8 }} />
                     <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>მოკლევადიანი ასპექტები</Text>
                   </View>
                   <Ionicons name="chevron-forward" size={20} color="#d4af37" />

@@ -510,7 +510,6 @@ function HomeScreen() {
             {/* სავსემთვარეობის ან ახალმთვარეობის პროგნოზის ღილაკი */}
             {(isNewMoon || isFullMoon) && (
               <TouchableOpacity style={styles.moonForecastBtn} onPress={() => setShowMoonModal(true)}>
-                <Ionicons name="sparkles" size={16} color="#070913" style={{ marginRight: 6 }} />
                 <Text style={{ color: '#070913', fontWeight: 'bold', fontSize: 13 }}>
                   {isNewMoon ? '🌑 ახალმთვარეობის დეტალური პროგნოზი' : '🌕 სავსემთვარეობის დეტალური პროგნოზი'}
                 </Text>

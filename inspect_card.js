@@ -1,10 +1,11 @@
 const fs = require('fs');
-if (fs.existsSync('DailyHoroscopeCard.js')) {
-  let code = fs.readFileSync('DailyHoroscopeCard.js', 'utf8');
-  let lines = code.split('\n');
-  for (let i = 0; i < Math.min(20, lines.length); i++) {
-    console.log(`${i + 1}: ${lines[i]}`);
+let code = fs.readFileSync('DailyHoroscopeCard.js', 'utf8');
+let lines = code.split('\n');
+for (let i = 0; i < lines.length; i++) {
+  if (lines[i].includes('სიყვარული') || lines[i].includes('isExpanded')) {
+    for (let j = Math.max(0, i - 5); j < Math.min(lines.length, i + 35); j++) {
+      console.log(`${j + 1}: ${lines[j]}`);
+    }
+    break;
   }
-} else {
-  console.log("ფაილი არ მოიძებნა.");
 }

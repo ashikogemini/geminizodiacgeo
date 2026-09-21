@@ -33,8 +33,8 @@ export const DailyHoroscopeCard = ({ aiData, isAiLoading }) => {
 
   return (
     <View style={{backgroundColor: "#131b2e", borderRadius: 16, padding: 16, marginVertical: 12, borderWidth: 1, borderColor: "#d4af37"}}>
-      <Text style={{color: "#d4af37", fontSize: 18, fontWeight: "bold", marginBottom: 8}}>
-        ✨ დღის ჰოროსკოპი ({currentDateTitle})
+      <Text numberOfLines={1} adjustsFontSizeToFit style={{color: "#d4af37", fontSize: 16, fontWeight: "bold", marginBottom: 8}}>
+        ✨ დღის ჰოროსკოპი • {currentDateTitle}
       </Text>
 
       <Text style={{color: "#fff", fontSize: 13, lineHeight: 18, marginBottom: 10}} numberOfLines={expanded ? undefined : 3}>

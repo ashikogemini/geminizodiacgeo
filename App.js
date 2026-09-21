@@ -1417,7 +1417,6 @@ function HomeScreen() {
             <View>
               <View style={{ marginBottom: 16 }}>
                 <Text style={{ color: '#fff', fontSize: 20, fontWeight: 'bold', marginBottom: 4 }}>✨ ასტროლოგიური პროგნოზები</Text>
-                <Text style={{ color: '#d4af37', fontSize: 13 }}>აირჩიეთ პერიოდი ვიდეო პროგნოზისთვის</Text>
               </View>
 
               {/* კვირის, თვის, წლის პროგნოზების ღილაკები */}

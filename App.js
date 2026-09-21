@@ -146,12 +146,26 @@ function HomeScreen() {
     
     return { 
       text: "📍 ნიშანი: " + defaultSign, 
-      quote: defaultQuote || `მთვარე ${defaultSign}ის ნიშანშია. ეს პერიოდი გავლენას ახდენს თქვენს ემოციურ ფონსა და შინაგან ინტუიციაზე.` 
+      quote: aiHoroscopeData.dailyHoroscope || defaultQuote || `მთვარე ${defaultSign}ის ნიშანშია. ეს პერიოდი გავლენას ახდენს თქვენს ემოციურ ფონსა და შინაგან ინტუიციაზე.` 
     };
   };
 
 
   const [isStartupModalVisible, setIsStartupModalVisible] = useState(true);
+  const [aiHoroscopeData, setAiHoroscopeData] = useState({
+    overview: "",
+    dailyHoroscope: "",
+    personality: "",
+    strengths: "",
+    challenges: "",
+    communication: "",
+    love: "",
+    friendship: "",
+    career: "",
+    shortAspects: "",
+    longAspects: ""
+  });
+  const [isAiLoading, setIsAiLoading] = useState(false);
   const [isShortModalVisible, setIsShortModalVisible] = useState(false);
   const [isLongModalVisible, setIsLongModalVisible] = useState(false);
   
@@ -162,7 +176,71 @@ function HomeScreen() {
   
   const [selectedForecast, setSelectedForecast] = useState(null);
 
+  
+  // Gemini API-ს ინტეგრაცია დღის ჰოროსკოპისა და ასპექტებისთვის
+  const fetchAllHoroscopeData = async () => {
+    setIsAiLoading(true);
+    try {
+      const apiKey = process.env.EXPO_PUBLIC_GEMINI_API_KEY ? process.env.EXPO_PUBLIC_GEMINI_API_KEY.trim() : null;
+      if (!apiKey) {
+        console.warn("⚠️ API Key ვერ მოიძებნა!");
+        setIsAiLoading(false);
+        return;
+      }
+
+      const promptText = "შენ ხარ პროფესიონალი ასტროლოგი. მოგვცე ზუსტი და აბსოლუტურად სანდო ასტროლოგიური მონაცემები ტყუპების (Gemini) ნიშნისთვის მიმდინარე პლანეტარული ტრანზიტების მიხედვით.\nგთხოვ, მოამზადო ტექსტები შემდეგი 10 კატეგორიისთვის მკაცრად JSON ფორმატში (გამოიყენე მხოლოდ JSON ობიექტი სავალდებულო გასაღებებით):\n- dailyHoroscope (დღის ჰოროსკოპის მთავარი ტექსტი)\n- overview (ზოგადი მიმოხილვა)\n- personality (პიროვნული ენერგია)\n- strengths (ძლიერი მხარეები)\n- challenges (გამოწვევები)\n- communication (კომუნიკაცია)\n- love (სიყვარული)\n- friendship (მეგობრობა)\n- career (კარიერა)\n- shortAspects (მოკლევადიანი ასპექტები)\n- longAspects (გრძელვადიანი ასპექტები)\n- indicators (ობიექტი 8 მაჩვენებლით პროცენტებში 0-100: energy, love, finance, career, luck, intuition, health, creativity)";
+
+      // პირდაპირ მივმართავთ უახლეს gemini-3.6-flash მოდელს
+      const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=" + apiKey, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: promptText }] }],
+          generationConfig: { responseMimeType: "application/json" }
+        })
+      });
+
+      const data = await response.json();
+      if (data.error) {
+        console.error("❌ API შეცდომა:", data.error.message);
+        setIsAiLoading(false); // სერვერი დაკავებულია -> მყისიერად ვრთავთ სათადარიგო ტექსტს
+        return;
+      }
+
+      const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (rawText) {
+        try {
+          const jsonStartIndex = rawText.indexOf('{');
+          const jsonEndIndex = rawText.lastIndexOf('}');
+          
+          if (jsonStartIndex !== -1 && jsonEndIndex !== -1) {
+            const jsonString = rawText.substring(jsonStartIndex, jsonEndIndex + 1);
+            const parsedData = JSON.parse(jsonString);
+            
+            setAiHoroscopeData(parsedData);
+            setIsAiLoading(false);
+            console.log("✅ 3.6-flash მოდელმა წარმატებით დააბრუნა მონაცემები!");
+          }
+        } catch (parseError) {
+          console.error("❌ JSON-ის პარსინგის შეცდომა:", parseError);
+        }
+      }
+    } catch (error) {
+      console.error("❌ ქსელის შეცდომა:", error.message);
+      setIsAiLoading(false); // ინტერნეტი გაწყდა -> მყისიერად ვრთავთ სათადარიგო ტექსტს
+    }
+  };
+
+  useEffect(() => {
+    fetchAllHoroscopeData();
+    // 8 წამში ავტომატურად ვთიშავთ ჩატვირთვას, რომ აპი არ გაიჭედოს
+    setTimeout(() => { setIsAiLoading(false); }, 20000);
+  }, []);
+
   const fetchGeminiLive = async (promptText) => {
+    // ზუსტი ასტროლოგიური კონტექსტი პლანეტების რეალური მდებარეობისთვის
+    const exactAstrologyContext = "შენ ხარ პროფესიონალი და გამოცდილი ასტროლოგი. შენი ამოცანაა ზუსტად განსაზღვრო ტყუპების (Gemini) ნიშნისთვის მიმდინარე პლანეტარული ტრანზიტები (მერკური, ვენერა, მარსი, იუპიტერი, სატურნი და სხვა პლანეტები) და მათზე დაყრდნობით გასცე სრული სიზუსტით ასტროლოგიური პასუხი. ყოველთვის დაეყრდენი რეალურ და ზუსტ ასტროლოგიურ მონაცემებს.";
+    promptText = exactAstrologyContext + "\n\n" + promptText;
     const apiKey = process.env.EXPO_PUBLIC_GEMINI_API_KEY;
     if (!apiKey) {
       console.warn("⚠️ API Key ვერ მოიძებნა .env ფაილში!");
@@ -456,9 +534,18 @@ function HomeScreen() {
           {/* 2. 8 ინდიკატორი (4 ზევით, 4 ქვევით) ხაზების გარეშე */}
           <View style={styles.card}>
             <Text style={[styles.cardTitle, { color: "#ffd700", fontSize: 19, fontWeight: "bold" }]}>✨ ტყუპების ვარსკვლავური დღე</Text>
-            <DailyHoroscopeCard />
+            <DailyHoroscopeCard aiData={aiHoroscopeData} isAiLoading={isAiLoading} />
             <View style={styles.indicatorsGrid}>
-              {percentages.map((item, idx) => (
+              {[
+                { label: 'ენერგია', val: aiHoroscopeData?.indicators?.energy || 95, icon: 'flash', color: '#ff4757' },
+                { label: 'სიყვარული', val: aiHoroscopeData?.indicators?.love || 88, icon: 'heart', color: '#ff6b81' },
+                { label: 'ფინანსები', val: aiHoroscopeData?.indicators?.finance || 75, icon: 'wallet', color: '#2ed573' },
+                { label: 'კარიერა', val: aiHoroscopeData?.indicators?.career || 92, icon: 'briefcase', color: '#1e90ff' },
+                { label: 'იღბალი', val: aiHoroscopeData?.indicators?.luck || 85, icon: 'star', color: '#ffa502' },
+                { label: 'ინტუიცია', val: aiHoroscopeData?.indicators?.intuition || 90, icon: 'eye', color: '#9b59b6' },
+                { label: 'ჯანმრთელობა', val: aiHoroscopeData?.indicators?.health || 80, icon: 'fitness', color: '#ff4757' },
+                { label: 'შემოქმედება', val: aiHoroscopeData?.indicators?.creativity || 98, icon: 'color-palette', color: '#1dd1a1' }
+              ].map((item, idx) => (
                 <View key={idx} style={styles.indicatorBox}>
                   <Ionicons name={item.icon} size={18} color={item.color} style={{ marginBottom: 4 }} />
                   <Text style={{ color: '#fff', fontSize: 9, fontWeight: '600', textAlign: 'center', marginBottom: 2 }} numberOfLines={1}>{item.label}</Text>
@@ -1574,7 +1661,7 @@ function HomeScreen() {
             <View style={{backgroundColor: '#1a233a', borderRadius: 12, padding: 12, marginBottom: 12, borderWidth: 1, borderColor: 'rgba(212,175,55,0.3)'}}>
               <Text style={{color: '#aaa', fontSize: 12, marginBottom: 4}}>⚡ მოკლევადიანი</Text>
               <Text style={{color: '#fff', fontSize: 14, fontWeight: 'bold', marginBottom: 8}} numberOfLines={1}>
-                {shortTermAspects.find(item => item.end >= new Date().toISOString().split('T')[0])?.title || 'აქტიური ასპექტი არ არის'}
+                {shortTermAspects?.find(item => item.end >= new Date().toISOString().split('T')[0])?.title || 'აქტიური ასპექტი არ არის'}
               </Text>
               <TouchableOpacity onPress={() => { setModalSource('startup'); setIsStartupModalVisible(false); setIsShortModalVisible(true);
      }} style={{backgroundColor: '#d4af37', padding: 8, borderRadius: 8, alignItems: 'center'}}>
@@ -1586,7 +1673,7 @@ function HomeScreen() {
             <View style={{backgroundColor: '#1a233a', borderRadius: 12, padding: 12, marginBottom: 18, borderWidth: 1, borderColor: 'rgba(212,175,55,0.3)'}}>
               <Text style={{color: '#aaa', fontSize: 12, marginBottom: 4}}>🪐 გრძელვადიანი</Text>
               <Text style={{color: '#fff', fontSize: 14, fontWeight: 'bold', marginBottom: 8}} numberOfLines={1}>
-                {longTermAspects.find(item => item.end >= new Date().toISOString().split('T')[0])?.title || 'აქტიური ასპექტი არ არის'}
+                {longTermAspects?.find(item => item.end >= new Date().toISOString().split('T')[0])?.title || 'აქტიური ასპექტი არ არის'}
               </Text>
               <TouchableOpacity onPress={() => { setModalSource('startup'); setIsStartupModalVisible(false); setIsLongModalVisible(true);
      }} style={{backgroundColor: '#d4af37', padding: 8, borderRadius: 8, alignItems: 'center'}}>
@@ -1610,7 +1697,7 @@ function HomeScreen() {
           <View style={{backgroundColor: '#131b2e', borderRadius: 20, padding: 20, borderWidth: 1, borderColor: '#d4af37', maxHeight: '85%'}}>
             <Text style={{color: '#d4af37', fontSize: 20, fontWeight: 'bold', marginBottom: 15, textAlign: 'center'}}>⚡ მოკლევადიანი ასპექტები</Text>
             <ScrollView showsVerticalScrollIndicator={false}>
-              {shortTermAspects
+              {(shortTermAspects || [])
                 .filter(item => item.end >= new Date().toISOString().split('T')[0])
                 .map(item => (
                   <View key={item.id} style={{backgroundColor: '#1a233a', borderRadius: 12, padding: 15, marginBottom: 12, borderWidth: 1, borderColor: 'rgba(212,175,55,0.3)'}}>
@@ -1646,7 +1733,7 @@ function HomeScreen() {
           <View style={{backgroundColor: '#131b2e', borderRadius: 20, padding: 20, borderWidth: 1, borderColor: '#d4af37', maxHeight: '85%'}}>
             <Text style={{color: '#d4af37', fontSize: 20, fontWeight: 'bold', marginBottom: 15, textAlign: 'center'}}>🪐 გრძელვადიანი ასპექტები</Text>
             <ScrollView showsVerticalScrollIndicator={false}>
-              {longTermAspects
+              {(longTermAspects || [])
                 .filter(item => item.end >= new Date().toISOString().split('T')[0])
                 .map(item => (
                   <View key={item.id} style={{backgroundColor: '#1a233a', borderRadius: 12, padding: 15, marginBottom: 12, borderWidth: 1, borderColor: 'rgba(212,175,55,0.3)'}}>

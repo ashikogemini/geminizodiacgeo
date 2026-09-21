@@ -106,6 +106,51 @@ const { width } = Dimensions.get('window');
   };
 
 function HomeScreen() {
+
+  // მათემატიკურად ზუსტი ტრანზიტის გამომთვლელი (2.28 დღიან ციკლზე დაყრდნობით)
+  const getSmartMoonTransit = (targetDate, defaultSign, zodiacSignsArray, defaultQuote) => {
+    if (!zodiacSignsArray || !defaultSign) return { text: "📍 ნიშანი: " + (defaultSign || ''), quote: defaultQuote || "" };
+    
+    const startOfDay = new Date(targetDate);
+    startOfDay.setHours(0, 0, 0, 0);
+    
+    const refDate = new Date(2026, 8, 18, 0, 0, 0); 
+    
+    const getExactIndexAtTime = (timeMs) => {
+      const diffDays = (timeMs - refDate.getTime()) / (1000 * 60 * 60 * 24);
+      let index = Math.floor(8 + diffDays / 2.28) % 12;
+      return index < 0 ? index + 12 : index;
+    };
+
+    const startSignIndex = getExactIndexAtTime(startOfDay.getTime());
+    const endSignIndex = getExactIndexAtTime(startOfDay.getTime() + (23 * 60 * 60 * 1000) + (59 * 60 * 1000));
+
+    if (startSignIndex !== endSignIndex) {
+      let transitionTime = startOfDay.getTime();
+      for (let i = 0; i <= 24 * 60; i++) {
+        const checkTime = startOfDay.getTime() + i * 60 * 1000;
+        if (getExactIndexAtTime(checkTime) !== startSignIndex) {
+          transitionTime = checkTime;
+          break;
+        }
+      }
+      const dt = new Date(transitionTime);
+      const hh = String(dt.getHours()).padStart(2, '0');
+      const mm = String(dt.getMinutes()).padStart(2, '0');
+      
+      return {
+        text: "⚡ ტრანზიტი: " + hh + ":" + mm + "-მდე " + zodiacSignsArray[startSignIndex] + " ➔ " + zodiacSignsArray[endSignIndex],
+        quote: "მთვარე დღეს ზოდიაქოს ნიშანს იცვლის. ყურადღება მიაქციეთ ენერგიების ცვლასა და ახალ ინტუიციურ სიგნალებს."
+      };
+    }
+    
+    return { 
+      text: "📍 ნიშანი: " + defaultSign, 
+      quote: defaultQuote || `მთვარე ${defaultSign}ის ნიშანშია. ეს პერიოდი გავლენას ახდენს თქვენს ემოციურ ფონსა და შინაგან ინტუიციაზე.` 
+    };
+  };
+
+
   const [isStartupModalVisible, setIsStartupModalVisible] = useState(true);
   const [isShortModalVisible, setIsShortModalVisible] = useState(false);
   const [isLongModalVisible, setIsLongModalVisible] = useState(false);
@@ -449,8 +494,8 @@ function HomeScreen() {
               <Text style={{ color: '#fff', fontSize: 17, fontWeight: 'bold' }}>
                 {moonInfo?.phaseName ? moonInfo.phaseName.replace(/[🌑🌒🌓🌔🌕🌖🌗🌘]/g, '').trim() : 'მთვარის ფაზა'}
               </Text>
-              <Text style={{ color: '#ffd700', fontSize: 14, fontWeight: '600', marginTop: 4 }}>
-                📍 ნიშანი: {currentSign}
+              <Text style={{ color: '#ffd700', fontSize: 13, fontWeight: '600', marginTop: 4 }}>
+                {getSmartMoonTransit(targetDate, currentSign, zodiacSigns, moonInfo?.dailyPhrase).text}
               </Text>
               <Text style={{ color: '#ccc', fontSize: 13, marginTop: 3 }}>
                 განათება: {moonInfo?.illumination ?? '0'}%
@@ -459,7 +504,7 @@ function HomeScreen() {
           </View>
 
             <Text style={[styles.bodyText, { marginTop: 12, fontStyle: 'italic', color: '#d4af37' }]}>
-              "{moonInfo?.dailyPhrase || `მთვარე ${currentSign}ის ნიშანშია. ეს პერიოდი გავლენას ახდენს თქვენს ემოციურ ფონსა და შინაგან ინტუიციაზე.`}"
+              "{getSmartMoonTransit(targetDate, currentSign, zodiacSigns, moonInfo?.dailyPhrase).quote}"
             </Text>
 
             {/* სავსემთვარეობის ან ახალმთვარეობის პროგნოზის ღილაკი */}

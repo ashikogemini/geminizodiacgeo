@@ -1,3 +1,6 @@
+const fs = require('fs');
+
+const completeData = `
 // ყოველდღიური ჰოროსკოპის მონაცემები
 export const DAILY_HOROSCOPE_DATA = {
   "2026-09-21": {
@@ -69,3 +72,7 @@ export const longTermAspects = [
     advice: 'ენდეთ შემოქმედებით ინტუიციას, მაგრამ მნიშვნელოვანი ფინანსური ან იურიდიული ნაბიჯების წინ გადაამოწმეთ ფაქტები.'
   }
 ];
+`;
+
+fs.writeFileSync('dailyHoroscopeData.js', completeData.trim(), 'utf8');
+console.log('✅ მონაცემთა ბაზა წარმატებით აღდგა და გაფართოვდა!');

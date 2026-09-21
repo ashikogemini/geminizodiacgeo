@@ -1,3 +1,5 @@
+import React, { useState, useEffect } from 'react';
+
 import { shortTermAspects, longTermAspects } from './dailyHoroscopeData';
 import { WebView } from 'react-native-webview';
 import { DailyHoroscopeCard } from "./DailyHoroscopeCard";
@@ -30,7 +32,7 @@ const renderFormattedHoroscope = (rawText) => {
   );
 };
 
-import { useState } from 'react';
+
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Dimensions, Modal , TextInput, Linking} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
@@ -104,8 +106,17 @@ const { width } = Dimensions.get('window');
   };
 
 function HomeScreen() {
+  const [isStartupModalVisible, setIsStartupModalVisible] = useState(true);
   const [isShortModalVisible, setIsShortModalVisible] = useState(false);
   const [isLongModalVisible, setIsLongModalVisible] = useState(false);
+  useEffect(() => {
+    setIsStartupModalVisible(true);
+  }, []);
+  ;
+  
+  
+  
+  
   const [selectedForecast, setSelectedForecast] = useState(null);
 
   const fetchGeminiLive = async (promptText) => {
@@ -1519,9 +1530,14 @@ function HomeScreen() {
                   </View>
                 ))}
             </ScrollView>
-            <TouchableOpacity onPress={() => setIsShortModalVisible(false)} style={{marginTop: 15, backgroundColor: '#d4af37', padding: 12, borderRadius: 10, alignItems: 'center'}}>
-              <Text style={{color: '#131b2e', fontWeight: 'bold', fontSize: 15}}>დახურვა</Text>
-            </TouchableOpacity>
+            <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 15}}>
+              <TouchableOpacity onPress={() => alert('მიმდინარე ასპექტები აქტიურია და გავლენას ახდენს თქვენს ენერგიაზე.')} style={{flex: 1, backgroundColor: '#1a233a', borderWidth: 1, borderColor: '#d4af37', padding: 12, borderRadius: 10, alignItems: 'center', marginRight: 8}}>
+                <Text style={{color: '#d4af37', fontWeight: 'bold', fontSize: 15}}>წაკითხვა</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => setIsShortModalVisible(false)} style={{flex: 1, backgroundColor: '#d4af37', padding: 12, borderRadius: 10, alignItems: 'center', marginLeft: 8}}>
+                <Text style={{color: '#131b2e', fontWeight: 'bold', fontSize: 15}}>დახურვა</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </Modal>
@@ -1550,6 +1566,45 @@ function HomeScreen() {
             <TouchableOpacity onPress={() => setIsLongModalVisible(false)} style={{marginTop: 15, backgroundColor: '#d4af37', padding: 12, borderRadius: 10, alignItems: 'center'}}>
               <Text style={{color: '#131b2e', fontWeight: 'bold', fontSize: 15}}>დახურვა</Text>
             </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
+
+      {/* კომპაქტური საწყისი მოდალური ფანჯარა */}
+      <Modal visible={isStartupModalVisible} animationType="fade" transparent={true}>
+        <View style={{flex: 1, backgroundColor: 'rgba(0,0,0,0.85)', justifyContent: 'center', alignItems: 'center', padding: 20}}>
+          <View style={{backgroundColor: '#131b2e', borderRadius: 20, padding: 22, width: '100%', maxWidth: 360, borderWidth: 1, borderColor: '#d4af37'}}>
+            
+            <Text style={{color: '#d4af37', fontSize: 20, fontWeight: 'bold', marginBottom: 18, textAlign: 'center'}}>✨ მიმდინარე ასპექტები</Text>
+
+            {/* მოკლევადიანი ასპექტის ბლოკი */}
+            <View style={{backgroundColor: '#1a233a', borderRadius: 12, padding: 12, marginBottom: 12, borderWidth: 1, borderColor: 'rgba(212,175,55,0.3)'}}>
+              <Text style={{color: '#aaa', fontSize: 12, marginBottom: 4}}>⚡ მოკლევადიანი</Text>
+              <Text style={{color: '#fff', fontSize: 14, fontWeight: 'bold', marginBottom: 8}} numberOfLines={1}>
+                {shortTermAspects.find(item => item.end >= new Date().toISOString().split('T')[0])?.title || 'აქტიური ასპექტი არ არის'}
+              </Text>
+              <TouchableOpacity onPress={() => { setIsStartupModalVisible(false); setIsShortModalVisible(true); }} style={{backgroundColor: '#d4af37', padding: 8, borderRadius: 8, alignItems: 'center'}}>
+                <Text style={{color: '#131b2e', fontWeight: 'bold', fontSize: 13}}>წაკითხვა</Text>
+              </TouchableOpacity>
+            </View>
+
+            {/* გრძელვადიანი ასპექტის ბლოკი */}
+            <View style={{backgroundColor: '#1a233a', borderRadius: 12, padding: 12, marginBottom: 18, borderWidth: 1, borderColor: 'rgba(212,175,55,0.3)'}}>
+              <Text style={{color: '#aaa', fontSize: 12, marginBottom: 4}}>🪐 გრძელვადიანი</Text>
+              <Text style={{color: '#fff', fontSize: 14, fontWeight: 'bold', marginBottom: 8}} numberOfLines={1}>
+                {longTermAspects.find(item => item.end >= new Date().toISOString().split('T')[0])?.title || 'აქტიური ასპექტი არ არის'}
+              </Text>
+              <TouchableOpacity onPress={() => { setIsStartupModalVisible(false); setIsLongModalVisible(true); }} style={{backgroundColor: '#d4af37', padding: 8, borderRadius: 8, alignItems: 'center'}}>
+                <Text style={{color: '#131b2e', fontWeight: 'bold', fontSize: 13}}>წაკითხვა</Text>
+              </TouchableOpacity>
+            </View>
+
+            {/* დახურვის ღილაკი */}
+            <TouchableOpacity onPress={() => setIsStartupModalVisible(false)} style={{backgroundColor: 'transparent', borderWidth: 1, borderColor: '#d4af37', padding: 10, borderRadius: 10, alignItems: 'center'}}>
+              <Text style={{color: '#d4af37', fontWeight: 'bold', fontSize: 14}}>დახურვა</Text>
+            </TouchableOpacity>
+
           </View>
         </View>
       </Modal>

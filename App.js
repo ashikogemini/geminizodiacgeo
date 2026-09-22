@@ -448,7 +448,6 @@ function HomeScreen() {
   const [juneDecade1ModalVisible, setJuneDecade1ModalVisible] = useState(false);
   const [juneDecade2ModalVisible, setJuneDecade2ModalVisible] = useState(false);
   const [juneModalVisible, setJuneModalVisible] = useState(false);
-  const [dayModalVisible, setDayModalVisible] = useState(false);
   const [selectedDayItem, setSelectedDayItem] = useState(null);
   const [personalityModalVisible, setPersonalityModalVisible] = useState(false);
   const [strengthsModalVisible, setStrengthsModalVisible] = useState(false);
@@ -464,6 +463,21 @@ function HomeScreen() {
   const [selectedSign, setSelectedSign] = useState(null);
   const [signDetailModalVisible, setSignDetailModalVisible] = useState(false);
   const [activeTab, setActiveTab] = useState('მთავარი');
+  const [natDay, setNatDay] = useState('');
+  const [natMonth, setNatMonth] = useState('');
+  const [natYear, setNatYear] = useState('');
+  const [natHour, setNatHour] = useState('');
+  const [natMinute, setNatMinute] = useState('');
+  const [natUnknownTime, setNatUnknownTime] = useState(false);
+  const [natTimePeriod, setNatTimePeriod] = useState('დილა');
+  const [natCity, setNatCity] = useState('');
+  const [natCustomCity, setNatCustomCity] = useState('');
+  const [dayModalVisible, setDayModalVisible] = useState(false);
+  const [monthModalVisible, setMonthModalVisible] = useState(false);
+  const [yearModalVisible, setYearModalVisible] = useState(false);
+  const [hourModalVisible, setHourModalVisible] = useState(false);
+  const [minuteModalVisible, setMinuteModalVisible] = useState(false);
+  const [cityModalVisible, setCityModalVisible] = useState(false);
   const [horoscopeType, setHoroscopeType] = useState('week');
   const [showFullHoroscope, setShowFullHoroscope] = useState(false);
   const [geminiOpen, setGeminiOpen] = useState({});
@@ -556,7 +570,202 @@ function HomeScreen() {
       </View>
 
       {/* TAB 1: მთავარი */}
-      {activeTab === 'მთავარი' && (
+      
+      
+      
+      {activeTab === 'ნატალური' && (
+        <View style={{ flex: 1 }}>
+          <ScrollView contentContainerStyle={{ padding: 16, paddingBottom: 35 }}>
+            <View style={{ backgroundColor: '#151525', padding: 20, borderRadius: 16, borderWidth: 1, borderColor: '#2a2a4a', marginBottom: 20 }}>
+              <Text style={{ color: '#d4af37', fontSize: 20, fontWeight: 'bold', textAlign: 'center', marginBottom: 20 }}>✨ ნატალური რუკის შედგენა</Text>
+
+              {/* დაბადების თარიღი */}
+              <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold', marginBottom: 8 }}>📅 დაბადების თარიღი</Text>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 16 }}>
+                <TouchableOpacity onPress={() => setDayModalVisible(true)} style={{ flex: 1, backgroundColor: '#1a1a2e', padding: 12, borderRadius: 8, marginRight: 6, borderWidth: 1, borderColor: '#2a2a4a', alignItems: 'center' }}>
+                  <Text style={{ color: natDay ? '#fff' : '#888', fontSize: 14 }}>{natDay || 'რიცხვი'}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => setMonthModalVisible(true)} style={{ flex: 1.8, backgroundColor: '#1a1a2e', padding: 12, borderRadius: 8, marginRight: 6, borderWidth: 1, borderColor: '#2a2a4a', alignItems: 'center' }}>
+                  <Text style={{ color: natMonth ? '#fff' : '#888', fontSize: 14 }} numberOfLines={1}>{natMonth || 'თვე'}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => setYearModalVisible(true)} style={{ flex: 1.2, backgroundColor: '#1a1a2e', padding: 12, borderRadius: 8, marginRight: 6, borderWidth: 1, borderColor: '#2a2a4a', alignItems: 'center' }}>
+                  <Text style={{ color: natYear ? '#fff' : '#888', fontSize: 14 }}>{natYear || 'წელი'}</Text>
+                </TouchableOpacity>
+              </View>
+
+              {/* დაბადების დრო */}
+              <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold', marginBottom: 8 }}>⏰ დაბადების დრო</Text>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 12 }}>
+                <TouchableOpacity disabled={natUnknownTime} onPress={() => setHourModalVisible(true)} style={{ flex: 1, backgroundColor: natUnknownTime ? '#111' : '#1a1a2e', padding: 12, borderRadius: 8, marginRight: 8, borderWidth: 1, borderColor: '#2a2a4a', alignItems: 'center', opacity: natUnknownTime ? 0.5 : 1 }}>
+                  <Text style={{ color: natHour ? '#fff' : '#888', fontSize: 14 }}>{natHour || 'საათი'}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity disabled={natUnknownTime} onPress={() => setMinuteModalVisible(true)} style={{ flex: 1, backgroundColor: natUnknownTime ? '#111' : '#1a1a2e', padding: 12, borderRadius: 8, marginRight: 8, borderWidth: 1, borderColor: '#2a2a4a', alignItems: 'center', opacity: natUnknownTime ? 0.5 : 1 }}>
+                  <Text style={{ color: natMinute ? '#fff' : '#888', fontSize: 14 }}>{natMinute || 'წუთი'}</Text>
+                </TouchableOpacity>
+              </View>
+
+              {/* ზუსტი დრო არ ვიცი */}
+              <TouchableOpacity onPress={() => setNatUnknownTime(!natUnknownTime)} style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 16 }}>
+                <View style={{ width: 22, height: 22, borderRadius: 4, borderWidth: 2, borderColor: '#d4af37', justifyContent: 'center', alignItems: 'center', marginRight: 10, backgroundColor: natUnknownTime ? '#d4af37' : 'transparent' }}>
+                  {natUnknownTime && <Text style={{ color: '#000', fontWeight: 'bold' }}>✓</Text>}
+                </View>
+                <Text style={{ color: '#fff', fontSize: 15 }}>ზუსტი დრო არ ვიცი</Text>
+              </TouchableOpacity>
+
+              {/* პერიოდები */}
+              {natUnknownTime && (
+                <View style={{ marginBottom: 16, backgroundColor: '#1a1a2e', padding: 12, borderRadius: 8, borderWidth: 1, borderColor: '#2a2a4a' }}>
+                  <Text style={{ color: '#d4af37', fontSize: 14, marginBottom: 8, fontWeight: 'bold' }}>აირჩიეთ პერიოდი:</Text>
+                  <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+                    {['დილა', 'შუადღე', 'საღამო', 'შუაღამე'].map(period => (
+                      <TouchableOpacity key={period} onPress={() => setNatTimePeriod(period)} style={{ width: '48%', backgroundColor: natTimePeriod === period ? '#d4af37' : '#151525', padding: 10, borderRadius: 8, marginBottom: 8, alignItems: 'center', borderWidth: 1, borderColor: '#2a2a4a' }}>
+                        <Text style={{ color: natTimePeriod === period ? '#000' : '#fff', fontWeight: 'bold' }}>{period}</Text>
+                      </TouchableOpacity>
+                    ))}
+                  </View>
+                </View>
+              )}
+
+              {/* დაბადების ადგილი */}
+              <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold', marginBottom: 8 }}>📍 დაბადების ადგილი</Text>
+              <TouchableOpacity onPress={() => setCityModalVisible(true)} style={{ backgroundColor: '#1a1a2e', padding: 14, borderRadius: 8, borderWidth: 1, borderColor: '#2a2a4a', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+                <Text style={{ color: natCity ? '#fff' : '#888', fontSize: 16 }}>{natCity || 'აირჩიეთ ქალაქი'}</Text>
+                <Text style={{ color: '#d4af37', fontSize: 16 }}>▼</Text>
+              </TouchableOpacity>
+
+              {natCity === 'სხვა' && (
+                <TextInput style={{ backgroundColor: '#1a1a2e', color: '#fff', padding: 12, borderRadius: 8, borderWidth: 1, borderColor: '#2a2a4a', marginBottom: 16 }} placeholder="ჩაწერეთ ქალაქი..." placeholderTextColor="#888" value={natCustomCity} onChangeText={setNatCustomCity} />
+              )}
+
+              <TouchableOpacity style={{ backgroundColor: '#d4af37', padding: 16, borderRadius: 12, alignItems: 'center', marginTop: 10 }}>
+                <Text style={{ color: '#000', fontSize: 16, fontWeight: 'bold' }}>✨ ნატალური რუკის შედგენა</Text>
+              </TouchableOpacity>
+            </View>
+          </ScrollView>
+
+          {/* მოდალური ფანჯრები */}
+          <Modal visible={dayModalVisible} animationType="fade" transparent={true} onRequestClose={() => setDayModalVisible(false)}>
+            <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.7)', justifyContent: 'center', alignItems: 'center' }}>
+              <View style={{ backgroundColor: '#1a1a2e', width: '80%', borderRadius: 16, padding: 20, maxHeight: '60%', borderWidth: 1, borderColor: '#2a2a4a' }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 15 }}>
+                  <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold' }}>აირჩიეთ რიცხვი</Text>
+                  <TouchableOpacity onPress={() => setDayModalVisible(false)}><Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>✕</Text></TouchableOpacity>
+                </View>
+                <ScrollView>
+                  {Array.from({length: 31}, (_, i) => String(i + 1)).map(d => (
+                    <TouchableOpacity key={d} onPress={() => { setNatDay(d); setDayModalVisible(false); }} style={{ paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: '#2a2a4a', alignItems: 'center' }}>
+                      <Text style={{ color: natDay === d ? '#d4af37' : '#fff', fontSize: 16, fontWeight: natDay === d ? 'bold' : 'normal' }}>{d}</Text>
+                    </TouchableOpacity>
+                  ))}
+                </ScrollView>
+              </View>
+            </View>
+          </Modal>
+
+          <Modal visible={monthModalVisible} animationType="fade" transparent={true} onRequestClose={() => setMonthModalVisible(false)}>
+            <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.7)', justifyContent: 'center', alignItems: 'center' }}>
+              <View style={{ backgroundColor: '#1a1a2e', width: '80%', borderRadius: 16, padding: 20, maxHeight: '60%', borderWidth: 1, borderColor: '#2a2a4a' }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 15 }}>
+                  <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold' }}>აირჩიეთ თვე</Text>
+                  <TouchableOpacity onPress={() => setMonthModalVisible(false)}><Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>✕</Text></TouchableOpacity>
+                </View>
+                <ScrollView>
+                  {['იანვარი', 'თებერვალი', 'მარტი', 'აპრილი', 'მაისი', 'ივნისი', 'ივლისი', 'აგვისტო', 'სექტემბერი', 'ოქტომბერი', 'ნოემბერი', 'დეკემბერი'].map(m => (
+                    <TouchableOpacity key={m} onPress={() => { setNatMonth(m); setMonthModalVisible(false); }} style={{ paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: '#2a2a4a', alignItems: 'center' }}>
+                      <Text style={{ color: natMonth === m ? '#d4af37' : '#fff', fontSize: 16, fontWeight: natMonth === m ? 'bold' : 'normal' }}>{m}</Text>
+                    </TouchableOpacity>
+                  ))}
+                </ScrollView>
+              </View>
+            </View>
+          </Modal>
+
+          <Modal visible={yearModalVisible} animationType="fade" transparent={true} onRequestClose={() => setYearModalVisible(false)}>
+            <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.7)', justifyContent: 'center', alignItems: 'center' }}>
+              <View style={{ backgroundColor: '#1a1a2e', width: '80%', borderRadius: 16, padding: 20, maxHeight: '60%', borderWidth: 1, borderColor: '#2a2a4a' }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 15 }}>
+                  <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold' }}>აირჩიეთ წელი (1900-დან)</Text>
+                  <TouchableOpacity onPress={() => setYearModalVisible(false)}><Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>✕</Text></TouchableOpacity>
+                </View>
+                <ScrollView>
+                  {Array.from({length: 127}, (_, i) => String(2026 - i)).map(y => (
+                    <TouchableOpacity key={y} onPress={() => { setNatYear(y); setYearModalVisible(false); }} style={{ paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: '#2a2a4a', alignItems: 'center' }}>
+                      <Text style={{ color: natYear === y ? '#d4af37' : '#fff', fontSize: 16, fontWeight: natYear === y ? 'bold' : 'normal' }}>{y}</Text>
+                    </TouchableOpacity>
+                  ))}
+                </ScrollView>
+              </View>
+            </View>
+          </Modal>
+
+          <Modal visible={hourModalVisible} animationType="fade" transparent={true} onRequestClose={() => setHourModalVisible(false)}>
+            <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.7)', justifyContent: 'center', alignItems: 'center' }}>
+              <View style={{ backgroundColor: '#1a1a2e', width: '80%', borderRadius: 16, padding: 20, maxHeight: '60%', borderWidth: 1, borderColor: '#2a2a4a' }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 15 }}>
+                  <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold' }}>აირჩიეთ საათი</Text>
+                  <TouchableOpacity onPress={() => setHourModalVisible(false)}><Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>✕</Text></TouchableOpacity>
+                </View>
+                <ScrollView>
+                  {Array.from({length: 24}, (_, i) => String(i).padStart(2, '0')).map(h => (
+                    <TouchableOpacity key={h} onPress={() => { setNatHour(h); setHourModalVisible(false); }} style={{ paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: '#2a2a4a', alignItems: 'center' }}>
+                      <Text style={{ color: natHour === h ? '#d4af37' : '#fff', fontSize: 16, fontWeight: natHour === h ? 'bold' : 'normal' }}>{h}</Text>
+                    </TouchableOpacity>
+                  ))}
+                </ScrollView>
+              </View>
+            </View>
+          </Modal>
+
+          <Modal visible={minuteModalVisible} animationType="fade" transparent={true} onRequestClose={() => setMinuteModalVisible(false)}>
+            <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.7)', justifyContent: 'center', alignItems: 'center' }}>
+              <View style={{ backgroundColor: '#1a1a2e', width: '80%', borderRadius: 16, padding: 20, maxHeight: '60%', borderWidth: 1, borderColor: '#2a2a4a' }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 15 }}>
+                  <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold' }}>აირჩიეთ წუთი</Text>
+                  <TouchableOpacity onPress={() => setMinuteModalVisible(false)}><Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>✕</Text></TouchableOpacity>
+                </View>
+                <ScrollView>
+                  {Array.from({length: 60}, (_, i) => String(i).padStart(2, '0')).map(min => (
+                    <TouchableOpacity key={min} onPress={() => { setNatMinute(min); setMinuteModalVisible(false); }} style={{ paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: '#2a2a4a', alignItems: 'center' }}>
+                      <Text style={{ color: natMinute === min ? '#d4af37' : '#fff', fontSize: 16, fontWeight: natMinute === min ? 'bold' : 'normal' }}>{min}</Text>
+                    </TouchableOpacity>
+                  ))}
+                </ScrollView>
+              </View>
+            </View>
+          </Modal>
+
+          <Modal visible={cityModalVisible} animationType="fade" transparent={true} onRequestClose={() => setCityModalVisible(false)}>
+            <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.7)', justifyContent: 'center', alignItems: 'center' }}>
+              <View style={{ backgroundColor: '#1a1a2e', width: '85%', borderRadius: 16, padding: 20, maxHeight: '75%', borderWidth: 1, borderColor: '#2a2a4a' }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 15 }}>
+                  <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold' }}>აირჩიეთ ქალაქი</Text>
+                  <TouchableOpacity onPress={() => setCityModalVisible(false)}><Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>✕</Text></TouchableOpacity>
+                </View>
+                <ScrollView>
+                  {[
+                    'აბაშა', 'ამბროლაური', 'ანაკლია', 'ახალგორი', 'ახალციხე', 'ახალქალაქი', 
+                    'ბაღდათი', 'ბათუმი', 'ბოლნისი', 'ბორჯომი', 'გაგრა', 'გალი', 
+                    'გარდაბანი', 'გორი', 'გურჯაანი', 'დედოფლისწყარო', 'დმანისი', 'დუშეთი', 
+                    'ვანი', 'ზესტაფონი', 'ზუგდიდი', 'თბილისი', 'თელავი', 'თერჯოლა', 
+                    'თიანეთი', 'კასპი', 'ლაგოდეხი', 'ლანჩხუთი', 'ლენტეხი', 
+                    'მარნეული', 'მარტვილი', 'მესტია', 'მცხეთა', 'ნინოწმინდა', 
+                    'ონი', 'ოზურგეთი', 'ოჩამჩირე', 'ფოთი', 'ქარელი', 'ქობულეთი', 
+                    'ქუთაისი', 'ყვარელი', 'ჩოხატაური', 'ჩხოროწყუ', 
+                    'ცაგერი', 'ცხინვალი', 'წალენჯიხა', 'წალკა', 'წყალტუბო', 'ჭიათურა', 
+                    'ხარაგაული', 'ხაშური', 'ხობი', 'ხულო', 'ჯვარი', 'სხვა'
+                  ].map(cityItem => (
+                    <TouchableOpacity key={cityItem} onPress={() => { setNatCity(cityItem); setCityModalVisible(false); }} style={{ paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: '#2a2a4a' }}>
+                      <Text style={{ color: natCity === cityItem ? '#d4af37' : '#fff', fontSize: 16, fontWeight: natCity === cityItem ? 'bold' : 'normal' }}>{cityItem}</Text>
+                    </TouchableOpacity>
+                  ))}
+                </ScrollView>
+              </View>
+            </View>
+          </Modal>
+
+        </View>
+      )}
+    {activeTab === 'მთავარი' && (
         <ScrollView contentContainerStyle={{ padding: 16, paddingBottom: 35 }}>
           
           {/* 1. დღის ჰოროსკოპი */}

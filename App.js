@@ -1800,7 +1800,7 @@ function HomeScreen() {
             <Text style={{color: '#d4af37', fontSize: 20, fontWeight: 'bold', marginBottom: 15, textAlign: 'center'}}>⚡ მოკლევადიანი ასპექტები</Text>
             <ScrollView showsVerticalScrollIndicator={false}>
               {(shortTermAspects || [])
-                .filter(item => item.end >= new Date().toISOString().split('T')[0])
+                .filter(item => true)
                 .map(item => (
                   <View key={item.id} style={{backgroundColor: '#1a233a', borderRadius: 12, padding: 15, marginBottom: 12, borderWidth: 1, borderColor: 'rgba(212,175,55,0.3)'}}>
                     <Text style={{color: '#d4af37', fontSize: 16, fontWeight: 'bold', marginBottom: 6}}>{item.title}</Text>
@@ -1836,7 +1836,7 @@ function HomeScreen() {
             <Text style={{color: '#d4af37', fontSize: 20, fontWeight: 'bold', marginBottom: 15, textAlign: 'center'}}>🪐 გრძელვადიანი ასპექტები</Text>
             <ScrollView showsVerticalScrollIndicator={false}>
               {(longTermAspects || [])
-                .filter(item => item.end >= new Date().toISOString().split('T')[0])
+                .filter(item => true)
                 .map(item => (
                   <View key={item.id} style={{backgroundColor: '#1a233a', borderRadius: 12, padding: 15, marginBottom: 12, borderWidth: 1, borderColor: 'rgba(212,175,55,0.3)'}}>
                     <Text style={{color: '#d4af37', fontSize: 16, fontWeight: 'bold', marginBottom: 6}}>{item.title}</Text>

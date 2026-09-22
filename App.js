@@ -694,6 +694,36 @@ function HomeScreen() {
           <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 6, textAlign: 'center' }}>♊ ტყუპების სამყარო</Text>
           <Text style={{ color: '#888', fontSize: 12, textAlign: 'center', marginBottom: 16 }}>ხასიათი, ენერგია და ასტროლოგიური პორტრეტი</Text>
 
+      {/* ♊ ზოგადი მიმოხილვის ღილაკი და ფანჯარა */}
+      <TouchableOpacity onPress={() => setOverviewModalVisible(true)} style={{ backgroundColor: "#151525", padding: 16, borderRadius: 12, marginBottom: 12, flexDirection: "row", justifyContent: "space-between", alignItems: "center", borderWidth: 1, borderColor: "#2a2a4a" }}>
+        <Text style={{ color: "#fff", fontSize: 16, fontWeight: "bold" }}>♊ ზოგადი მიმოხილვა</Text>
+        <Text style={{ color: "#d4af37", fontSize: 20, fontWeight: "bold" }}>❯</Text>
+      </TouchableOpacity>
+
+      <Modal visible={overviewModalVisible} animationType="fade" transparent={true} onRequestClose={() => setOverviewModalVisible(false)}>
+        <View style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.8)", justifyContent: "center", alignItems: "center", padding: 20 }}>
+          <View style={{ backgroundColor: "#1a1a2e", padding: 24, borderRadius: 16, borderWidth: 1, borderColor: "#d4af37", width: "100%", maxHeight: "80%" }}>
+            <Text style={{ color: "#d4af37", fontSize: 20, fontWeight: "bold", marginBottom: 16, textAlign: "center" }}>♊ ზოგადი მიმოხილვა</Text>
+            <ScrollView>
+              <Text style={{ color: "#fff", fontSize: 15, lineHeight: 24, textAlign: "left" }}>{`ტყუპები ზოდიაქოს მესამე ნიშანია და ჰაერის სტიქიას მიეკუთვნება. მისი მმართველი პლანეტაა მერკური - პლანეტა, რომელიც ასტროლოგიაში აზროვნებას, სიტყვას, ინფორმაციის გაცვლასა და სწავლის პროცესს უკავშირდება.
+
+ტყუპების მთავარი თემა არის ცნობისმოყვარეობა და მოძრაობა. მათთვის მნიშვნელოვანია ახალი ინფორმაციის მიღება, სხვადასხვა ადამიანთან ურთიერთობა, ახალი იდეების აღმოჩენა და გარემოს შეცვლა. ერთფეროვნება და მუდმივი რუტინა კი ხშირად ნაკლებად საინტერესო ხდება.
+
+ტყუპებს ხშირად აქვთ უნარი, ერთ საკითხს რამდენიმე განსხვავებული მხრიდან შეხედონ. სწორედ ამიტომ შეიძლება მათში ერთდროულად რამდენიმე ინტერესი, იდეა ან განსხვავებული შეხედულება არსებობდეს. მათთვის ბუნებრივია კითხვების დასმა, ინფორმაციის მოძიება და საკუთარი აზრის გადახედვა მაშინ, როცა ახალ რამეს აღმოაჩენენ.
+
+ამ ნიშნის კიდევ ერთი მნიშვნელოვანი მახასიათებელია მოქნილობა. ტყუპებს შეუძლიათ სწრაფად მოერგონ ახალ გარემოსა და ადამიანებს. ისინი ადვილად ერთვებიან სხვადასხვა ტიპის საქმიანობაში და განსაკუთრებით მაშინ გრძნობენ თავს კომფორტულად, როცა აქვთ თავისუფლება, არჩევანის შესაძლებლობა და განვითარების სივრცე.
+
+ტყუპების სიმბოლო - ♊ - ორ ტყუპს წარმოადგენს. ეს სიმბოლო ხშირად უკავშირდება მრავალფეროვნებას, ორ განსხვავებულ ხედვას და ერთმანეთისგან განსხვავებული მხარეების თანაარსებობას. სწორედ ამიტომ ტყუპების ბუნებაში ხშირად გვხვდება კონტრასტებიც - ერთ დღეს შეიძლება ერთი რამ აინტერესებდეთ, მეორე დღეს კი სრულიად ახალი მიმართულება აღმოაჩინონ.
+
+ტყუპები მხოლოდ „საუბრის მოყვარული“ ნიშანი არაა. მისი არსი ბევრად უფრო ფართოა: ინფორმაცია, ცოდნა, ცნობისმოყვარეობა, მოძრაობა, ახალი გამოცდილება და ადამიანებთან კავშირი - ეს ყველაფერი ამ ნიშნის საერთო სურათის მნიშვნელოვანი ნაწილია.`}</Text>
+            </ScrollView>
+            <TouchableOpacity onPress={() => setOverviewModalVisible(false)} style={{ marginTop: 20, backgroundColor: "#d4af37", padding: 12, borderRadius: 8, alignItems: "center" }}>
+              <Text style={{ color: "#000", fontWeight: "bold", fontSize: 16 }}>დახურვა</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
           
       
       {/* 🌸 მაისის ტყუპები */}
@@ -970,35 +1000,7 @@ function HomeScreen() {
 
 
 
-      {/* ♊ ზოგადი მიმოხილვის ღილაკი და ფანჯარა */}
-      <TouchableOpacity onPress={() => setOverviewModalVisible(true)} style={{ backgroundColor: "#151525", padding: 16, borderRadius: 12, marginBottom: 12, flexDirection: "row", justifyContent: "space-between", alignItems: "center", borderWidth: 1, borderColor: "#2a2a4a" }}>
-        <Text style={{ color: "#fff", fontSize: 16, fontWeight: "bold" }}>♊ ზოგადი მიმოხილვა</Text>
-        <Text style={{ color: "#d4af37", fontSize: 20, fontWeight: "bold" }}>❯</Text>
-      </TouchableOpacity>
-
-      <Modal visible={overviewModalVisible} animationType="fade" transparent={true} onRequestClose={() => setOverviewModalVisible(false)}>
-        <View style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.8)", justifyContent: "center", alignItems: "center", padding: 20 }}>
-          <View style={{ backgroundColor: "#1a1a2e", padding: 24, borderRadius: 16, borderWidth: 1, borderColor: "#d4af37", width: "100%", maxHeight: "80%" }}>
-            <Text style={{ color: "#d4af37", fontSize: 20, fontWeight: "bold", marginBottom: 16, textAlign: "center" }}>♊ ზოგადი მიმოხილვა</Text>
-            <ScrollView>
-              <Text style={{ color: "#fff", fontSize: 15, lineHeight: 24, textAlign: "left" }}>{`ტყუპები ზოდიაქოს მესამე ნიშანია და ჰაერის სტიქიას მიეკუთვნება. მისი მმართველი პლანეტაა მერკური - პლანეტა, რომელიც ასტროლოგიაში აზროვნებას, სიტყვას, ინფორმაციის გაცვლასა და სწავლის პროცესს უკავშირდება.
-
-ტყუპების მთავარი თემა არის ცნობისმოყვარეობა და მოძრაობა. მათთვის მნიშვნელოვანია ახალი ინფორმაციის მიღება, სხვადასხვა ადამიანთან ურთიერთობა, ახალი იდეების აღმოჩენა და გარემოს შეცვლა. ერთფეროვნება და მუდმივი რუტინა კი ხშირად ნაკლებად საინტერესო ხდება.
-
-ტყუპებს ხშირად აქვთ უნარი, ერთ საკითხს რამდენიმე განსხვავებული მხრიდან შეხედონ. სწორედ ამიტომ შეიძლება მათში ერთდროულად რამდენიმე ინტერესი, იდეა ან განსხვავებული შეხედულება არსებობდეს. მათთვის ბუნებრივია კითხვების დასმა, ინფორმაციის მოძიება და საკუთარი აზრის გადახედვა მაშინ, როცა ახალ რამეს აღმოაჩენენ.
-
-ამ ნიშნის კიდევ ერთი მნიშვნელოვანი მახასიათებელია მოქნილობა. ტყუპებს შეუძლიათ სწრაფად მოერგონ ახალ გარემოსა და ადამიანებს. ისინი ადვილად ერთვებიან სხვადასხვა ტიპის საქმიანობაში და განსაკუთრებით მაშინ გრძნობენ თავს კომფორტულად, როცა აქვთ თავისუფლება, არჩევანის შესაძლებლობა და განვითარების სივრცე.
-
-ტყუპების სიმბოლო - ♊ - ორ ტყუპს წარმოადგენს. ეს სიმბოლო ხშირად უკავშირდება მრავალფეროვნებას, ორ განსხვავებულ ხედვას და ერთმანეთისგან განსხვავებული მხარეების თანაარსებობას. სწორედ ამიტომ ტყუპების ბუნებაში ხშირად გვხვდება კონტრასტებიც - ერთ დღეს შეიძლება ერთი რამ აინტერესებდეთ, მეორე დღეს კი სრულიად ახალი მიმართულება აღმოაჩინონ.
-
-ტყუპები მხოლოდ „საუბრის მოყვარული“ ნიშანი არაა. მისი არსი ბევრად უფრო ფართოა: ინფორმაცია, ცოდნა, ცნობისმოყვარეობა, მოძრაობა, ახალი გამოცდილება და ადამიანებთან კავშირი - ეს ყველაფერი ამ ნიშნის საერთო სურათის მნიშვნელოვანი ნაწილია.`}</Text>
-            </ScrollView>
-            <TouchableOpacity onPress={() => setOverviewModalVisible(false)} style={{ marginTop: 20, backgroundColor: "#d4af37", padding: 12, borderRadius: 8, alignItems: "center" }}>
-              <Text style={{ color: "#000", fontWeight: "bold", fontSize: 16 }}>დახურვა</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
+      
 
       {/* 🧠 პიროვნება და ხასიათის ღილაკი და ფანჯარა */}
       <TouchableOpacity onPress={() => setPersonalityModalVisible(true)} style={{ backgroundColor: "#151525", padding: 16, borderRadius: 12, marginBottom: 12, flexDirection: "row", justifyContent: "space-between", alignItems: "center", borderWidth: 1, borderColor: "#2a2a4a" }}>

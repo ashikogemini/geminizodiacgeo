@@ -1,4 +1,5 @@
-import { MAY_GEMINI, JUNE_DECADE_1, JUNE_DECADE_2, GEMINI_BY_DAY } from './geminiDecadesData';
+import { GEMINI_BY_DAY } from './geminiByDayData';
+import { MAY_GEMINI, JUNE_DECADE_1, JUNE_DECADE_2 } from './geminiDecadesData';;
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState, useEffect } from 'react';
 
@@ -909,22 +910,63 @@ function HomeScreen() {
       </Modal>
 
       {/* თითოეული დღის დეტალური აღწერის მოდალური ფანჯარა */}
+      
+      
       <Modal visible={selectedDayItem !== null} animationType="slide" transparent={true} onRequestClose={() => setSelectedDayItem(null)}>
         <View style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.9)", justifyContent: "center", alignItems: "center", padding: 20 }}>
-          <View style={{ backgroundColor: "#131b2e", padding: 22, borderRadius: 18, borderWidth: 1, borderColor: "#d4af37", width: "100%", maxHeight: "85%" }}>
-            <Text style={{ color: "#d4af37", fontSize: 20, fontWeight: "bold", marginBottom: 8, textAlign: "center" }}>{selectedDayItem?.title}</Text>
-            <Text style={{ color: "#888", fontSize: 13, marginBottom: 16, textAlign: "center" }}>✨ {selectedDayItem?.energy}</Text>
+          <View style={{ backgroundColor: "#131b2e", padding: 22, borderRadius: 18, borderWidth: 1, borderColor: "#d4af37", width: "100%", maxHeight: "88%" }}>
+            <Text style={{ color: "#d4af37", fontSize: 20, fontWeight: "bold", marginBottom: 6, textAlign: "center" }}>{selectedDayItem?.title}</Text>
+            <Text style={{ color: "#888", fontSize: 13, marginBottom: 14, textAlign: "center" }}>✨ {selectedDayItem?.energy}</Text>
             
             <ScrollView showsVerticalScrollIndicator={false}>
-              <Text style={{ color: "#fff", fontSize: 15, lineHeight: 24, textAlign: "left" }}>{selectedDayItem?.description}</Text>
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• მთავარი ხასიათი და პიროვნული ბუნება:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8, lineHeight: 20 }}>{selectedDayItem?.mainCharacter}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• აზროვნებისა და გადაწყვეტილებების სტილი:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8, lineHeight: 20 }}>{selectedDayItem?.thinkingStyle}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• კომუნიკაციის თავისებურებები:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8, lineHeight: 20 }}>{selectedDayItem?.communication}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• ემოციური ბუნება:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8, lineHeight: 20 }}>{selectedDayItem?.emotions}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", lineHeight: 20 }}>• სიყვარული და ურთიერთობები:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8, lineHeight: 20 }}>{selectedDayItem?.love}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• მეგობრობა და სოციალური ურთიერთობები:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8, lineHeight: 20 }}>{selectedDayItem?.friendship}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• ძლიერი მხარეები:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8, lineHeight: 20 }}>{selectedDayItem?.strengths}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• სუსტი მხარეები და გამოწვევები:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8, lineHeight: 20 }}>{selectedDayItem?.weaknesses}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• ფარული ან ნაკლებად შესამჩნევი თვისება:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8, lineHeight: 20 }}>{selectedDayItem?.hiddenTrait}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• კარიერა და საქმიანობა:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8, lineHeight: 20 }}>{selectedDayItem?.career}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• რა განასხვავებს ამ დაბადების დღეს სხვა დღეებისგან:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8, lineHeight: 20 }}>{selectedDayItem?.uniqueness}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• ერთი გამორჩეული თვისება:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8, lineHeight: 20 }}>{selectedDayItem?.distinctiveFeature}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• მოკლე პერსონალური რჩევა:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 16, lineHeight: 20 }}>{selectedDayItem?.advice}</Text>
             </ScrollView>
 
-            <TouchableOpacity onPress={() => setSelectedDayItem(null)} style={{ backgroundColor: "#d4af37", padding: 12, borderRadius: 10, marginTop: 16, alignItems: "center" }}>
+            <TouchableOpacity onPress={() => setSelectedDayItem(null)} style={{ backgroundColor: "#d4af37", padding: 12, borderRadius: 10, marginTop: 12, alignItems: "center" }}>
               <Text style={{ color: "#131b2e", fontWeight: "bold", fontSize: 16 }}>უკან დაბრუნება</Text>
             </TouchableOpacity>
           </View>
         </View>
       </Modal>
+  
+  
 
 
 

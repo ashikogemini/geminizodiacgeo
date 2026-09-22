@@ -448,6 +448,7 @@ function HomeScreen() {
   const [juneDecade2ModalVisible, setJuneDecade2ModalVisible] = useState(false);
   const [juneModalVisible, setJuneModalVisible] = useState(false);
   const [dayModalVisible, setDayModalVisible] = useState(false);
+  const [selectedDayItem, setSelectedDayItem] = useState(null);
   const [personalityModalVisible, setPersonalityModalVisible] = useState(false);
   const [strengthsModalVisible, setStrengthsModalVisible] = useState(false);
   const [challengesModalVisible, setChallengesModalVisible] = useState(false);
@@ -700,24 +701,58 @@ function HomeScreen() {
         <Text style={{ color: "#d4af37", fontSize: 20, fontWeight: "bold" }}>❯</Text>
       </TouchableOpacity>
 
+      
       <Modal visible={mayModalVisible} animationType="fade" transparent={true} onRequestClose={() => setMayModalVisible(false)}>
-        <View style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.8)", justifyContent: "center", alignItems: "center", padding: 20 }}>
-          <View style={{ backgroundColor: "#1a1a2e", padding: 24, borderRadius: 16, borderWidth: 1, borderColor: "#d4af37", width: "100%", maxHeight: "80%" }}>
-            <Text style={{ color: "#d4af37", fontSize: 18, fontWeight: "bold", marginBottom: 12, textAlign: "center" }}>{MAY_GEMINI.title}</Text>
-            <Text style={{ color: "#888", fontSize: 13, marginBottom: 12, textAlign: "center" }}>{MAY_GEMINI.ruler}</Text>
-            <ScrollView>
-              <Text style={{ color: "#fff", fontSize: 15, lineHeight: 24, marginBottom: 16 }}>{MAY_GEMINI.description}</Text>
-              <Text style={{ color: "#d4af37", fontSize: 15, fontWeight: "bold", marginBottom: 8 }}>ძირითადი თვისებები:</Text>
-              {MAY_GEMINI.traits.map((trait, index) => (
-                <Text key={index} style={{ color: "#fff", fontSize: 14, lineHeight: 22, marginBottom: 6 }}>• {trait}</Text>
-              ))}
+        <View style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.85)", justifyContent: "center", alignItems: "center", padding: 20 }}>
+          <View style={{ backgroundColor: "#1a1a2e", padding: 20, borderRadius: 16, borderWidth: 1, borderColor: "#d4af37", width: "100%", maxHeight: "85%" }}>
+            <Text style={{ color: "#d4af37", fontSize: 18, fontWeight: "bold", marginBottom: 8, textAlign: "center" }}>{MAY_GEMINI.title}</Text>
+            <Text style={{ color: "#aaa", fontSize: 13, marginBottom: 12, textAlign: "center" }}>{MAY_GEMINI.ruler}</Text>
+            
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• თარიღები:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{MAY_GEMINI.dateRange}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• მთავარი ხასიათი:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{MAY_GEMINI.mainCharacter}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• აზროვნებისა და კომუნიკაციის სტილი:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{MAY_GEMINI.thinkingStyle}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• ძლიერი მხარეები:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{MAY_GEMINI.strengths}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• სუსტი მხარეები და გამოწვევები:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{MAY_GEMINI.weaknesses}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• ემოციური თავისებურებები:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{MAY_GEMINI.emotions}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• სიყვარული და ურთიერთობები:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{MAY_GEMINI.love}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• მეგობრობა და სოციალური ურთიერთობები:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{MAY_GEMINI.friendship}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• კარიერა და სამუშაო:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{MAY_GEMINI.career}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• ფარული თვისებები:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{MAY_GEMINI.hiddenTraits}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• რით განსხვავდება სხვა დეკადებისგან:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{MAY_GEMINI.uniqueness}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• პრაქტიკული რჩევა:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 16 }}>{MAY_GEMINI.advice}</Text>
             </ScrollView>
-            <TouchableOpacity onPress={() => setMayModalVisible(false)} style={{ backgroundColor: "#d4af37", padding: 12, borderRadius: 10, marginTop: 16, alignItems: "center" }}>
+
+            <TouchableOpacity onPress={() => setMayModalVisible(false)} style={{ backgroundColor: "#d4af37", padding: 12, borderRadius: 10, marginTop: 12, alignItems: "center" }}>
               <Text style={{ color: "#1a1a2e", fontWeight: "bold", fontSize: 16 }}>დახურვა</Text>
             </TouchableOpacity>
           </View>
         </View>
       </Modal>
+  
 
       
       {/* ☀️ ივნისის I დეკადა */}
@@ -726,24 +761,58 @@ function HomeScreen() {
         <Text style={{ color: "#d4af37", fontSize: 20, fontWeight: "bold" }}>❯</Text>
       </TouchableOpacity>
 
+      
       <Modal visible={juneDecade1ModalVisible} animationType="fade" transparent={true} onRequestClose={() => setJuneDecade1ModalVisible(false)}>
-        <View style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.8)", justifyContent: "center", alignItems: "center", padding: 20 }}>
-          <View style={{ backgroundColor: "#1a1a2e", padding: 24, borderRadius: 16, borderWidth: 1, borderColor: "#d4af37", width: "100%", maxHeight: "80%" }}>
-            <Text style={{ color: "#d4af37", fontSize: 18, fontWeight: "bold", marginBottom: 12, textAlign: "center" }}>{JUNE_DECADE_1.title}</Text>
-            <Text style={{ color: "#888", fontSize: 13, marginBottom: 12, textAlign: "center" }}>{JUNE_DECADE_1.ruler}</Text>
-            <ScrollView>
-              <Text style={{ color: "#fff", fontSize: 15, lineHeight: 24, marginBottom: 16 }}>{JUNE_DECADE_1.description}</Text>
-              <Text style={{ color: "#d4af37", fontSize: 15, fontWeight: "bold", marginBottom: 8 }}>ძირითადი თვისებები:</Text>
-              {JUNE_DECADE_1.traits.map((trait, index) => (
-                <Text key={index} style={{ color: "#fff", fontSize: 14, lineHeight: 22, marginBottom: 6 }}>• {trait}</Text>
-              ))}
+        <View style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.85)", justifyContent: "center", alignItems: "center", padding: 20 }}>
+          <View style={{ backgroundColor: "#1a1a2e", padding: 20, borderRadius: 16, borderWidth: 1, borderColor: "#d4af37", width: "100%", maxHeight: "85%" }}>
+            <Text style={{ color: "#d4af37", fontSize: 18, fontWeight: "bold", marginBottom: 8, textAlign: "center" }}>{JUNE_DECADE_1.title}</Text>
+            <Text style={{ color: "#aaa", fontSize: 13, marginBottom: 12, textAlign: "center" }}>{JUNE_DECADE_1.ruler}</Text>
+            
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• თარიღები:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{JUNE_DECADE_1.dateRange}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• მთავარი ხასიათი:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{JUNE_DECADE_1.mainCharacter}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• აზროვნებისა და კომუნიკაციის სტილი:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{JUNE_DECADE_1.thinkingStyle}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• ძლიერი მხარეები:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{JUNE_DECADE_1.strengths}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• სუსტი მხარეები და გამოწვევები:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{JUNE_DECADE_1.weaknesses}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• ემოციური თავისებურებები:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{JUNE_DECADE_1.emotions}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• სიყვარული და ურთიერთობები:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{JUNE_DECADE_1.love}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• მეგობრობა და სოციალური ურთიერთობები:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{JUNE_DECADE_1.friendship}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• კარიერა და სამუშაო:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{JUNE_DECADE_1.career}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• ფარული თვისებები:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{JUNE_DECADE_1.hiddenTraits}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• რით განსხვავდება სხვა დეკადებისგან:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{JUNE_DECADE_1.uniqueness}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• პრაქტიკული რჩევა:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 16 }}>{JUNE_DECADE_1.advice}</Text>
             </ScrollView>
-            <TouchableOpacity onPress={() => setJuneDecade1ModalVisible(false)} style={{ backgroundColor: "#d4af37", padding: 12, borderRadius: 10, marginTop: 16, alignItems: "center" }}>
+
+            <TouchableOpacity onPress={() => setJuneDecade1ModalVisible(false)} style={{ backgroundColor: "#d4af37", padding: 12, borderRadius: 10, marginTop: 12, alignItems: "center" }}>
               <Text style={{ color: "#1a1a2e", fontWeight: "bold", fontSize: 16 }}>დახურვა</Text>
             </TouchableOpacity>
           </View>
         </View>
       </Modal>
+  
 
       {/* ☀️ ივნისის II დეკადა */}
       <TouchableOpacity onPress={() => setJuneDecade2ModalVisible(true)} style={{ backgroundColor: "#151525", padding: 16, borderRadius: 12, marginBottom: 12, flexDirection: "row", justifyContent: "space-between", alignItems: "center", borderWidth: 1, borderColor: "#2a2a4a" }}>
@@ -751,24 +820,58 @@ function HomeScreen() {
         <Text style={{ color: "#d4af37", fontSize: 20, fontWeight: "bold" }}>❯</Text>
       </TouchableOpacity>
 
+      
       <Modal visible={juneDecade2ModalVisible} animationType="fade" transparent={true} onRequestClose={() => setJuneDecade2ModalVisible(false)}>
-        <View style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.8)", justifyContent: "center", alignItems: "center", padding: 20 }}>
-          <View style={{ backgroundColor: "#1a1a2e", padding: 24, borderRadius: 16, borderWidth: 1, borderColor: "#d4af37", width: "100%", maxHeight: "80%" }}>
-            <Text style={{ color: "#d4af37", fontSize: 18, fontWeight: "bold", marginBottom: 12, textAlign: "center" }}>{JUNE_DECADE_2.title}</Text>
-            <Text style={{ color: "#888", fontSize: 13, marginBottom: 12, textAlign: "center" }}>{JUNE_DECADE_2.ruler}</Text>
-            <ScrollView>
-              <Text style={{ color: "#fff", fontSize: 15, lineHeight: 24, marginBottom: 16 }}>{JUNE_DECADE_2.description}</Text>
-              <Text style={{ color: "#d4af37", fontSize: 15, fontWeight: "bold", marginBottom: 8 }}>ძირითადი თვისებები:</Text>
-              {JUNE_DECADE_2.traits.map((trait, index) => (
-                <Text key={index} style={{ color: "#fff", fontSize: 14, lineHeight: 22, marginBottom: 6 }}>• {trait}</Text>
-              ))}
+        <View style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.85)", justifyContent: "center", alignItems: "center", padding: 20 }}>
+          <View style={{ backgroundColor: "#1a1a2e", padding: 20, borderRadius: 16, borderWidth: 1, borderColor: "#d4af37", width: "100%", maxHeight: "85%" }}>
+            <Text style={{ color: "#d4af37", fontSize: 18, fontWeight: "bold", marginBottom: 8, textAlign: "center" }}>{JUNE_DECADE_2.title}</Text>
+            <Text style={{ color: "#aaa", fontSize: 13, marginBottom: 12, textAlign: "center" }}>{JUNE_DECADE_2.ruler}</Text>
+            
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• თარიღები:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{JUNE_DECADE_2.dateRange}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• მთავარი ხასიათი:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{JUNE_DECADE_2.mainCharacter}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• აზროვნებისა და კომუნიკაციის სტილი:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{JUNE_DECADE_2.thinkingStyle}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• ძლიერი მხარეები:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{JUNE_DECADE_2.strengths}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• სუსტი მხარეები და გამოწვევები:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{JUNE_DECADE_2.weaknesses}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• ემოციური თავისებურებები:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{JUNE_DECADE_2.emotions}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• სიყვარული და ურთიერთობები:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{JUNE_DECADE_2.love}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• მეგობრობა და სოციალური ურთიერთობები:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{JUNE_DECADE_2.friendship}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• კარიერა და სამუშაო:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{JUNE_DECADE_2.career}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• ფარული თვისებები:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{JUNE_DECADE_2.hiddenTraits}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• რით განსხვავდება სხვა დეკადებისგან:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{JUNE_DECADE_2.uniqueness}</Text>
+
+              <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• პრაქტიკული რჩევა:</Text>
+              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 16 }}>{JUNE_DECADE_2.advice}</Text>
             </ScrollView>
-            <TouchableOpacity onPress={() => setJuneDecade2ModalVisible(false)} style={{ backgroundColor: "#d4af37", padding: 12, borderRadius: 10, marginTop: 16, alignItems: "center" }}>
+
+            <TouchableOpacity onPress={() => setJuneDecade2ModalVisible(false)} style={{ backgroundColor: "#d4af37", padding: 12, borderRadius: 10, marginTop: 12, alignItems: "center" }}>
               <Text style={{ color: "#1a1a2e", fontWeight: "bold", fontSize: 16 }}>დახურვა</Text>
             </TouchableOpacity>
           </View>
         </View>
       </Modal>
+  
 
 
       {/* 📅 დაბადების რიცხვის მიხედვით */}
@@ -777,23 +880,53 @@ function HomeScreen() {
         <Text style={{ color: "#d4af37", fontSize: 20, fontWeight: "bold" }}>❯</Text>
       </TouchableOpacity>
 
+      
+      
+      {/* დაბადების რიცხვის მიხედვით მთავარი სია და დეტალური მოდალი */}
       <Modal visible={dayModalVisible} animationType="fade" transparent={true} onRequestClose={() => setDayModalVisible(false)}>
-        <View style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.8)", justifyContent: "center", alignItems: "center", padding: 20 }}>
-          <View style={{ backgroundColor: "#1a1a2e", padding: 24, borderRadius: 16, borderWidth: 1, borderColor: "#d4af37", width: "100%", maxHeight: "80%" }}>
+        <View style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.85)", justifyContent: "center", alignItems: "center", padding: 20 }}>
+          <View style={{ backgroundColor: "#1a1a2e", padding: 20, borderRadius: 16, borderWidth: 1, borderColor: "#d4af37", width: "100%", maxHeight: "85%" }}>
             <Text style={{ color: "#d4af37", fontSize: 18, fontWeight: "bold", marginBottom: 16, textAlign: "center" }}>📅 დახასიათება დაბადების რიცხვის მიხედვით</Text>
-            <ScrollView>
-              {Object.entries(GEMINI_BY_DAY).map(([dateKey, text]) => (
-                <View key={dateKey} style={{ marginBottom: 12, borderBottomWidth: 0.5, borderBottomColor: "#333", paddingBottom: 8 }}>
-                  <Text style={{ color: "#fff", fontSize: 14, lineHeight: 20 }}>• {text}</Text>
-                </View>
+            
+            <ScrollView showsVerticalScrollIndicator={false}>
+              {GEMINI_BY_DAY.map((item, index) => (
+                <TouchableOpacity 
+                  key={index} 
+                  onPress={() => setSelectedDayItem(item)}
+                  style={{ backgroundColor: "#151525", borderRadius: 12, padding: 14, marginBottom: 10, flexDirection: "row", justifyContent: "space-between", alignItems: "center", borderWidth: 1, borderColor: "#2a2a4a" }}
+                >
+                  <Text style={{ color: "#fff", fontSize: 16, fontWeight: "bold" }}>📅 {item.date}</Text>
+                  <Text style={{ color: "#d4af37", fontSize: 18, fontWeight: "bold" }}>❯</Text>
+                </TouchableOpacity>
               ))}
             </ScrollView>
+
             <TouchableOpacity onPress={() => setDayModalVisible(false)} style={{ backgroundColor: "#d4af37", padding: 12, borderRadius: 10, marginTop: 16, alignItems: "center" }}>
               <Text style={{ color: "#1a1a2e", fontWeight: "bold", fontSize: 16 }}>დახურვა</Text>
             </TouchableOpacity>
           </View>
         </View>
       </Modal>
+
+      {/* თითოეული დღის დეტალური აღწერის მოდალური ფანჯარა */}
+      <Modal visible={selectedDayItem !== null} animationType="slide" transparent={true} onRequestClose={() => setSelectedDayItem(null)}>
+        <View style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.9)", justifyContent: "center", alignItems: "center", padding: 20 }}>
+          <View style={{ backgroundColor: "#131b2e", padding: 22, borderRadius: 18, borderWidth: 1, borderColor: "#d4af37", width: "100%", maxHeight: "85%" }}>
+            <Text style={{ color: "#d4af37", fontSize: 20, fontWeight: "bold", marginBottom: 8, textAlign: "center" }}>{selectedDayItem?.title}</Text>
+            <Text style={{ color: "#888", fontSize: 13, marginBottom: 16, textAlign: "center" }}>✨ {selectedDayItem?.energy}</Text>
+            
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <Text style={{ color: "#fff", fontSize: 15, lineHeight: 24, textAlign: "left" }}>{selectedDayItem?.description}</Text>
+            </ScrollView>
+
+            <TouchableOpacity onPress={() => setSelectedDayItem(null)} style={{ backgroundColor: "#d4af37", padding: 12, borderRadius: 10, marginTop: 16, alignItems: "center" }}>
+              <Text style={{ color: "#131b2e", fontWeight: "bold", fontSize: 16 }}>უკან დაბრუნება</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
+
 
       {/* ♊ ზოგადი მიმოხილვის ღილაკი და ფანჯარა */}
       <TouchableOpacity onPress={() => setOverviewModalVisible(true)} style={{ backgroundColor: "#151525", padding: 16, borderRadius: 12, marginBottom: 12, flexDirection: "row", justifyContent: "space-between", alignItems: "center", borderWidth: 1, borderColor: "#2a2a4a" }}>

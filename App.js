@@ -1,4 +1,4 @@
-import { MAY_GEMINI, JUNE_GEMINI, GEMINI_BY_DAY } from './geminiDecadesData';
+import { MAY_GEMINI, JUNE_DECADE_1, JUNE_DECADE_2, GEMINI_BY_DAY } from './geminiDecadesData';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState, useEffect } from 'react';
 
@@ -444,6 +444,8 @@ function HomeScreen() {
   const [selectedDay, setSelectedDay] = useState('1');
   const [overviewModalVisible, setOverviewModalVisible] = useState(false);
   const [mayModalVisible, setMayModalVisible] = useState(false);
+  const [juneDecade1ModalVisible, setJuneDecade1ModalVisible] = useState(false);
+  const [juneDecade2ModalVisible, setJuneDecade2ModalVisible] = useState(false);
   const [juneModalVisible, setJuneModalVisible] = useState(false);
   const [dayModalVisible, setDayModalVisible] = useState(false);
   const [personalityModalVisible, setPersonalityModalVisible] = useState(false);
@@ -717,30 +719,57 @@ function HomeScreen() {
         </View>
       </Modal>
 
-      {/* ☀️ ივნისის ტყუპები */}
-      <TouchableOpacity onPress={() => setJuneModalVisible(true)} style={{ backgroundColor: "#151525", padding: 16, borderRadius: 12, marginBottom: 12, flexDirection: "row", justifyContent: "space-between", alignItems: "center", borderWidth: 1, borderColor: "#2a2a4a" }}>
-        <Text style={{ color: "#fff", fontSize: 16, fontWeight: "bold" }}>☀️ ივნისის ტყუპები (II-III დეკადა)</Text>
+      
+      {/* ☀️ ივნისის I დეკადა */}
+      <TouchableOpacity onPress={() => setJuneDecade1ModalVisible(true)} style={{ backgroundColor: "#151525", padding: 16, borderRadius: 12, marginBottom: 12, flexDirection: "row", justifyContent: "space-between", alignItems: "center", borderWidth: 1, borderColor: "#2a2a4a" }}>
+        <Text style={{ color: "#fff", fontSize: 16, fontWeight: "bold" }}>☀️ ივნისის I დეკადა (1 - 10 ივნისი)</Text>
         <Text style={{ color: "#d4af37", fontSize: 20, fontWeight: "bold" }}>❯</Text>
       </TouchableOpacity>
 
-      <Modal visible={juneModalVisible} animationType="fade" transparent={true} onRequestClose={() => setJuneModalVisible(false)}>
+      <Modal visible={juneDecade1ModalVisible} animationType="fade" transparent={true} onRequestClose={() => setJuneDecade1ModalVisible(false)}>
         <View style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.8)", justifyContent: "center", alignItems: "center", padding: 20 }}>
           <View style={{ backgroundColor: "#1a1a2e", padding: 24, borderRadius: 16, borderWidth: 1, borderColor: "#d4af37", width: "100%", maxHeight: "80%" }}>
-            <Text style={{ color: "#d4af37", fontSize: 18, fontWeight: "bold", marginBottom: 12, textAlign: "center" }}>{JUNE_GEMINI.title}</Text>
-            <Text style={{ color: "#888", fontSize: 13, marginBottom: 12, textAlign: "center" }}>{JUNE_GEMINI.ruler}</Text>
+            <Text style={{ color: "#d4af37", fontSize: 18, fontWeight: "bold", marginBottom: 12, textAlign: "center" }}>{JUNE_DECADE_1.title}</Text>
+            <Text style={{ color: "#888", fontSize: 13, marginBottom: 12, textAlign: "center" }}>{JUNE_DECADE_1.ruler}</Text>
             <ScrollView>
-              <Text style={{ color: "#fff", fontSize: 15, lineHeight: 24, marginBottom: 16 }}>{JUNE_GEMINI.description}</Text>
+              <Text style={{ color: "#fff", fontSize: 15, lineHeight: 24, marginBottom: 16 }}>{JUNE_DECADE_1.description}</Text>
               <Text style={{ color: "#d4af37", fontSize: 15, fontWeight: "bold", marginBottom: 8 }}>ძირითადი თვისებები:</Text>
-              {JUNE_GEMINI.traits.map((trait, index) => (
+              {JUNE_DECADE_1.traits.map((trait, index) => (
                 <Text key={index} style={{ color: "#fff", fontSize: 14, lineHeight: 22, marginBottom: 6 }}>• {trait}</Text>
               ))}
             </ScrollView>
-            <TouchableOpacity onPress={() => setJuneModalVisible(false)} style={{ backgroundColor: "#d4af37", padding: 12, borderRadius: 10, marginTop: 16, alignItems: "center" }}>
+            <TouchableOpacity onPress={() => setJuneDecade1ModalVisible(false)} style={{ backgroundColor: "#d4af37", padding: 12, borderRadius: 10, marginTop: 16, alignItems: "center" }}>
               <Text style={{ color: "#1a1a2e", fontWeight: "bold", fontSize: 16 }}>დახურვა</Text>
             </TouchableOpacity>
           </View>
         </View>
       </Modal>
+
+      {/* ☀️ ივნისის II დეკადა */}
+      <TouchableOpacity onPress={() => setJuneDecade2ModalVisible(true)} style={{ backgroundColor: "#151525", padding: 16, borderRadius: 12, marginBottom: 12, flexDirection: "row", justifyContent: "space-between", alignItems: "center", borderWidth: 1, borderColor: "#2a2a4a" }}>
+        <Text style={{ color: "#fff", fontSize: 16, fontWeight: "bold" }}>☀️ ივნისის II დეკადა (11 - 21 ივნისი)</Text>
+        <Text style={{ color: "#d4af37", fontSize: 20, fontWeight: "bold" }}>❯</Text>
+      </TouchableOpacity>
+
+      <Modal visible={juneDecade2ModalVisible} animationType="fade" transparent={true} onRequestClose={() => setJuneDecade2ModalVisible(false)}>
+        <View style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.8)", justifyContent: "center", alignItems: "center", padding: 20 }}>
+          <View style={{ backgroundColor: "#1a1a2e", padding: 24, borderRadius: 16, borderWidth: 1, borderColor: "#d4af37", width: "100%", maxHeight: "80%" }}>
+            <Text style={{ color: "#d4af37", fontSize: 18, fontWeight: "bold", marginBottom: 12, textAlign: "center" }}>{JUNE_DECADE_2.title}</Text>
+            <Text style={{ color: "#888", fontSize: 13, marginBottom: 12, textAlign: "center" }}>{JUNE_DECADE_2.ruler}</Text>
+            <ScrollView>
+              <Text style={{ color: "#fff", fontSize: 15, lineHeight: 24, marginBottom: 16 }}>{JUNE_DECADE_2.description}</Text>
+              <Text style={{ color: "#d4af37", fontSize: 15, fontWeight: "bold", marginBottom: 8 }}>ძირითადი თვისებები:</Text>
+              {JUNE_DECADE_2.traits.map((trait, index) => (
+                <Text key={index} style={{ color: "#fff", fontSize: 14, lineHeight: 22, marginBottom: 6 }}>• {trait}</Text>
+              ))}
+            </ScrollView>
+            <TouchableOpacity onPress={() => setJuneDecade2ModalVisible(false)} style={{ backgroundColor: "#d4af37", padding: 12, borderRadius: 10, marginTop: 16, alignItems: "center" }}>
+              <Text style={{ color: "#1a1a2e", fontWeight: "bold", fontSize: 16 }}>დახურვა</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
 
       {/* 📅 დაბადების რიცხვის მიხედვით */}
       <TouchableOpacity onPress={() => setDayModalVisible(true)} style={{ backgroundColor: "#151525", padding: 16, borderRadius: 12, marginBottom: 12, flexDirection: "row", justifyContent: "space-between", alignItems: "center", borderWidth: 1, borderColor: "#2a2a4a" }}>

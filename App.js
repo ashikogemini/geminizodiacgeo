@@ -728,7 +728,7 @@ function HomeScreen() {
       
       {/* 🌸 მაისის ტყუპები */}
       <TouchableOpacity onPress={() => setMayModalVisible(true)} style={{ backgroundColor: "#151525", padding: 16, borderRadius: 12, marginBottom: 12, flexDirection: "row", justifyContent: "space-between", alignItems: "center", borderWidth: 1, borderColor: "#2a2a4a" }}>
-        <Text style={{ color: "#fff", fontSize: 16, fontWeight: "bold" }}>🌸 მაისის ტყუპები (I დეკადა)</Text>
+        <Text style={{ color: "#fff", fontSize: 16, fontWeight: "bold" }}>🌸 მაისის ტყუპები (21-31 მაისი) I დეკადა</Text>
         <Text style={{ color: "#d4af37", fontSize: 20, fontWeight: "bold" }}>❯</Text>
       </TouchableOpacity>
 
@@ -786,9 +786,9 @@ function HomeScreen() {
   
 
       
-      {/* ☀️ ივნისის I დეკადა */}
+      {/* ☀️ ივნისის ტყუპები (1-10 ივნისი) II დეკადა */}
       <TouchableOpacity onPress={() => setJuneDecade1ModalVisible(true)} style={{ backgroundColor: "#151525", padding: 16, borderRadius: 12, marginBottom: 12, flexDirection: "row", justifyContent: "space-between", alignItems: "center", borderWidth: 1, borderColor: "#2a2a4a" }}>
-        <Text style={{ color: "#fff", fontSize: 16, fontWeight: "bold" }}>☀️ ივნისის I დეკადა (1 - 10 ივნისი)</Text>
+        <Text style={{ color: "#fff", fontSize: 16, fontWeight: "bold" }}>☀️ ივნისის ტყუპები (1-10 ივნისი) II დეკადა</Text>
         <Text style={{ color: "#d4af37", fontSize: 20, fontWeight: "bold" }}>❯</Text>
       </TouchableOpacity>
 
@@ -845,9 +845,9 @@ function HomeScreen() {
       </Modal>
   
 
-      {/* ☀️ ივნისის II დეკადა */}
+      {/* ☀️ ივნისის ტყუპები (11-21 ივნისი) III დეკადა */}
       <TouchableOpacity onPress={() => setJuneDecade2ModalVisible(true)} style={{ backgroundColor: "#151525", padding: 16, borderRadius: 12, marginBottom: 12, flexDirection: "row", justifyContent: "space-between", alignItems: "center", borderWidth: 1, borderColor: "#2a2a4a" }}>
-        <Text style={{ color: "#fff", fontSize: 16, fontWeight: "bold" }}>☀️ ივნისის II დეკადა (11 - 21 ივნისი)</Text>
+        <Text style={{ color: "#fff", fontSize: 16, fontWeight: "bold" }}>☀️ ივნისის ტყუპები (11-21 ივნისი) III დეკადა</Text>
         <Text style={{ color: "#d4af37", fontSize: 20, fontWeight: "bold" }}>❯</Text>
       </TouchableOpacity>
 

@@ -830,7 +830,7 @@ function HomeScreen() {
           </View>
 
             <Text style={[styles.bodyText, { marginTop: 12, fontStyle: 'italic', color: '#d4af37' }]}>
-              "{getSmartMoonTransit(targetDate, currentSign, zodiacSigns, moonInfo?.dailyPhrase).quote}"
+              "{getSmartMoonTransit(targetDate, currentSign, zodiacSigns, moonInfo?.dailyPhrase).phaseAdvice || (getDynamicMoonQuote(targetDate, moonInfo?.phaseName))}"
             </Text>
 
             {/* სავსემთვარეობის ან ახალმთვარეობის პროგნოზის ღილაკი */}

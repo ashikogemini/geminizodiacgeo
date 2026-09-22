@@ -1,3 +1,4 @@
+import { MAY_GEMINI, JUNE_GEMINI, GEMINI_BY_DAY } from './geminiDecadesData';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState, useEffect } from 'react';
 
@@ -442,6 +443,9 @@ function HomeScreen() {
   const [selectedMonth, setSelectedMonth] = useState('5');
   const [selectedDay, setSelectedDay] = useState('1');
   const [overviewModalVisible, setOverviewModalVisible] = useState(false);
+  const [mayModalVisible, setMayModalVisible] = useState(false);
+  const [juneModalVisible, setJuneModalVisible] = useState(false);
+  const [dayModalVisible, setDayModalVisible] = useState(false);
   const [personalityModalVisible, setPersonalityModalVisible] = useState(false);
   const [strengthsModalVisible, setStrengthsModalVisible] = useState(false);
   const [challengesModalVisible, setChallengesModalVisible] = useState(false);
@@ -687,6 +691,81 @@ function HomeScreen() {
           <Text style={{ color: '#888', fontSize: 12, textAlign: 'center', marginBottom: 16 }}>ხასიათი, ენერგია და ასტროლოგიური პორტრეტი</Text>
 
           
+      
+      {/* 🌸 მაისის ტყუპები */}
+      <TouchableOpacity onPress={() => setMayModalVisible(true)} style={{ backgroundColor: "#151525", padding: 16, borderRadius: 12, marginBottom: 12, flexDirection: "row", justifyContent: "space-between", alignItems: "center", borderWidth: 1, borderColor: "#2a2a4a" }}>
+        <Text style={{ color: "#fff", fontSize: 16, fontWeight: "bold" }}>🌸 მაისის ტყუპები (I დეკადა)</Text>
+        <Text style={{ color: "#d4af37", fontSize: 20, fontWeight: "bold" }}>❯</Text>
+      </TouchableOpacity>
+
+      <Modal visible={mayModalVisible} animationType="fade" transparent={true} onRequestClose={() => setMayModalVisible(false)}>
+        <View style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.8)", justifyContent: "center", alignItems: "center", padding: 20 }}>
+          <View style={{ backgroundColor: "#1a1a2e", padding: 24, borderRadius: 16, borderWidth: 1, borderColor: "#d4af37", width: "100%", maxHeight: "80%" }}>
+            <Text style={{ color: "#d4af37", fontSize: 18, fontWeight: "bold", marginBottom: 12, textAlign: "center" }}>{MAY_GEMINI.title}</Text>
+            <Text style={{ color: "#888", fontSize: 13, marginBottom: 12, textAlign: "center" }}>{MAY_GEMINI.ruler}</Text>
+            <ScrollView>
+              <Text style={{ color: "#fff", fontSize: 15, lineHeight: 24, marginBottom: 16 }}>{MAY_GEMINI.description}</Text>
+              <Text style={{ color: "#d4af37", fontSize: 15, fontWeight: "bold", marginBottom: 8 }}>ძირითადი თვისებები:</Text>
+              {MAY_GEMINI.traits.map((trait, index) => (
+                <Text key={index} style={{ color: "#fff", fontSize: 14, lineHeight: 22, marginBottom: 6 }}>• {trait}</Text>
+              ))}
+            </ScrollView>
+            <TouchableOpacity onPress={() => setMayModalVisible(false)} style={{ backgroundColor: "#d4af37", padding: 12, borderRadius: 10, marginTop: 16, alignItems: "center" }}>
+              <Text style={{ color: "#1a1a2e", fontWeight: "bold", fontSize: 16 }}>დახურვა</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
+      {/* ☀️ ივნისის ტყუპები */}
+      <TouchableOpacity onPress={() => setJuneModalVisible(true)} style={{ backgroundColor: "#151525", padding: 16, borderRadius: 12, marginBottom: 12, flexDirection: "row", justifyContent: "space-between", alignItems: "center", borderWidth: 1, borderColor: "#2a2a4a" }}>
+        <Text style={{ color: "#fff", fontSize: 16, fontWeight: "bold" }}>☀️ ივნისის ტყუპები (II-III დეკადა)</Text>
+        <Text style={{ color: "#d4af37", fontSize: 20, fontWeight: "bold" }}>❯</Text>
+      </TouchableOpacity>
+
+      <Modal visible={juneModalVisible} animationType="fade" transparent={true} onRequestClose={() => setJuneModalVisible(false)}>
+        <View style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.8)", justifyContent: "center", alignItems: "center", padding: 20 }}>
+          <View style={{ backgroundColor: "#1a1a2e", padding: 24, borderRadius: 16, borderWidth: 1, borderColor: "#d4af37", width: "100%", maxHeight: "80%" }}>
+            <Text style={{ color: "#d4af37", fontSize: 18, fontWeight: "bold", marginBottom: 12, textAlign: "center" }}>{JUNE_GEMINI.title}</Text>
+            <Text style={{ color: "#888", fontSize: 13, marginBottom: 12, textAlign: "center" }}>{JUNE_GEMINI.ruler}</Text>
+            <ScrollView>
+              <Text style={{ color: "#fff", fontSize: 15, lineHeight: 24, marginBottom: 16 }}>{JUNE_GEMINI.description}</Text>
+              <Text style={{ color: "#d4af37", fontSize: 15, fontWeight: "bold", marginBottom: 8 }}>ძირითადი თვისებები:</Text>
+              {JUNE_GEMINI.traits.map((trait, index) => (
+                <Text key={index} style={{ color: "#fff", fontSize: 14, lineHeight: 22, marginBottom: 6 }}>• {trait}</Text>
+              ))}
+            </ScrollView>
+            <TouchableOpacity onPress={() => setJuneModalVisible(false)} style={{ backgroundColor: "#d4af37", padding: 12, borderRadius: 10, marginTop: 16, alignItems: "center" }}>
+              <Text style={{ color: "#1a1a2e", fontWeight: "bold", fontSize: 16 }}>დახურვა</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
+      {/* 📅 დაბადების რიცხვის მიხედვით */}
+      <TouchableOpacity onPress={() => setDayModalVisible(true)} style={{ backgroundColor: "#151525", padding: 16, borderRadius: 12, marginBottom: 12, flexDirection: "row", justifyContent: "space-between", alignItems: "center", borderWidth: 1, borderColor: "#2a2a4a" }}>
+        <Text style={{ color: "#fff", fontSize: 16, fontWeight: "bold" }}>📅 დახასიათება დაბადების რიცხვით</Text>
+        <Text style={{ color: "#d4af37", fontSize: 20, fontWeight: "bold" }}>❯</Text>
+      </TouchableOpacity>
+
+      <Modal visible={dayModalVisible} animationType="fade" transparent={true} onRequestClose={() => setDayModalVisible(false)}>
+        <View style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.8)", justifyContent: "center", alignItems: "center", padding: 20 }}>
+          <View style={{ backgroundColor: "#1a1a2e", padding: 24, borderRadius: 16, borderWidth: 1, borderColor: "#d4af37", width: "100%", maxHeight: "80%" }}>
+            <Text style={{ color: "#d4af37", fontSize: 18, fontWeight: "bold", marginBottom: 16, textAlign: "center" }}>📅 დახასიათება დაბადების რიცხვის მიხედვით</Text>
+            <ScrollView>
+              {Object.entries(GEMINI_BY_DAY).map(([dateKey, text]) => (
+                <View key={dateKey} style={{ marginBottom: 12, borderBottomWidth: 0.5, borderBottomColor: "#333", paddingBottom: 8 }}>
+                  <Text style={{ color: "#fff", fontSize: 14, lineHeight: 20 }}>• {text}</Text>
+                </View>
+              ))}
+            </ScrollView>
+            <TouchableOpacity onPress={() => setDayModalVisible(false)} style={{ backgroundColor: "#d4af37", padding: 12, borderRadius: 10, marginTop: 16, alignItems: "center" }}>
+              <Text style={{ color: "#1a1a2e", fontWeight: "bold", fontSize: 16 }}>დახურვა</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
       {/* ♊ ზოგადი მიმოხილვის ღილაკი და ფანჯარა */}
       <TouchableOpacity onPress={() => setOverviewModalVisible(true)} style={{ backgroundColor: "#151525", padding: 16, borderRadius: 12, marginBottom: 12, flexDirection: "row", justifyContent: "space-between", alignItems: "center", borderWidth: 1, borderColor: "#2a2a4a" }}>
         <Text style={{ color: "#fff", fontSize: 16, fontWeight: "bold" }}>♊ ზოგადი მიმოხილვა</Text>

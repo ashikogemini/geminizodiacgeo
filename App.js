@@ -765,8 +765,9 @@ function HomeScreen() {
           <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>9. ⚖️ მოდალობები</Text>
           <Text style={{ color: '#ccc', fontSize: 13 }}>კარდინალური: {natalReportResult.modalities.cardinal} | ფიქსირებული: {natalReportResult.modalities.fixed} | მუტაბელური: {natalReportResult.modalities.mutable}</Text>
           <Text style={{ color: '#ccc', fontSize: 13, marginTop: 4 }}>დომინანტური: {natalReportResult.modalities.dominant}</Text>
-          <Text style={{ color: '#fff', fontSize: 13, marginTop: 8 }}>{natalReportResult.modalities.analysis}</Text>
-          <Text style={{ color: '#ccc', fontSize: 12 }}>ძლიერი მხარე: {natalReportResult.modalities.strength}{"\n"}გამოწვევა: {natalReportResult.modalities.challenge}</Text>
+          {natalReportResult.modalities.meaning && <Text style={{ color: '#ccc', fontSize: 13, marginTop: 4 }}>მნიშვნელობა: {natalReportResult.modalities.meaning}</Text>}
+          <Text style={{ color: '#ccc', fontSize: 13, marginTop: 4 }}>ანალიზი: {natalReportResult.modalities.analysis}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginTop: 4 }}>ძლიერი მხარე: {natalReportResult.modalities.strength}{"\n"}გამოწვევა: {natalReportResult.modalities.challenge}</Text>
         </View>
 
         {/* 10. დომინანტური ენერგიები */}

@@ -749,11 +749,11 @@ function HomeScreen() {
         <View style={{ backgroundColor: '#151525', padding: 16, borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#2a2a4a' }}>
           <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>7. 🧭 ნატალური რუკის ოთხი კუთხე</Text>
           {natalReportResult.angles.map((ang, i) => (
-            <View key={i} style={{ marginBottom: 10 }}>
+            <View key={i} style={{ marginBottom: 12, borderBottomWidth: i < natalReportResult.angles.length - 1 ? 1 : 0, borderBottomColor: '#222', paddingBottom: 8 }}>
               <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold' }}>• {ang.name}: {ang.sign}</Text>
-              <Text style={{ color: '#ccc', fontSize: 13 }}>მნიშვნელობა: {ang.meaning}</Text>
-              <Text style={{ color: '#ccc', fontSize: 13 }}>ძლიერი მხარე: {ang.strength}გამოწვევა: {ang.challenge}</Text>
-              
+              <Text style={{ color: '#ccc', fontSize: 13 }}>• მნიშვნელობა: {ang.meaning}</Text>
+              <Text style={{ color: '#ccc', fontSize: 13 }}>• ძლიერი მხარე: {ang.strength}</Text>
+              <Text style={{ color: '#ccc', fontSize: 13 }}>• გამოწვევა: {ang.challenge}</Text>
             </View>
           ))}
         </View>

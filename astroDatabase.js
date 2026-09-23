@@ -1,3 +1,21 @@
+const getGenitiveSign = (s) => {
+  const map = {
+    'ვერძი': 'ვერძის',
+    'კურო': 'კუროს',
+    'ტყუპები': 'ტყუპების',
+    'კირჩხიბი': 'კირჩხიბის',
+    'ლომი': 'ლომის',
+    'ქალწული': 'ქალწულის',
+    'სასწორი': 'სასწორის',
+    'მორიელი': 'მორიელის',
+    'მშვილდოსანი': 'მშვილდოსნის',
+    'თხის რქა': 'თხის რქის',
+    'მერწყული': 'მერწყულის',
+    'თევზები': 'თევზების'
+  };
+  return map[s] || s;
+};
+
 import * as astronomy from 'astronomy-engine';
 
 export const generateFullNatalReport = (day, month, year, hour, minute, city, unknownTime) => {
@@ -209,7 +227,7 @@ export const generateFullNatalReport = (day, month, year, hour, minute, city, un
         meaning: 'წარსული გამოცდილება, კარმული ბარგისა და უკვე ათვისებული უნარების სფერო.', 
         manifestation: 'ვლინდება ინტუიციურ მეხსიერებაში და კომფორტის ზონაში.', 
         strength: 'მყარი შინაგანი ბაზისი და ბუნებრივი ნიჭი.', 
-        challenge: 'წარსულში תקალება და განვითარების შეფერხება.' 
+        challenge: 'წარსულში ჩარჩენა და განვითარების შეფერხება.' 
       },
       { 
         name: 'ქირონი', 
@@ -240,10 +258,34 @@ export const generateFullNatalReport = (day, month, year, hour, minute, city, un
       }
     ],
     angles: [
-      { name: 'ASC (ასცენდენტი)', sign: ascSign, meaning: 'პიროვნება და გარეგანი იმიჯი.', ...getSignData(ascSign) }, 
-      { name: 'DSC (დესცენდენტი)', sign: dscSign, meaning: 'პარტნიორობა და ურთიერთობები.', ...getSignData(dscSign) },
-      { name: 'MC (შუა ცა)', sign: mcSign, meaning: 'კარიერა და საზოგადოებრივი სტატუსი.', ...getSignData(mcSign) }, 
-      { name: 'IC (ქვედა ცა)', sign: icSign, meaning: 'ოჯახი, ფესვები და პირადი სივრცე.', ...getSignData(icSign) }
+      { 
+        name: 'ASC (ასცენდენტი)', 
+        sign: ascSign, 
+        meaning: 'პიროვნების პირველი შთაბეჭდილება, გარეგნული იმიჯი და სამყაროსთან ურთიერთობის სტილი.', 
+        strength: `${getGenitiveSign(ascSign)} ენერგია ანიჭებს ${getSignData(ascSign).strength}`, 
+        challenge: `გამოწვევითია ${getSignData(ascSign).challenge.toLowerCase()}` 
+      }, 
+      { 
+        name: 'DSC (დესცენდენტი)', 
+        sign: dscSign, 
+        meaning: 'პარტნიორობა, ურთიერთობების მოდელი და თვისებები, რომლებსაც პარტნიორში ეძებთ.', 
+        strength: `ურთიერთობებში ვლინდება ${getGenitiveSign(dscSign)} საუკეთესო თვისებები: ${getSignData(dscSign).strength}`, 
+        challenge: `პარტნიორობაში გადასალახია ${getSignData(dscSign).challenge.toLowerCase()}` 
+      },
+      { 
+        name: 'MC (შუა ცა)', 
+        sign: mcSign, 
+        meaning: 'კარიერული მწვერვალი, საზოგადოებრივი სტატუსი, ამბიციები და ცხოვრებისეული მისია.', 
+        strength: `პროფესიულ ასპარეზზე გეხმარებათ ${getGenitiveSign(mcSign)} თვისებები: ${getSignData(mcSign).strength}`, 
+        challenge: `კარიერაში მთავარი დაბრკოლებაა ${getSignData(mcSign).challenge.toLowerCase()}` 
+      }, 
+      { 
+        name: 'IC (ქვედა ცა)', 
+        sign: icSign, 
+        meaning: 'ოჯახური ფესვები, პირადი სივრცე, ემოციური უსაფრთხოება და შინაგანი საყრდენი.', 
+        strength: `სახლსა და ოჯახურ გარემოში განიჭებთ ${getGenitiveSign(icSign)} ბუნებას: ${getSignData(icSign).strength}`, 
+        challenge: `შინაგანი ჰარმონიისთვის გადასალახია ${getSignData(icSign).challenge.toLowerCase()}` 
+      }
     ],
     elements: { 
       fire: '30%', earth: '35%', air: '20%', water: '15%', 

@@ -706,8 +706,10 @@ function HomeScreen() {
           {natalReportResult.planets.map((p, i) => (
             <View key={i} style={{ marginBottom: 12, borderBottomWidth: i < natalReportResult.planets.length - 1 ? 1 : 0, borderBottomColor: '#222', paddingBottom: 8 }}>
               <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold' }}>• {p.name}: {p.sign} ({getHouseLabel(p.house)})</Text>
-              <Text style={{ color: '#ccc', fontSize: 13 }}>მნიშვნელობა: {p.meaning}გამოვლინება: {p.daily}</Text>
-              <Text style={{ color: '#ccc', fontSize: 13 }}>ძლიერი მხარე: {p.strength}გამოწვევა: {p.challenge}</Text>
+              <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 2 }}>• მნიშვნელობა: {p.meaning}</Text>
+              <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 2 }}>• როგორ ვლინდება: {p.daily}</Text>
+              <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 2 }}>• ძლიერი მხარე: {p.strength}</Text>
+              <Text style={{ color: '#ccc', fontSize: 13 }}>• გამოწვევა: {p.challenge}</Text>
               
             </View>
           ))}

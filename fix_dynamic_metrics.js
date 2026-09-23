@@ -5,7 +5,7 @@ const dynamicCode = `
   // დინამიური პროცენტების გენერატორი (იცვლება ყოველდღე და ზოდიაქოს მიხედვით)
   const getDynamicPercent = (label) => {
     const today = new Date().toISOString().split('T')[0];
-    const sign = zodiacSigns[signIndex] || '';
+    const sign = zodiacSigns[signIndex] |"';
     const str = label + sign + today;
     let hash = 0;
     for (let i = 0; i < str.length; i++) {

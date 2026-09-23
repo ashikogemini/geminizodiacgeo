@@ -4,7 +4,7 @@ let code = fs.readFileSync('App.js', 'utf8');
 const mathTransitFunction = `
   // მათემატიკურად ზუსტი ტრანზიტის გამომთვლელი (2.28 დღიან ციკლზე დაყრდნობით)
   const getSmartMoonTransit = (targetDate, defaultSign, zodiacSignsArray, defaultQuote) => {
-    if (!zodiacSignsArray || !defaultSign) return { text: "📍 ნიშანი: " + (defaultSign || ''), quote: defaultQuote || "" };
+    if (!zodiacSignsArray || !defaultSign) return { text: "📍 ნიშანი: " + (defaultSign |"'), quote: defaultQuote |"" };
     
     const startOfDay = new Date(targetDate);
     startOfDay.setHours(0, 0, 0, 0);

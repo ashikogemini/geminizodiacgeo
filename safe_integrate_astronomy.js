@@ -11,7 +11,7 @@ const match = code.match(/(export\s+default\s+function\s+\w+\s*\([^)]*\)\s*\{|fu
 if (match && !code.includes("const dynamicAspects = getDynamicAspects")) {
   const insertionPoint = match.index + match[0].length;
   code = code.slice(0, insertionPoint) + `
-  const dynamicAspects = getDynamicAspects(selectedDate || '2026-09-21');
+  const dynamicAspects = getDynamicAspects(selectedDate |"2026-09-21');
   const shortTermAspects = dynamicAspects.shortTerm;
   const longTermAspects = dynamicAspects.longTerm;
   ` + code.slice(insertionPoint);

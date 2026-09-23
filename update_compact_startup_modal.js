@@ -28,7 +28,7 @@ const compactModalJSX = `
             <View style={{backgroundColor: '#1a233a', borderRadius: 12, padding: 12, marginBottom: 12, borderWidth: 1, borderColor: 'rgba(212,175,55,0.3)'}}>
               <Text style={{color: '#aaa', fontSize: 12, marginBottom: 4}}>⚡ მოკლევადიანი</Text>
               <Text style={{color: '#fff', fontSize: 14, fontWeight: 'bold', marginBottom: 8}} numberOfLines={1}>
-                {shortTermAspects.find(item => item.end >= new Date().toISOString().split('T')[0])?.title || 'აქტიური ასპექტი არ არის'}
+                {shortTermAspects.find(item => item.end >= new Date().toISOString().split('T')[0])?.title |"აქტიური ასპექტი არ არის'}
               </Text>
               <TouchableOpacity onPress={() => { setIsStartupModalVisible(false); setIsShortModalVisible(true); }} style={{backgroundColor: '#d4af37', padding: 8, borderRadius: 8, alignItems: 'center'}}>
                 <Text style={{color: '#131b2e', fontWeight: 'bold', fontSize: 13}}>წაკითხვა</Text>
@@ -39,7 +39,7 @@ const compactModalJSX = `
             <View style={{backgroundColor: '#1a233a', borderRadius: 12, padding: 12, marginBottom: 18, borderWidth: 1, borderColor: 'rgba(212,175,55,0.3)'}}>
               <Text style={{color: '#aaa', fontSize: 12, marginBottom: 4}}>🪐 გრძელვადიანი</Text>
               <Text style={{color: '#fff', fontSize: 14, fontWeight: 'bold', marginBottom: 8}} numberOfLines={1}>
-                {longTermAspects.find(item => item.end >= new Date().toISOString().split('T')[0])?.title || 'აქტიური ასპექტი არ არის'}
+                {longTermAspects.find(item => item.end >= new Date().toISOString().split('T')[0])?.title |"აქტიური ასპექტი არ არის'}
               </Text>
               <TouchableOpacity onPress={() => { setIsStartupModalVisible(false); setIsLongModalVisible(true); }} style={{backgroundColor: '#d4af37', padding: 8, borderRadius: 8, alignItems: 'center'}}>
                 <Text style={{color: '#131b2e', fontWeight: 'bold', fontSize: 13}}>წაკითხვა</Text>

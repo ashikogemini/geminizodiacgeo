@@ -670,13 +670,13 @@ function HomeScreen() {
         <View style={{ backgroundColor: '#151525', padding: 16, borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#2a2a4a' }}>
           <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>2. ☀️ 🌙 ⬆️ მთავარი სამი (Big 3)</Text>
           <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold', marginTop: 8 }}>☀️ მზე ({natalReportResult.big3.sun.sign}, მე-{natalReportResult.big3.sun.house} სახლი)</Text>
-          <Text style={{ color: '#ccc', fontSize: 13 }}>{natalReportResult.big3.sun.meaning}. ვლინდება: {natalReportResult.big3.sun.manifestation}.</Text>
-          <Text style={{ color: '#ccc', fontSize: 13 }}>ძლიერი მხარე: {natalReportResult.big3.sun.strength} | გამოწვევა: {natalReportResult.big3.sun.challenge}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13 }}>მნიშვნელობა: {natalReportResult.big3.sun.meaning}{"\n"}გამოვლინება: {natalReportResult.big3.sun.manifestation}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13 }}>ძლიერი მხარე: {natalReportResult.big3.sun.strength}{"\n"}გამოწვევა: {natalReportResult.big3.sun.challenge}</Text>
           
           
           <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold', marginTop: 12 }}>🌙 მთვარე ({natalReportResult.big3.moon.sign}, მე-{natalReportResult.big3.moon.house} სახლი)</Text>
-          <Text style={{ color: '#ccc', fontSize: 13 }}>{natalReportResult.big3.moon.meaning}. ვლინდება: {natalReportResult.big3.moon.manifestation}.</Text>
-          <Text style={{ color: '#ccc', fontSize: 13 }}>ძლიერი მხარე: {natalReportResult.big3.moon.strength} | გამოწვევა: {natalReportResult.big3.moon.challenge}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13 }}>მნიშვნელობა: {natalReportResult.big3.moon.meaning}{"\n"}გამოვლინება: {natalReportResult.big3.moon.manifestation}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13 }}>ძლიერი მხარე: {natalReportResult.big3.moon.strength}{"\n"}გამოწვევა: {natalReportResult.big3.moon.challenge}</Text>
           
 
           
@@ -691,8 +691,8 @@ function HomeScreen() {
           {natalReportResult.planets.map((p, i) => (
             <View key={i} style={{ marginBottom: 12, borderBottomWidth: i < natalReportResult.planets.length - 1 ? 1 : 0, borderBottomColor: '#222', paddingBottom: 8 }}>
               <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold' }}>• {p.name}: {p.sign} (მე-{p.house} სახლი)</Text>
-              <Text style={{ color: '#ccc', fontSize: 13 }}>მნიშვნელობა: {p.meaning} | გამოვლინება: {p.daily}</Text>
-              <Text style={{ color: '#ccc', fontSize: 13 }}>ძლიერი მხარე: {p.strength} | გამოწვევა: {p.challenge}</Text>
+              <Text style={{ color: '#ccc', fontSize: 13 }}>მნიშვნელობა: {p.meaning}{"\n"}გამოვლინება: {p.daily}</Text>
+              <Text style={{ color: '#ccc', fontSize: 13 }}>ძლიერი მხარე: {p.strength}{"\n"}გამოწვევა: {p.challenge}</Text>
               
             </View>
           ))}
@@ -705,7 +705,7 @@ function HomeScreen() {
             <View key={i} style={{ marginBottom: 10 }}>
               <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold' }}>{h.num}. {h.name} ({h.sign})</Text>
               <Text style={{ color: '#ccc', fontSize: 13 }}>• გავლენა: {h.impact}</Text>
-              <Text style={{ color: '#ccc', fontSize: 13 }}>• ძლიერი მხარე: {h.strength} | გამოწვევა: {h.challenge}</Text>
+              <Text style={{ color: '#ccc', fontSize: 13 }}>• ძლიერი მხარე: {h.strength}{"\n"}გამოწვევა: {h.challenge}</Text>
             </View>
           ))}
         </View>
@@ -716,7 +716,9 @@ function HomeScreen() {
           {natalReportResult.aspects.map((a, i) => (
             <View key={i} style={{ marginBottom: 10 }}>
               <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold' }}>• {a.planets} ({a.type}, ორბისი: {a.orb})</Text>
-              <Text style={{ color: '#ccc', fontSize: 13 }}>{a.meaning}. ვლინდება: {a.manifestation}.</Text>
+              <Text style={{ color: '#ccc', fontSize: 13 }}>მნიშვნელობა: {a.meaning}</Text>
+              <Text style={{ color: '#ccc', fontSize: 13 }}>გამოვლინება: {a.manifestation}</Text>
+              <Text style={{ color: '#ccc', fontSize: 13 }}>ძლიერი მხარე: {a.strength}{"\n"}გამოწვევა: {a.challenge}</Text>
               
             </View>
           ))}
@@ -728,7 +730,9 @@ function HomeScreen() {
           {natalReportResult.karmic.map((k, i) => (
             <View key={i} style={{ marginBottom: 10 }}>
               <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold' }}>• {k.name}: {k.sign} (მე-{k.house} სახლი)</Text>
-              <Text style={{ color: '#ccc', fontSize: 13 }}>{k.meaning}. {k.manifestation}.</Text>
+              <Text style={{ color: '#ccc', fontSize: 13 }}>მნიშვნელობა: {k.meaning}</Text>
+              <Text style={{ color: '#ccc', fontSize: 13 }}>გამოვლინება: {k.manifestation}</Text>
+              <Text style={{ color: '#ccc', fontSize: 13 }}>ძლიერი მხარე: {k.strength}{"\n"}გამოწვევა: {k.challenge}</Text>
               
             </View>
           ))}
@@ -739,8 +743,9 @@ function HomeScreen() {
           <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>7. 🧭 ნატალური რუკის ოთხი კუთხე</Text>
           {natalReportResult.angles.map((ang, i) => (
             <View key={i} style={{ marginBottom: 10 }}>
-              <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold' }}>• {ang.name} ({ang.sign})</Text>
-              <Text style={{ color: '#ccc', fontSize: 13 }}>{ang.meaning}. ძლიერი მხარე: {ang.strength}.</Text>
+              <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold' }}>• {ang.name}: {ang.sign}</Text>
+              <Text style={{ color: '#ccc', fontSize: 13 }}>მნიშვნელობა: {ang.meaning}</Text>
+              <Text style={{ color: '#ccc', fontSize: 13 }}>ძლიერი მხარე: {ang.strength}{"\n"}გამოწვევა: {ang.challenge}</Text>
               
             </View>
           ))}
@@ -761,7 +766,7 @@ function HomeScreen() {
           <Text style={{ color: '#ccc', fontSize: 13 }}>კარდინალური: {natalReportResult.modalities.cardinal} | ფიქსირებული: {natalReportResult.modalities.fixed} | მუტაბელური: {natalReportResult.modalities.mutable}</Text>
           <Text style={{ color: '#ccc', fontSize: 13, marginTop: 4 }}>დომინანტური: {natalReportResult.modalities.dominant}</Text>
           <Text style={{ color: '#fff', fontSize: 13, marginTop: 8 }}>{natalReportResult.modalities.analysis}</Text>
-          <Text style={{ color: '#ccc', fontSize: 12 }}>ძლიერი მხარე: {natalReportResult.modalities.strength} | გამოწვევა: {natalReportResult.modalities.challenge}</Text>
+          <Text style={{ color: '#ccc', fontSize: 12 }}>ძლიერი მხარე: {natalReportResult.modalities.strength}{"\n"}გამოწვევა: {natalReportResult.modalities.challenge}</Text>
         </View>
 
         {/* 10. დომინანტური ენერგიები */}
@@ -777,7 +782,7 @@ function HomeScreen() {
         <View style={{ backgroundColor: '#151525', padding: 16, borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#2a2a4a' }}>
           <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>11. 📝 პერსონალური შეჯამება</Text>
           <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• მთავარი თვისება: {natalReportResult.summary.trait}</Text>
-          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• ძლიერი მხარე: {natalReportResult.summary.strength} | გამოწვევა: {natalReportResult.summary.challenge}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• ძლიერი მხარე: {natalReportResult.summary.strength}{"\n"}გამოწვევა: {natalReportResult.summary.challenge}</Text>
           
           <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• ემოციური ბუნება: {natalReportResult.summary.emotion}</Text>
           <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• სიყვარულისა და ურთიერთობების სტილი: {natalReportResult.summary.love}</Text>

@@ -45,10 +45,12 @@ const updatedSituationsAi = `
       if (liveResult) {
         setSituationsAiText(liveResult);
       } else {
-        setSituationsAiText(Object.values(GEMINI_ENCYCLOPEDIA?.situations || {}).join('\\ნ\\ნ'));
+        setSituationsAiText(Object.values(GEMINI_ENCYCLOPEDIA?.situations |
+{}).join('\\ნ\\ნ'));
       }
     } catch (e) {
-      setSituationsAiText(Object.values(GEMINI_ENCYCLOPEDIA?.situations || {}).join('\\ნ\\ნ'));
+      setSituationsAiText(Object.values(GEMINI_ENCYCLOPEDIA?.situations |
+{}).join('\\ნ\\ნ'));
     } finally {
       setLoadingSituationsAi(false);
     }
@@ -63,7 +65,8 @@ if (regex.test(code)) {
 // 3. ვაახლებთ რენდერს
 const liveSituationsRender = `
             { key: 'situations', title: '🎭 ტყუპები სხვადასხვა სიტუაციაში', content: 
-              loadingSituationsAi ? '✨ AI გენერირებს სიტუაციურ ანალიზს...' : (situationsAiText || Object.values(GEMINI_ENCYCLOPEDIA?.situations || {}).join('\\ნ\\ნ'))
+              loadingSituationsAi ? '✨ AI გენერირებს სიტუაციურ ანალიზს...' : (situationsAiText || Object.values(GEMINI_ENCYCLOPEDIA?.situations |
+{}).join('\\ნ\\ნ'))
             },
 `;
 

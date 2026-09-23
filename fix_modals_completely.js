@@ -13,7 +13,7 @@ if (!code.includes("const dynamicAspects = getDynamicAspects")) {
     const insertionPoint = match.index + match[0].length;
     code = code.slice(0, insertionPoint) + `
   // დინამიური ასპექტები ასტრონომიული კალკულატორიდან
-  const dynamicAspects = getDynamicAspects(selectedDate || '2026-09-21');
+  const dynamicAspects = getDynamicAspects(selectedDate |"2026-09-21');
   const shortTermAspects = dynamicAspects.shortTerm;
   const longTermAspects = dynamicAspects.longTerm;
     ` + code.slice(insertionPoint);

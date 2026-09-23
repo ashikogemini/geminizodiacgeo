@@ -730,12 +730,12 @@ function HomeScreen() {
         <View style={{ backgroundColor: '#151525', padding: 16, borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#2a2a4a' }}>
           <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>6. 🔮 კარმული და დამატებითი მაჩვენებლები</Text>
           {natalReportResult.karmic.map((k, i) => (
-            <View key={i} style={{ marginBottom: 10 }}>
+            <View key={i} style={{ marginBottom: 12, borderBottomWidth: i < natalReportResult.karmic.length - 1 ? 1 : 0, borderBottomColor: '#222', paddingBottom: 8 }}>
               <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold' }}>• {k.name}: {k.sign} (მე-{k.house} სახლი)</Text>
-              <Text style={{ color: '#ccc', fontSize: 13 }}>მნიშვნელობა: {k.meaning}</Text>
-              <Text style={{ color: '#ccc', fontSize: 13 }}>გამოვლინება: {k.manifestation}</Text>
-              <Text style={{ color: '#ccc', fontSize: 13 }}>ძლიერი მხარე: {k.strength}გამოწვევა: {k.challenge}</Text>
-              
+              <Text style={{ color: '#ccc', fontSize: 13 }}>• მნიშვნელობა: {k.meaning}</Text>
+              <Text style={{ color: '#ccc', fontSize: 13 }}>• გამოვლინება: {k.manifestation}</Text>
+              <Text style={{ color: '#ccc', fontSize: 13 }}>• ძლიერი მხარე: {k.strength}</Text>
+              <Text style={{ color: '#ccc', fontSize: 13 }}>• გამოწვევა: {k.challenge}</Text>
             </View>
           ))}
         </View>

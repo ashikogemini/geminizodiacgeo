@@ -29,7 +29,7 @@ const renderFormattedHoroscope = (rawText) => {
       {advice && (
         <View style={{ marginTop: 12, padding: 12, backgroundColor: 'rgba(212, 175, 55, 0.1)', borderRadius: 8, borderLeftWidth: 3, borderLeftColor: '#d4af37' }}>
           <Text style={{ color: '#d4af37', fontWeight: 'bold', marginBottom: 4, fontSize: 13 }}>💡 დღის რჩევა:</Text>
-          <Text style={{ color: '#ddd', fontSize: 13, lineHeight: 18 }}>{advice}</Text>
+          
         </View>
       )}
     </View>
@@ -662,8 +662,8 @@ function HomeScreen() {
         <View style={{ backgroundColor: '#151525', padding: 16, borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#2a2a4a' }}>
           <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>1. 🌌 ნატალური რუკა — ვიზუალური სქემა</Text>
           <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 8 }}>{natalReportResult.visualSchema.description}</Text>
-          <Text style={{ color: '#fff', fontSize: 13, marginBottom: 4 }}>• ASC: {natalReportResult.visualSchema.asc} | DSC: {natalReportResult.visualSchema.dsc}</Text>
-          <Text style={{ color: '#fff', fontSize: 13 }}>• MC: {natalReportResult.visualSchema.mc} | IC: {natalReportResult.visualSchema.ic}</Text>
+          
+          
         </View>
 
         {/* 2. Big 3 */}
@@ -672,17 +672,17 @@ function HomeScreen() {
           <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold', marginTop: 8 }}>☀️ მზე ({natalReportResult.big3.sun.sign}, მე-{natalReportResult.big3.sun.house} სახლი)</Text>
           <Text style={{ color: '#ccc', fontSize: 13 }}>{natalReportResult.big3.sun.meaning}. ვლინდება: {natalReportResult.big3.sun.manifestation}.</Text>
           <Text style={{ color: '#ccc', fontSize: 13 }}>ძლიერი მხარე: {natalReportResult.big3.sun.strength} | გამოწვევა: {natalReportResult.big3.sun.challenge}</Text>
-          <Text style={{ color: '#fff', fontSize: 13, fontStyle: 'italic', marginTop: 4 }}>💡 რჩევა: {natalReportResult.big3.sun.advice}</Text>
+          
           
           <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold', marginTop: 12 }}>🌙 მთვარე ({natalReportResult.big3.moon.sign}, მე-{natalReportResult.big3.moon.house} სახლი)</Text>
           <Text style={{ color: '#ccc', fontSize: 13 }}>{natalReportResult.big3.moon.meaning}. ვლინდება: {natalReportResult.big3.moon.manifestation}.</Text>
           <Text style={{ color: '#ccc', fontSize: 13 }}>ძლიერი მხარე: {natalReportResult.big3.moon.strength} | გამოწვევა: {natalReportResult.big3.moon.challenge}</Text>
-          <Text style={{ color: '#fff', fontSize: 13, fontStyle: 'italic', marginTop: 4 }}>💡 რჩევა: {natalReportResult.big3.moon.advice}</Text>
+          
 
-          <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold', marginTop: 12 }}>⬆️ ასცენდენტი ({natalReportResult.big3.ascendant.sign})</Text>
-          <Text style={{ color: '#ccc', fontSize: 13 }}>{natalReportResult.big3.ascendant.meaning}. ვლინდება: {natalReportResult.big3.ascendant.manifestation}.</Text>
-          <Text style={{ color: '#ccc', fontSize: 13 }}>ძლიერი მხარე: {natalReportResult.big3.ascendant.strength} | გამოწვევა: {natalReportResult.big3.ascendant.challenge}</Text>
-          <Text style={{ color: '#fff', fontSize: 13, fontStyle: 'italic', marginTop: 4 }}>💡 რჩევა: {natalReportResult.big3.ascendant.advice}</Text>
+          
+          
+          
+          
         </View>
 
         {/* 3. პლანეტები */}
@@ -693,7 +693,7 @@ function HomeScreen() {
               <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold' }}>• {p.name}: {p.sign} (მე-{p.house} სახლი)</Text>
               <Text style={{ color: '#ccc', fontSize: 13 }}>მნიშვნელობა: {p.meaning} | გამოვლინება: {p.daily}</Text>
               <Text style={{ color: '#ccc', fontSize: 13 }}>ძლიერი მხარე: {p.strength} | გამოწვევა: {p.challenge}</Text>
-              <Text style={{ color: '#fff', fontSize: 12, fontStyle: 'italic' }}>💡 რჩევა: {p.advice}</Text>
+              
             </View>
           ))}
         </View>
@@ -717,7 +717,7 @@ function HomeScreen() {
             <View key={i} style={{ marginBottom: 10 }}>
               <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold' }}>• {a.planets} ({a.type}, ორბისი: {a.orb})</Text>
               <Text style={{ color: '#ccc', fontSize: 13 }}>{a.meaning}. ვლინდება: {a.manifestation}.</Text>
-              <Text style={{ color: '#fff', fontSize: 12, fontStyle: 'italic' }}>💡 რჩევა: {a.advice}</Text>
+              
             </View>
           ))}
         </View>
@@ -729,7 +729,7 @@ function HomeScreen() {
             <View key={i} style={{ marginBottom: 10 }}>
               <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold' }}>• {k.name}: {k.sign} (მე-{k.house} სახლი)</Text>
               <Text style={{ color: '#ccc', fontSize: 13 }}>{k.meaning}. {k.manifestation}.</Text>
-              <Text style={{ color: '#fff', fontSize: 12, fontStyle: 'italic' }}>💡 რჩევა: {k.advice}</Text>
+              
             </View>
           ))}
         </View>
@@ -741,7 +741,7 @@ function HomeScreen() {
             <View key={i} style={{ marginBottom: 10 }}>
               <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold' }}>• {ang.name} ({ang.sign})</Text>
               <Text style={{ color: '#ccc', fontSize: 13 }}>{ang.meaning}. ძლიერი მხარე: {ang.strength}.</Text>
-              <Text style={{ color: '#fff', fontSize: 12, fontStyle: 'italic' }}>💡 რჩევა: {ang.advice}</Text>
+              
             </View>
           ))}
         </View>
@@ -752,7 +752,7 @@ function HomeScreen() {
           <Text style={{ color: '#ccc', fontSize: 13 }}>ცეცხლი: {natalReportResult.elements.fire} | მიწა: {natalReportResult.elements.earth} | ჰაერი: {natalReportResult.elements.air} | წყალი: {natalReportResult.elements.water}</Text>
           <Text style={{ color: '#ccc', fontSize: 13, marginTop: 4 }}>დომინანტური: {natalReportResult.elements.dominant} | ნაკლები: {natalReportResult.elements.weakest}</Text>
           <Text style={{ color: '#fff', fontSize: 13, marginTop: 8 }}>{natalReportResult.elements.analysis}</Text>
-          <Text style={{ color: '#fff', fontSize: 13, fontStyle: 'italic', marginTop: 4 }}>💡 ბალანსის რჩევა: {natalReportResult.elements.balanceAdvice}</Text>
+          
         </View>
 
         {/* 9. მოდალობები */}
@@ -770,7 +770,7 @@ function HomeScreen() {
           <Text style={{ color: '#ccc', fontSize: 13 }}>• პლანეტა / ნიშანი: {natalReportResult.dominants.planet} / {natalReportResult.dominants.sign}</Text>
           <Text style={{ color: '#ccc', fontSize: 13 }}>• რატომ: {natalReportResult.dominants.why}</Text>
           <Text style={{ color: '#ccc', fontSize: 13 }}>• გავლენა: {natalReportResult.dominants.strength}</Text>
-          <Text style={{ color: '#fff', fontSize: 13, fontStyle: 'italic', marginTop: 4 }}>💡 რჩევა: {natalReportResult.dominants.advice}</Text>
+          
         </View>
 
         {/* 11. პერსონალური შეჯამება */}
@@ -778,12 +778,12 @@ function HomeScreen() {
           <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>11. 📝 პერსონალური შეჯამება</Text>
           <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• მთავარი თვისება: {natalReportResult.summary.trait}</Text>
           <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• ძლიერი მხარე: {natalReportResult.summary.strength} | გამოწვევა: {natalReportResult.summary.challenge}</Text>
-          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• აზროვნება: {natalReportResult.summary.thinking} | კომუნიკაცია: {natalReportResult.summary.communication}</Text>
+          
           <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• ემოციური ბუნება: {natalReportResult.summary.emotion}</Text>
           <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• სიყვარულისა და ურთიერთობების სტილი: {natalReportResult.summary.love}</Text>
           <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• კარიერული პოტენციალი: {natalReportResult.summary.career}</Text>
           <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• ენერგიის წყარო: {natalReportResult.summary.energySource}</Text>
-          <Text style={{ color: '#fff', fontSize: 13, fontStyle: 'italic', marginTop: 8, lineHeight: 20 }}>💡 საბოლოო რჩევა: {natalReportResult.summary.finalAdvice}</Text>
+          
           <Text style={{ color: '#888', fontSize: 11, marginTop: 12, textAlign: 'center' }}></Text>
         </View>
       </View>
@@ -1134,7 +1134,7 @@ function HomeScreen() {
               <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{MAY_GEMINI.uniqueness}</Text>
 
               <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• პრაქტიკული რჩევა:</Text>
-              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 16 }}>{MAY_GEMINI.advice}</Text>
+              
             </ScrollView>
 
             <TouchableOpacity onPress={() => setMayModalVisible(false)} style={{ backgroundColor: "#d4af37", padding: 12, borderRadius: 10, marginTop: 12, alignItems: "center" }}>
@@ -1194,7 +1194,7 @@ function HomeScreen() {
               <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{JUNE_DECADE_1.uniqueness}</Text>
 
               <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• პრაქტიკული რჩევა:</Text>
-              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 16 }}>{JUNE_DECADE_1.advice}</Text>
+              
             </ScrollView>
 
             <TouchableOpacity onPress={() => setJuneDecade1ModalVisible(false)} style={{ backgroundColor: "#d4af37", padding: 12, borderRadius: 10, marginTop: 12, alignItems: "center" }}>
@@ -1253,7 +1253,7 @@ function HomeScreen() {
               <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8 }}>{JUNE_DECADE_2.uniqueness}</Text>
 
               <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• პრაქტიკული რჩევა:</Text>
-              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 16 }}>{JUNE_DECADE_2.advice}</Text>
+              
             </ScrollView>
 
             <TouchableOpacity onPress={() => setJuneDecade2ModalVisible(false)} style={{ backgroundColor: "#d4af37", padding: 12, borderRadius: 10, marginTop: 12, alignItems: "center" }}>
@@ -1316,7 +1316,7 @@ function HomeScreen() {
               <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8, lineHeight: 20 }}>{selectedDayItem?.thinkingStyle}</Text>
 
               <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• კომუნიკაციის თავისებურებები:</Text>
-              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8, lineHeight: 20 }}>{selectedDayItem?.communication}</Text>
+              
 
               <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• ემოციური ბუნება:</Text>
               <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8, lineHeight: 20 }}>{selectedDayItem?.emotions}</Text>
@@ -1346,7 +1346,7 @@ function HomeScreen() {
               <Text style={{ color: "#fff", fontSize: 14, marginBottom: 8, lineHeight: 20 }}>{selectedDayItem?.distinctiveFeature}</Text>
 
               <Text style={{ color: "#d4af37", fontSize: 14, fontWeight: "bold", marginTop: 8 }}>• მოკლე პერსონალური რჩევა:</Text>
-              <Text style={{ color: "#fff", fontSize: 14, marginBottom: 16, lineHeight: 20 }}>{selectedDayItem?.advice}</Text>
+              
             </ScrollView>
 
             <TouchableOpacity onPress={() => setSelectedDayItem(null)} style={{ backgroundColor: "#d4af37", padding: 12, borderRadius: 10, marginTop: 12, alignItems: "center" }}>
@@ -2374,7 +2374,7 @@ function HomeScreen() {
                     <Text style={{color: '#ddd', fontSize: 13, marginBottom: 6}}>📅 პერიოდი: {item.period} (პიკი: {item.peak})</Text>
                     <Text style={{color: '#fff', fontSize: 13, lineHeight: 18, marginBottom: 8}}>✨ {item.impact}</Text>
                     <Text style={{color: '#8be9fd', fontSize: 13, lineHeight: 18, marginBottom: 6}}>🎯 სფეროები: {item.manifestation}</Text>
-                    <Text style={{color: '#55efc4', fontSize: 13, lineHeight: 18, fontStyle: 'italic'}}>💡 რჩევა: {item.advice}</Text>
+                    
                   </View>
                 ))}
             </ScrollView>
@@ -2412,7 +2412,7 @@ function HomeScreen() {
                     <Text style={{color: '#fdcb6e', fontSize: 13, fontWeight: 'bold', marginBottom: 6}}>📌 მთავარი თემა: {item.theme}</Text>
                     <Text style={{color: '#fff', fontSize: 13, lineHeight: 18, marginBottom: 8}}>✨ გამოვლინება: {item.manifestation}</Text>
                     {item.cautions && <Text style={{color: '#ff9ff3', fontSize: 13, lineHeight: 18, marginBottom: 6}}>⚠️ გასათვალისწინებელი: {item.cautions}</Text>}
-                    <Text style={{color: '#55efc4', fontSize: 13, lineHeight: 18, fontStyle: 'italic'}}>💡 რჩევა: {item.advice}</Text>
+                    
                   </View>
                 ))}
             </ScrollView>

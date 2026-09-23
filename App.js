@@ -1,3 +1,8 @@
+const getHouseLabel = (num) => {
+  const n = parseInt(num, 10);
+  if (n === 1) return 'პირველი სახლი';
+  return `მე-${n} სახლი`;
+};
 import { generateFullNatalReport } from './astroDatabase';
 import { GEMINI_BY_DAY } from './geminiByDayData';
 import { MAY_GEMINI, JUNE_DECADE_1, JUNE_DECADE_2 } from './geminiDecadesData';;
@@ -690,7 +695,7 @@ function HomeScreen() {
           <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>3. 🪐 პლანეტები ნიშნებსა და სახლებში</Text>
           {natalReportResult.planets.map((p, i) => (
             <View key={i} style={{ marginBottom: 12, borderBottomWidth: i < natalReportResult.planets.length - 1 ? 1 : 0, borderBottomColor: '#222', paddingBottom: 8 }}>
-              <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold' }}>• {p.name}: {p.sign} (მე-{p.house} სახლი)</Text>
+              <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold' }}>• {p.name}: {p.sign} ({getHouseLabel(p.house)})</Text>
               <Text style={{ color: '#ccc', fontSize: 13 }}>მნიშვნელობა: {p.meaning}გამოვლინება: {p.daily}</Text>
               <Text style={{ color: '#ccc', fontSize: 13 }}>ძლიერი მხარე: {p.strength}გამოწვევა: {p.challenge}</Text>
               
@@ -731,7 +736,7 @@ function HomeScreen() {
           <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>6. 🔮 კარმული და დამატებითი მაჩვენებლები</Text>
           {natalReportResult.karmic.map((k, i) => (
             <View key={i} style={{ marginBottom: 12, borderBottomWidth: i < natalReportResult.karmic.length - 1 ? 1 : 0, borderBottomColor: '#222', paddingBottom: 8 }}>
-              <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold' }}>• {k.name}: {k.sign} (მე-{k.house} სახლი)</Text>
+              <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold' }}>• {k.name}: {k.sign} ({getHouseLabel(k.house)})</Text>
               <Text style={{ color: '#ccc', fontSize: 13 }}>• მნიშვნელობა: {k.meaning}</Text>
               <Text style={{ color: '#ccc', fontSize: 13 }}>• გამოვლინება: {k.manifestation}</Text>
               <Text style={{ color: '#ccc', fontSize: 13 }}>• ძლიერი მხარე: {k.strength}</Text>

@@ -269,8 +269,8 @@ export const generateFullNatalReport = (day, month, year, hour, minute, city, un
     },
     summary: { 
       trait: `${getSign(sunLon)} მზისა და ${ascSign} ასცენდენტის სინთეზი`, 
-      strength: 'Astro.com-ის იდენტური სიზუსტე.', 
-      challenge: 'ბალანსი.', 
+      strength: 'მაღალი შინაგანი პოტენციალი, მიზანდასახულობა, სიტუაციების ღრმა ანალიზისა და გამოწვევების შესაძლებლობად ქცევის უნარი.', 
+      challenge: 'ემოციურსა და ლოგიკურ სფეროებს შორის ოქროს შუალედის პოვნა და გადაღლის თავიდან აცილება.', 
       thinking: 'ანალიტიკური', 
       communication: 'ღია', 
       emotion: 'ინტუიციური', 

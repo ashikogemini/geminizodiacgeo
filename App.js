@@ -660,7 +660,7 @@ function HomeScreen() {
       <View style={{ marginTop: 20, paddingBottom: 40, width: '100%' }}>
         {/* 1. ვიზუალური სქემა */}
         <View style={{ backgroundColor: '#151525', padding: 16, borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#2a2a4a' }}>
-          <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>1. 🌌 ნატალური რუკა — ვიზუალური სქემა</Text>
+          <Text style={{ color: '#d4af37', fontSize: 16, fontWeight: 'bold', marginBottom: 12 }}>1. 🌌 რუკის ძირითადი პარამეტრები</Text>
           <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 8 }}>{natalReportResult.visualSchema.description}</Text>
           
           
@@ -705,7 +705,8 @@ function HomeScreen() {
             <View key={i} style={{ marginBottom: 10 }}>
               <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold' }}>{h.num}. {h.name} ({h.sign})</Text>
               <Text style={{ color: '#ccc', fontSize: 13 }}>• გავლენა: {h.impact}</Text>
-              <Text style={{ color: '#ccc', fontSize: 13 }}>• ძლიერი მხარე: {h.strength}{"\n"}გამოწვევა: {h.challenge}</Text>
+              <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• ძლიერი მხარე: {natalReportResult.summary.strength}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• გამოწვევა: {natalReportResult.summary.challenge}</Text>
             </View>
           ))}
         </View>
@@ -783,7 +784,8 @@ function HomeScreen() {
         <View style={{ backgroundColor: '#151525', padding: 16, borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#2a2a4a' }}>
           <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>11. 📝 პერსონალური შეჯამება</Text>
           <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• მთავარი თვისება: {natalReportResult.summary.trait}</Text>
-          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• ძლიერი მხარე: {natalReportResult.summary.strength}{"\n"}გამოწვევა: {natalReportResult.summary.challenge}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• ძლიერი მხარე: {natalReportResult.summary.strength}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• გამოწვევა: {natalReportResult.summary.challenge}</Text>
           
           <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• ემოციური ბუნება: {natalReportResult.summary.emotion}</Text>
           <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• სიყვარულისა და ურთიერთობების სტილი: {natalReportResult.summary.love}</Text>

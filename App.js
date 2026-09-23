@@ -641,9 +641,9 @@ function HomeScreen() {
 
 
             <TouchableOpacity
-              onPress={() => {
+              onPress={async () => {
                 console.log('--- ღილაკს დაეჭირა! ---', {natDay, natMonth, natYear, natCity});
-                const res = generateFullNatalReport(natDay, natMonth, natYear, natHour, natMinute, natCity, natUnknownTime);
+                const res = await generateFullNatalReport(natDay, natMonth, natYear, natHour, natMinute, natCity, natUnknownTime);
                 if (res) {
                   setNatalReportResult(res);
                   console.log('--- შედეგი დაგენერირდა! ---');
@@ -784,7 +784,7 @@ function HomeScreen() {
           <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• კარიერული პოტენციალი: {natalReportResult.summary.career}</Text>
           <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• ენერგიის წყარო: {natalReportResult.summary.energySource}</Text>
           <Text style={{ color: '#fff', fontSize: 13, fontStyle: 'italic', marginTop: 8, lineHeight: 20 }}>💡 საბოლოო რჩევა: {natalReportResult.summary.finalAdvice}</Text>
-          <Text style={{ color: '#888', fontSize: 11, marginTop: 12, textAlign: 'center' }}>*ასტროლოგიური მონაცემები წარმოდგენილია როგორც ინტერპრეტაცია.</Text>
+          <Text style={{ color: '#888', fontSize: 11, marginTop: 12, textAlign: 'center' }}></Text>
         </View>
       </View>
     )}
@@ -804,7 +804,7 @@ function HomeScreen() {
                 </View>
                 <ScrollView>
                   {Array.from({length: 31}, (_, i) => String(i + 1)).map(d => (
-                    <TouchableOpacity key={d} onPress={() => { setNatDay(d); setDayModalVisible(false); }} style={{ paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: '#2a2a4a', alignItems: 'center' }}>
+                    <TouchableOpacity key={d} onPress={async () => { setNatDay(d); setDayModalVisible(false); }} style={{ paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: '#2a2a4a', alignItems: 'center' }}>
                       <Text style={{ color: natDay === d ? '#d4af37' : '#fff', fontSize: 16, fontWeight: natDay === d ? 'bold' : 'normal' }}>{d}</Text>
                     </TouchableOpacity>
                   ))}
@@ -822,7 +822,7 @@ function HomeScreen() {
                 </View>
                 <ScrollView>
                   {['იანვარი', 'თებერვალი', 'მარტი', 'აპრილი', 'მაისი', 'ივნისი', 'ივლისი', 'აგვისტო', 'სექტემბერი', 'ოქტომბერი', 'ნოემბერი', 'დეკემბერი'].map(m => (
-                    <TouchableOpacity key={m} onPress={() => { setNatMonth(m); setMonthModalVisible(false); }} style={{ paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: '#2a2a4a', alignItems: 'center' }}>
+                    <TouchableOpacity key={m} onPress={async () => { setNatMonth(m); setMonthModalVisible(false); }} style={{ paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: '#2a2a4a', alignItems: 'center' }}>
                       <Text style={{ color: natMonth === m ? '#d4af37' : '#fff', fontSize: 16, fontWeight: natMonth === m ? 'bold' : 'normal' }}>{m}</Text>
                     </TouchableOpacity>
                   ))}
@@ -840,7 +840,7 @@ function HomeScreen() {
                 </View>
                 <ScrollView>
                   {Array.from({length: 127}, (_, i) => String(2026 - i)).map(y => (
-                    <TouchableOpacity key={y} onPress={() => { setNatYear(y); setYearModalVisible(false); }} style={{ paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: '#2a2a4a', alignItems: 'center' }}>
+                    <TouchableOpacity key={y} onPress={async () => { setNatYear(y); setYearModalVisible(false); }} style={{ paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: '#2a2a4a', alignItems: 'center' }}>
                       <Text style={{ color: natYear === y ? '#d4af37' : '#fff', fontSize: 16, fontWeight: natYear === y ? 'bold' : 'normal' }}>{y}</Text>
                     </TouchableOpacity>
                   ))}
@@ -858,7 +858,7 @@ function HomeScreen() {
                 </View>
                 <ScrollView>
                   {Array.from({length: 24}, (_, i) => String(i).padStart(2, '0')).map(h => (
-                    <TouchableOpacity key={h} onPress={() => { setNatHour(h); setHourModalVisible(false); }} style={{ paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: '#2a2a4a', alignItems: 'center' }}>
+                    <TouchableOpacity key={h} onPress={async () => { setNatHour(h); setHourModalVisible(false); }} style={{ paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: '#2a2a4a', alignItems: 'center' }}>
                       <Text style={{ color: natHour === h ? '#d4af37' : '#fff', fontSize: 16, fontWeight: natHour === h ? 'bold' : 'normal' }}>{h}</Text>
                     </TouchableOpacity>
                   ))}
@@ -876,7 +876,7 @@ function HomeScreen() {
                 </View>
                 <ScrollView>
                   {Array.from({length: 60}, (_, i) => String(i).padStart(2, '0')).map(min => (
-                    <TouchableOpacity key={min} onPress={() => { setNatMinute(min); setMinuteModalVisible(false); }} style={{ paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: '#2a2a4a', alignItems: 'center' }}>
+                    <TouchableOpacity key={min} onPress={async () => { setNatMinute(min); setMinuteModalVisible(false); }} style={{ paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: '#2a2a4a', alignItems: 'center' }}>
                       <Text style={{ color: natMinute === min ? '#d4af37' : '#fff', fontSize: 16, fontWeight: natMinute === min ? 'bold' : 'normal' }}>{min}</Text>
                     </TouchableOpacity>
                   ))}
@@ -905,7 +905,7 @@ function HomeScreen() {
                     'ცაგერი', 'ცხინვალი', 'წალენჯიხა', 'წალკა', 'წყალტუბო', 'ჭიათურა', 
                     'ხარაგაული', 'ხაშური', 'ხობი', 'ხულო', 'ჯვარი', 'სხვა'
                   ].map(cityItem => (
-                    <TouchableOpacity key={cityItem} onPress={() => { setNatCity(cityItem); setCityModalVisible(false); }} style={{ paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: '#2a2a4a' }}>
+                    <TouchableOpacity key={cityItem} onPress={async () => { setNatCity(cityItem); setCityModalVisible(false); }} style={{ paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: '#2a2a4a' }}>
                       <Text style={{ color: natCity === cityItem ? '#d4af37' : '#fff', fontSize: 16, fontWeight: natCity === cityItem ? 'bold' : 'normal' }}>{cityItem}</Text>
                     </TouchableOpacity>
                   ))}
@@ -1971,7 +1971,7 @@ function HomeScreen() {
               ].map((sign) => (
                 <TouchableOpacity
                   key={sign.id}
-                  onPress={() => {
+                  onPress={async () => {
                     setSelectedSign(sign);
                     setSignDetailModalVisible(true);
                   }}
@@ -2251,7 +2251,7 @@ function HomeScreen() {
               ))}
 
               {/* მოკლევადიანი ასპექტები */}
-              <TouchableOpacity onPress={() => { setModalSource('tab'); setIsShortModalVisible(true);
+              <TouchableOpacity onPress={async () => { setModalSource('tab'); setIsShortModalVisible(true);
      }} activeOpacity={0.8} style={[styles.card, { marginTop: 10, padding: 12 }]}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -2263,7 +2263,7 @@ function HomeScreen() {
               </TouchableOpacity>
 
               {/* გრძელვადიანი ასპექტები */}
-              <TouchableOpacity onPress={() => { setModalSource('tab'); setIsLongModalVisible(true);
+              <TouchableOpacity onPress={async () => { setModalSource('tab'); setIsLongModalVisible(true);
      }} activeOpacity={0.8} style={[styles.card, { marginTop: 14, padding: 12 }]}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -2331,7 +2331,7 @@ function HomeScreen() {
               <Text style={{color: '#fff', fontSize: 14, fontWeight: 'bold', marginBottom: 8}} numberOfLines={1}>
                 {shortTermAspects?.find(item => item.end >= new Date().toISOString().split('T')[0])?.title || 'აქტიური ასპექტი არ არის'}
               </Text>
-              <TouchableOpacity onPress={() => { setModalSource('startup'); setIsStartupModalVisible(false); setIsShortModalVisible(true);
+              <TouchableOpacity onPress={async () => { setModalSource('startup'); setIsStartupModalVisible(false); setIsShortModalVisible(true);
      }} style={{backgroundColor: '#d4af37', padding: 8, borderRadius: 8, alignItems: 'center'}}>
                 <Text style={{color: '#131b2e', fontWeight: 'bold', fontSize: 13}}>წაკითხვა</Text>
               </TouchableOpacity>
@@ -2343,7 +2343,7 @@ function HomeScreen() {
               <Text style={{color: '#fff', fontSize: 14, fontWeight: 'bold', marginBottom: 8}} numberOfLines={1}>
                 {longTermAspects?.find(item => item.end >= new Date().toISOString().split('T')[0])?.title || 'აქტიური ასპექტი არ არის'}
               </Text>
-              <TouchableOpacity onPress={() => { setModalSource('startup'); setIsStartupModalVisible(false); setIsLongModalVisible(true);
+              <TouchableOpacity onPress={async () => { setModalSource('startup'); setIsStartupModalVisible(false); setIsLongModalVisible(true);
      }} style={{backgroundColor: '#d4af37', padding: 8, borderRadius: 8, alignItems: 'center'}}>
                 <Text style={{color: '#131b2e', fontWeight: 'bold', fontSize: 13}}>წაკითხვა</Text>
               </TouchableOpacity>
@@ -2381,11 +2381,11 @@ function HomeScreen() {
             
             <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 15}}>
               {modalSource === 'startup' && (
-                <TouchableOpacity onPress={() => { setIsShortModalVisible(false); if (modalSource === 'startup') { setIsStartupModalVisible(true); } }} style={{flex: 1, backgroundColor: '#1a233a', borderWidth: 1, borderColor: '#d4af37', padding: 12, borderRadius: 10, alignItems: 'center', marginRight: 8}}>
+                <TouchableOpacity onPress={async () => { setIsShortModalVisible(false); if (modalSource === 'startup') { setIsStartupModalVisible(true); } }} style={{flex: 1, backgroundColor: '#1a233a', borderWidth: 1, borderColor: '#d4af37', padding: 12, borderRadius: 10, alignItems: 'center', marginRight: 8}}>
                   <Text style={{color: '#d4af37', fontWeight: 'bold', fontSize: 15}}>უკან</Text>
                 </TouchableOpacity>
               )}
-              <TouchableOpacity onPress={() => { setIsShortModalVisible(false); setIsStartupModalVisible(false); setIsLongModalVisible(false); }} style={{flex: 1, backgroundColor: '#d4af37', padding: 12, borderRadius: 10, alignItems: 'center', marginLeft: modalSource === 'startup' ? 8 : 0}}>
+              <TouchableOpacity onPress={async () => { setIsShortModalVisible(false); setIsStartupModalVisible(false); setIsLongModalVisible(false); }} style={{flex: 1, backgroundColor: '#d4af37', padding: 12, borderRadius: 10, alignItems: 'center', marginLeft: modalSource === 'startup' ? 8 : 0}}>
                 <Text style={{color: '#131b2e', fontWeight: 'bold', fontSize: 15}}>დახურვა</Text>
               </TouchableOpacity>
             </View>
@@ -2419,11 +2419,11 @@ function HomeScreen() {
             
             <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 15}}>
               {modalSource === 'startup' && (
-                <TouchableOpacity onPress={() => { setIsLongModalVisible(false); if (modalSource === 'startup') { setIsStartupModalVisible(true); } }} style={{flex: 1, backgroundColor: '#1a233a', borderWidth: 1, borderColor: '#d4af37', padding: 12, borderRadius: 10, alignItems: 'center', marginRight: 8}}>
+                <TouchableOpacity onPress={async () => { setIsLongModalVisible(false); if (modalSource === 'startup') { setIsStartupModalVisible(true); } }} style={{flex: 1, backgroundColor: '#1a233a', borderWidth: 1, borderColor: '#d4af37', padding: 12, borderRadius: 10, alignItems: 'center', marginRight: 8}}>
                   <Text style={{color: '#d4af37', fontWeight: 'bold', fontSize: 15}}>უკან</Text>
                 </TouchableOpacity>
               )}
-              <TouchableOpacity onPress={() => { setIsShortModalVisible(false); setIsStartupModalVisible(false); setIsLongModalVisible(false); }} style={{flex: 1, backgroundColor: '#d4af37', padding: 12, borderRadius: 10, alignItems: 'center', marginLeft: modalSource === 'startup' ? 8 : 0}}>
+              <TouchableOpacity onPress={async () => { setIsShortModalVisible(false); setIsStartupModalVisible(false); setIsLongModalVisible(false); }} style={{flex: 1, backgroundColor: '#d4af37', padding: 12, borderRadius: 10, alignItems: 'center', marginLeft: modalSource === 'startup' ? 8 : 0}}>
                 <Text style={{color: '#131b2e', fontWeight: 'bold', fontSize: 15}}>დახურვა</Text>
               </TouchableOpacity>
             </View>

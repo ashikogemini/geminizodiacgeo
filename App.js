@@ -759,12 +759,14 @@ function HomeScreen() {
         </View>
 
         {/* 8. სტიქიები */}
-        <View style={{ backgroundColor: '#151525', padding: 16, borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#2a2a4a' }}>
-          <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>8. 🔥🌍💨💧 სტიქიები</Text>
-          <Text style={{ color: '#ccc', fontSize: 13 }}>ცეცხლი: {natalReportResult.elements.fire} | მიწა: {natalReportResult.elements.earth} | ჰაერი: {natalReportResult.elements.air} | წყალი: {natalReportResult.elements.water}</Text>
-          <Text style={{ color: '#ccc', fontSize: 13, marginTop: 4 }}>დომინანტური: {natalReportResult.elements.dominant} | ნაკლები: {natalReportResult.elements.weakest}</Text>
-          <Text style={{ color: '#fff', fontSize: 13, marginTop: 8 }}>{natalReportResult.elements.analysis}</Text>
-          
+        <View style={{ backgroundColor: '#11131e', padding: 14, borderRadius: 12, marginBottom: 16, borderWidth: 1, borderColor: '#1f2233' }}>
+          <Text style={{ color: '#d4af37', fontSize: 16, fontWeight: 'bold', marginBottom: 12 }}>8. 🔥🌍💨💧 სტიქიები</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• ცეცხლი: {natalReportResult.elements.fire} | მიწა: {natalReportResult.elements.earth} | ჰაერი: {natalReportResult.elements.air} | წყალი: {natalReportResult.elements.water}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• დომინანტური: {natalReportResult.elements.dominant} | ნაკლები: {natalReportResult.elements.least}</Text>
+          {natalReportResult.elements.meaning && <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• მნიშვნელობა: {natalReportResult.elements.meaning}</Text>}
+          {natalReportResult.elements.analysis && <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• ანალიზი: {natalReportResult.elements.analysis}</Text>}
+          {natalReportResult.elements.strength && <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• ძლიერი მხარე: {natalReportResult.elements.strength}</Text>}
+          {natalReportResult.elements.challenge && <Text style={{ color: '#ccc', fontSize: 13 }}>• გამოწვევა: {natalReportResult.elements.challenge}</Text>}
         </View>
 
         {/* 9. მოდალობები */}

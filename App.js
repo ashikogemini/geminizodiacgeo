@@ -757,29 +757,17 @@ function HomeScreen() {
           ))}
         </View>
 
-        {/* 7. ოთხი კუთხე */}
-        <View style={{ backgroundColor: '#151525', padding: 16, borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#2a2a4a' }}>
-          <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>7. 🧭 ნატალური რუკის ოთხი კუთხე</Text>
-          {natalReportResult.angles.map((ang, i) => (
-            <View key={i} style={{ marginBottom: 12, borderBottomWidth: i < natalReportResult.angles.length - 1 ? 1 : 0, borderBottomColor: '#222', paddingBottom: 8 }}>
-              <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold' }}>• {ang.name}: {ang.sign}</Text>
-              <Text style={{ color: '#ccc', fontSize: 13 }}>• მნიშვნელობა: {ang.meaning}</Text>
-              <Text style={{ color: '#ccc', fontSize: 13 }}>• ძლიერი მხარე: {ang.strength}</Text>
-              <Text style={{ color: '#ccc', fontSize: 13 }}>• გამოწვევა: {ang.challenge}</Text>
+<Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>7. 🧭 ნატალური რუკის ოთხი კუთხე</Text>
+          {natalReportResult.corners && natalReportResult.corners.map((c, i) => (
+            <View key={i} style={{ marginBottom: 16, borderBottomWidth: i < natalReportResult.corners.length - 1 ? 1 : 0, borderBottomColor: '#222', paddingBottom: 12 }}>
+              <Text style={{ color: '#d4af37', fontSize: 15, fontWeight: 'bold', marginBottom: 4 }}>• {String(c.name || '')}: {String(c.sign || '')}</Text>
+              <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 2 }}>• მნიშვნელობა: {String(c.meaning || '')}</Text>
+              <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 2 }}>• როგორ ვლინდება: {String(c.manifestation || '')}</Text>
+              <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 2 }}>• ძლიერი მხარე: {String(c.strength || '')}</Text>
+              <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 2 }}>• გამოწვევა: {String(c.challenge || '')}</Text>
+              <Text style={{ color: '#ccc', fontSize: 13, fontStyle: 'italic' }}>• რჩევა: {String(c.advice || '')}</Text>
             </View>
           ))}
-        </View>
-
-        {/* 8. სტიქიები */}
-        <View style={{ backgroundColor: '#11131e', padding: 14, borderRadius: 12, marginBottom: 16, borderWidth: 1, borderColor: '#1f2233' }}>
-          <Text style={{ color: '#d4af37', fontSize: 16, fontWeight: 'bold', marginBottom: 12 }}>8. 🔥🌍💨💧 სტიქიები</Text>
-          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• ცეცხლი: {natalReportResult.elements.fire} | მიწა: {natalReportResult.elements.earth} | ჰაერი: {natalReportResult.elements.air} | წყალი: {natalReportResult.elements.water}</Text>
-          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• დომინანტური: {natalReportResult.elements.dominant} | ნაკლები: {natalReportResult.elements.least}</Text>
-          {natalReportResult.elements.meaning && <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• მნიშვნელობა: {natalReportResult.elements.meaning}</Text>}
-          {natalReportResult.elements.analysis && <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• ანალიზი: {natalReportResult.elements.analysis}</Text>}
-          {natalReportResult.elements.strength && <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• ძლიერი მხარე: {natalReportResult.elements.strength}</Text>}
-          {natalReportResult.elements.challenge && <Text style={{ color: '#ccc', fontSize: 13 }}>• გამოწვევა: {natalReportResult.elements.challenge}</Text>}
-        </View>
 
         {/* 9. მოდალობები */}
         <View style={{ backgroundColor: '#151525', padding: 16, borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#2a2a4a' }}>

@@ -672,22 +672,32 @@ function HomeScreen() {
         </View>
 
         {/* 2. Big 3 */}
-        <View style={{ backgroundColor: '#151525', padding: 16, borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#2a2a4a' }}>
-          <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>2. ☀️ 🌙 ⬆️ მთავარი სამი (Big 3)</Text>
-          <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold', marginTop: 8 }}>☀️ მზე ({natalReportResult.big3.sun.sign}, მე-{natalReportResult.big3.sun.house} სახლი)</Text>
-          <Text style={{ color: '#ccc', fontSize: 13 }}>მნიშვნელობა: {natalReportResult.big3.sun.meaning}გამოვლინება: {natalReportResult.big3.sun.manifestation}</Text>
-          <Text style={{ color: '#ccc', fontSize: 13 }}>ძლიერი მხარე: {natalReportResult.big3.sun.strength}გამოწვევა: {natalReportResult.big3.sun.challenge}</Text>
+        <View style={{ backgroundColor: '#11131e', padding: 14, borderRadius: 12, marginBottom: 16, borderWidth: 1, borderColor: '#1f2233' }}>
+          <Text style={{ color: '#d4af37', fontSize: 16, fontWeight: 'bold', marginBottom: 12 }}>2. ☀️ 🌙 ⬆️ მთავარი სამი (Big 3)</Text>
           
-          
-          <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold', marginTop: 12 }}>🌙 მთვარე ({natalReportResult.big3.moon.sign}, მე-{natalReportResult.big3.moon.house} სახლი)</Text>
-          <Text style={{ color: '#ccc', fontSize: 13 }}>მნიშვნელობა: {natalReportResult.big3.moon.meaning}გამოვლინება: {natalReportResult.big3.moon.manifestation}</Text>
-          <Text style={{ color: '#ccc', fontSize: 13 }}>ძლიერი მხარე: {natalReportResult.big3.moon.strength}გამოწვევა: {natalReportResult.big3.moon.challenge}</Text>
-          
+          {/* მზე */}
+          <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold', marginBottom: 2 }}>☀️ მზე ({natalReportResult.big3?.sun?.sign}, მე-{natalReportResult.big3?.sun?.house} სახლი)</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 2 }}>• მნიშვნელობა: {natalReportResult.big3?.sun?.meaning}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 2 }}>• როგორ ვლინდება: {natalReportResult.big3?.sun?.manifestation}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 2 }}>• ძლიერი მხარე: {natalReportResult.big3?.sun?.strength}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 2 }}>• გამოწვევა: {natalReportResult.big3?.sun?.challenge}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 12 }}>• პრაქტიკული რჩევა: {natalReportResult.big3?.sun?.advice}</Text>
 
-          
-          
-          
-          
+          {/* მთვარე */}
+          <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold', marginBottom: 2 }}>🌙 მთვარე ({natalReportResult.big3?.moon?.sign}, მე-{natalReportResult.big3?.moon?.house} სახლი)</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 2 }}>• მნიშვნელობა: {natalReportResult.big3?.moon?.meaning}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 2 }}>• როგორ ვლინდება: {natalReportResult.big3?.moon?.manifestation}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 2 }}>• ძლიერი მხარე: {natalReportResult.big3?.moon?.strength}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 2 }}>• გამოწვევა: {natalReportResult.big3?.moon?.challenge}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 12 }}>• პრაქტიკული რჩევა: {natalReportResult.big3?.moon?.advice}</Text>
+
+          {/* ასცენდენტი */}
+          <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold', marginBottom: 2 }}>⬆️ ასცენდენტი ({natalReportResult.big3?.asc?.sign || natalReportResult.ascSign || 'უცნობია'}, 1-ლი სახლი)</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 2 }}>• მნიშვნელობა: {natalReportResult.big3?.asc?.meaning}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 2 }}>• როგორ ვლინდება: {natalReportResult.big3?.asc?.manifestation}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 2 }}>• ძლიერი მხარე: {natalReportResult.big3?.asc?.strength}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 2 }}>• გამოწვევა: {natalReportResult.big3?.asc?.challenge}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 8 }}>• პრაქტიკული რჩევა: {natalReportResult.big3?.asc?.advice}</Text>
         </View>
 
         {/* 3. პლანეტები */}

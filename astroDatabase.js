@@ -182,9 +182,36 @@ export const generateFullNatalReport = (day, month, year, hour, minute, city, un
       description: `• დაბადების თარიღი: ${day} ${month}, ${y}\n• დაბადების დრო: ${formattedTime}\n• დაბადების ადგილი: ${city}\n• დროის ზონა: ${zoneDesc}\n• რუკის ტიპი: დასავლური ტროპიკული` 
     },
     big3: {
-      sun: { sign: getSign(sunLon), house: 9, meaning: 'პიროვნების ბირთვი.', manifestation: 'იდენტობა.', ...getSignData(getSign(sunLon)) },
-      moon: { sign: getSign(moonLon), house: 4, meaning: 'ემოციური სამყარო.', manifestation: 'ინსტინქტები.', ...getSignData(getSign(moonLon)) },
-      ascendant: { sign: ascSign, house: 1, meaning: 'გარეგანი ქცევა.', manifestation: 'იმიჯი.', ...getSignData(ascSign) }
+      sun: { 
+        sign: getSign(sunLon), 
+        house: typeof sunHouse !== 'undefined' ? sunHouse : 9, 
+        meaning: 'აჩვენებს პიროვნების ძირითად ბუნებას, თვითგამოხატვასა და იდენტობას.', 
+        manifestation: 'აქტიურ მოქმედებებში, ეგოსა და სასიცოცხლო ენერგიის განაწილებაში.', 
+        strength: 'ნებისყოფა, შემოქმედებითობა და ინდივიდუალურობა.',
+        challenge: 'ეგოცენტრიზმი ან საკუთარი თავის დაკარგვის შიში.',
+        advice: 'თამამად გამოხატეთ თქვენი უნიკალურობა და ნუ შეგეშინდებათ ყურადღების ცენტრში ყოფნის.',
+        ...(typeof getSignData === 'function' ? getSignData(getSign(sunLon)) : {})
+      },
+      moon: { 
+        sign: getSign(moonLon), 
+        house: typeof moonHouse !== 'undefined' ? moonHouse : 4, 
+        meaning: 'განსაზღვრავს ემოციებს, შინაგან სამყაროსა და ემოციურ რეაქციებს.', 
+        manifestation: 'ქვეცნობიერ რეფლექსებში, ინსტინქტებსა და მზრუნველობის გამოხატვაში.', 
+        strength: 'ინტუიცია, ემპათია და ემოციური სიღრმე.',
+        challenge: 'ემოციური არასტაბილურობა და წარსულზე ზედმეტი მიჯაჭვულობა.',
+        advice: 'ისწავლეთ საკუთარი ემოციების მიღება და მიეცით თავს დასვენებისა და აღდგენის უფლება.',
+        ...(typeof getSignData === 'function' ? getSignData(getSign(moonLon)) : {})
+      },
+      asc: { 
+        sign: typeof ascSign !== 'undefined' ? ascSign : 'უცნობია', 
+        house: 1, 
+        meaning: 'აჩვენებს გარეგნულ ქცევას, პირველ შთაბეჭდილებასა და სამყაროსთან ურთიერთობის სტილს.', 
+        manifestation: 'სოციალურ ნიღაბში, პირველად კონტაქტსა და ახალ გარემოსთან ადაპტაციაში.', 
+        strength: 'ადაპტაციის უნარი და გარე სამყაროსთან ეფექტური კომუნიკაცია.',
+        challenge: "ზედაპირული შეფასებების რისკი და რეალური 'მე'-ს ნიღბის მიღმა დამალვა.",
+        advice: 'იყავით ბუნებრივი — ეცადეთ, თქვენი სოციალური როლი თქვენს რეალურ შინაგან სამყაროსთან ჰარმონიაში იყოს.',
+        ...(typeof getSignData === 'function' && typeof ascSign !== 'undefined' ? getSignData(ascSign) : {})
+      }
     },
     planets: [
       { name: 'მერკური', sign: getSign(mercuryLon), house: 8, meaning: 'აზროვნება.', manifestation: 'აზრების გამოხატვა.', ...getSignData(getSign(mercuryLon)) },

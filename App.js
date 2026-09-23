@@ -1,3 +1,4 @@
+import { generateFullNatalReport } from './astroDatabase';
 import { GEMINI_BY_DAY } from './geminiByDayData';
 import { MAY_GEMINI, JUNE_DECADE_1, JUNE_DECADE_2 } from './geminiDecadesData';;
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -463,6 +464,7 @@ function HomeScreen() {
   const [selectedSign, setSelectedSign] = useState(null);
   const [signDetailModalVisible, setSignDetailModalVisible] = useState(false);
   const [activeTab, setActiveTab] = useState('მთავარი');
+  const [natalReportResult, setNatalReportResult] = useState(null);
   const [natDay, setNatDay] = useState('');
   const [natMonth, setNatMonth] = useState('');
   const [natYear, setNatYear] = useState('');
@@ -637,9 +639,158 @@ function HomeScreen() {
                 <TextInput style={{ backgroundColor: '#1a1a2e', color: '#fff', padding: 12, borderRadius: 8, borderWidth: 1, borderColor: '#2a2a4a', marginBottom: 16 }} placeholder="ჩაწერეთ ქალაქი..." placeholderTextColor="#888" value={natCustomCity} onChangeText={setNatCustomCity} />
               )}
 
-              <TouchableOpacity style={{ backgroundColor: '#d4af37', padding: 16, borderRadius: 12, alignItems: 'center', marginTop: 10 }}>
-                <Text style={{ color: '#000', fontSize: 16, fontWeight: 'bold' }}>✨ ნატალური რუკის შედგენა</Text>
-              </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => {
+                console.log('--- ღილაკს დაეჭირა! ---', {natDay, natMonth, natYear, natCity});
+                const res = generateFullNatalReport(natDay, natMonth, natYear, natHour, natMinute, natCity, natUnknownTime);
+                if (res) {
+                  setNatalReportResult(res);
+                  console.log('--- შედეგი დაგენერირდა! ---');
+                } else {
+                  alert('გთხოვთ შეავსოთ დაბადების თარიღი და ქალაქი.');
+                }
+              }}
+              style={{ backgroundColor: '#d4af37', padding: 16, borderRadius: 12, alignItems: 'center', marginTop: 10 }}
+            >
+              <Text style={{ color: '#000', fontSize: 16, fontWeight: 'bold' }}>✨ ნატალური რუკის შედგენა</Text>
+            </TouchableOpacity>
+
+            {natalReportResult && (
+      <View style={{ marginTop: 20, paddingBottom: 40, width: '100%' }}>
+        {/* 1. ვიზუალური სქემა */}
+        <View style={{ backgroundColor: '#151525', padding: 16, borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#2a2a4a' }}>
+          <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>1. 🌌 ნატალური რუკა — ვიზუალური სქემა</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 8 }}>{natalReportResult.visualSchema.description}</Text>
+          <Text style={{ color: '#fff', fontSize: 13, marginBottom: 4 }}>• ASC: {natalReportResult.visualSchema.asc} | DSC: {natalReportResult.visualSchema.dsc}</Text>
+          <Text style={{ color: '#fff', fontSize: 13 }}>• MC: {natalReportResult.visualSchema.mc} | IC: {natalReportResult.visualSchema.ic}</Text>
+        </View>
+
+        {/* 2. Big 3 */}
+        <View style={{ backgroundColor: '#151525', padding: 16, borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#2a2a4a' }}>
+          <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>2. ☀️ 🌙 ⬆️ მთავარი სამი (Big 3)</Text>
+          <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold', marginTop: 8 }}>☀️ მზე ({natalReportResult.big3.sun.sign}, მე-{natalReportResult.big3.sun.house} სახლი)</Text>
+          <Text style={{ color: '#ccc', fontSize: 13 }}>{natalReportResult.big3.sun.meaning}. ვლინდება: {natalReportResult.big3.sun.manifestation}.</Text>
+          <Text style={{ color: '#ccc', fontSize: 13 }}>ძლიერი მხარე: {natalReportResult.big3.sun.strength} | გამოწვევა: {natalReportResult.big3.sun.challenge}</Text>
+          <Text style={{ color: '#fff', fontSize: 13, fontStyle: 'italic', marginTop: 4 }}>💡 რჩევა: {natalReportResult.big3.sun.advice}</Text>
+          
+          <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold', marginTop: 12 }}>🌙 მთვარე ({natalReportResult.big3.moon.sign}, მე-{natalReportResult.big3.moon.house} სახლი)</Text>
+          <Text style={{ color: '#ccc', fontSize: 13 }}>{natalReportResult.big3.moon.meaning}. ვლინდება: {natalReportResult.big3.moon.manifestation}.</Text>
+          <Text style={{ color: '#ccc', fontSize: 13 }}>ძლიერი მხარე: {natalReportResult.big3.moon.strength} | გამოწვევა: {natalReportResult.big3.moon.challenge}</Text>
+          <Text style={{ color: '#fff', fontSize: 13, fontStyle: 'italic', marginTop: 4 }}>💡 რჩევა: {natalReportResult.big3.moon.advice}</Text>
+
+          <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold', marginTop: 12 }}>⬆️ ასცენდენტი ({natalReportResult.big3.ascendant.sign})</Text>
+          <Text style={{ color: '#ccc', fontSize: 13 }}>{natalReportResult.big3.ascendant.meaning}. ვლინდება: {natalReportResult.big3.ascendant.manifestation}.</Text>
+          <Text style={{ color: '#ccc', fontSize: 13 }}>ძლიერი მხარე: {natalReportResult.big3.ascendant.strength} | გამოწვევა: {natalReportResult.big3.ascendant.challenge}</Text>
+          <Text style={{ color: '#fff', fontSize: 13, fontStyle: 'italic', marginTop: 4 }}>💡 რჩევა: {natalReportResult.big3.ascendant.advice}</Text>
+        </View>
+
+        {/* 3. პლანეტები */}
+        <View style={{ backgroundColor: '#151525', padding: 16, borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#2a2a4a' }}>
+          <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>3. 🪐 პლანეტები ნიშნებსა და სახლებში</Text>
+          {natalReportResult.planets.map((p, i) => (
+            <View key={i} style={{ marginBottom: 12, borderBottomWidth: i < natalReportResult.planets.length - 1 ? 1 : 0, borderBottomColor: '#222', paddingBottom: 8 }}>
+              <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold' }}>• {p.name}: {p.sign} (მე-{p.house} სახლი)</Text>
+              <Text style={{ color: '#ccc', fontSize: 13 }}>მნიშვნელობა: {p.meaning} | გამოვლინება: {p.daily}</Text>
+              <Text style={{ color: '#ccc', fontSize: 13 }}>ძლიერი მხარე: {p.strength} | გამოწვევა: {p.challenge}</Text>
+              <Text style={{ color: '#fff', fontSize: 12, fontStyle: 'italic' }}>💡 რჩევა: {p.advice}</Text>
+            </View>
+          ))}
+        </View>
+
+        {/* 4. 12 სახლი */}
+        <View style={{ backgroundColor: '#151525', padding: 16, borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#2a2a4a' }}>
+          <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>4. 🏠 12 სახლი</Text>
+          {natalReportResult.houses.map((h, i) => (
+            <View key={i} style={{ marginBottom: 10 }}>
+              <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold' }}>{h.num}. {h.name} ({h.sign})</Text>
+              <Text style={{ color: '#ccc', fontSize: 13 }}>• გავლენა: {h.impact}</Text>
+              <Text style={{ color: '#ccc', fontSize: 13 }}>• ძლიერი მხარე: {h.strength} | გამოწვევა: {h.challenge}</Text>
+            </View>
+          ))}
+        </View>
+
+        {/* 5. ასპექტები */}
+        <View style={{ backgroundColor: '#151525', padding: 16, borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#2a2a4a' }}>
+          <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>5. ⚡ ასპექტები</Text>
+          {natalReportResult.aspects.map((a, i) => (
+            <View key={i} style={{ marginBottom: 10 }}>
+              <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold' }}>• {a.planets} ({a.type}, ორბისი: {a.orb})</Text>
+              <Text style={{ color: '#ccc', fontSize: 13 }}>{a.meaning}. ვლინდება: {a.manifestation}.</Text>
+              <Text style={{ color: '#fff', fontSize: 12, fontStyle: 'italic' }}>💡 რჩევა: {a.advice}</Text>
+            </View>
+          ))}
+        </View>
+
+        {/* 6. კარმული მაჩვენებლები */}
+        <View style={{ backgroundColor: '#151525', padding: 16, borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#2a2a4a' }}>
+          <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>6. 🔮 კარმული და დამატებითი მაჩვენებლები</Text>
+          {natalReportResult.karmic.map((k, i) => (
+            <View key={i} style={{ marginBottom: 10 }}>
+              <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold' }}>• {k.name}: {k.sign} (მე-{k.house} სახლი)</Text>
+              <Text style={{ color: '#ccc', fontSize: 13 }}>{k.meaning}. {k.manifestation}.</Text>
+              <Text style={{ color: '#fff', fontSize: 12, fontStyle: 'italic' }}>💡 რჩევა: {k.advice}</Text>
+            </View>
+          ))}
+        </View>
+
+        {/* 7. ოთხი კუთხე */}
+        <View style={{ backgroundColor: '#151525', padding: 16, borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#2a2a4a' }}>
+          <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>7. 🧭 ნატალური რუკის ოთხი კუთხე</Text>
+          {natalReportResult.angles.map((ang, i) => (
+            <View key={i} style={{ marginBottom: 10 }}>
+              <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold' }}>• {ang.name} ({ang.sign})</Text>
+              <Text style={{ color: '#ccc', fontSize: 13 }}>{ang.meaning}. ძლიერი მხარე: {ang.strength}.</Text>
+              <Text style={{ color: '#fff', fontSize: 12, fontStyle: 'italic' }}>💡 რჩევა: {ang.advice}</Text>
+            </View>
+          ))}
+        </View>
+
+        {/* 8. სტიქიები */}
+        <View style={{ backgroundColor: '#151525', padding: 16, borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#2a2a4a' }}>
+          <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>8. 🔥🌍💨💧 სტიქიები</Text>
+          <Text style={{ color: '#ccc', fontSize: 13 }}>ცეცხლი: {natalReportResult.elements.fire} | მიწა: {natalReportResult.elements.earth} | ჰაერი: {natalReportResult.elements.air} | წყალი: {natalReportResult.elements.water}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginTop: 4 }}>დომინანტური: {natalReportResult.elements.dominant} | ნაკლები: {natalReportResult.elements.weakest}</Text>
+          <Text style={{ color: '#fff', fontSize: 13, marginTop: 8 }}>{natalReportResult.elements.analysis}</Text>
+          <Text style={{ color: '#fff', fontSize: 13, fontStyle: 'italic', marginTop: 4 }}>💡 ბალანსის რჩევა: {natalReportResult.elements.balanceAdvice}</Text>
+        </View>
+
+        {/* 9. მოდალობები */}
+        <View style={{ backgroundColor: '#151525', padding: 16, borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#2a2a4a' }}>
+          <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>9. ⚖️ მოდალობები</Text>
+          <Text style={{ color: '#ccc', fontSize: 13 }}>კარდინალური: {natalReportResult.modalities.cardinal} | ფიქსირებული: {natalReportResult.modalities.fixed} | მუტაბელური: {natalReportResult.modalities.mutable}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginTop: 4 }}>დომინანტური: {natalReportResult.modalities.dominant}</Text>
+          <Text style={{ color: '#fff', fontSize: 13, marginTop: 8 }}>{natalReportResult.modalities.analysis}</Text>
+          <Text style={{ color: '#ccc', fontSize: 12 }}>ძლიერი მხარე: {natalReportResult.modalities.strength} | გამოწვევა: {natalReportResult.modalities.challenge}</Text>
+        </View>
+
+        {/* 10. დომინანტური ენერგიები */}
+        <View style={{ backgroundColor: '#151525', padding: 16, borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#2a2a4a' }}>
+          <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>10. 🌟 დომინანტური ენერგიები</Text>
+          <Text style={{ color: '#ccc', fontSize: 13 }}>• პლანეტა / ნიშანი: {natalReportResult.dominants.planet} / {natalReportResult.dominants.sign}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13 }}>• რატომ: {natalReportResult.dominants.why}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13 }}>• გავლენა: {natalReportResult.dominants.strength}</Text>
+          <Text style={{ color: '#fff', fontSize: 13, fontStyle: 'italic', marginTop: 4 }}>💡 რჩევა: {natalReportResult.dominants.advice}</Text>
+        </View>
+
+        {/* 11. პერსონალური შეჯამება */}
+        <View style={{ backgroundColor: '#151525', padding: 16, borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#2a2a4a' }}>
+          <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>11. 📝 პერსონალური შეჯამება</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• მთავარი თვისება: {natalReportResult.summary.trait}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• ძლიერი მხარე: {natalReportResult.summary.strength} | გამოწვევა: {natalReportResult.summary.challenge}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• აზროვნება: {natalReportResult.summary.thinking} | კომუნიკაცია: {natalReportResult.summary.communication}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• ემოციური ბუნება: {natalReportResult.summary.emotion}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• სიყვარულისა და ურთიერთობების სტილი: {natalReportResult.summary.love}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• კარიერული პოტენციალი: {natalReportResult.summary.career}</Text>
+          <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 4 }}>• ენერგიის წყარო: {natalReportResult.summary.energySource}</Text>
+          <Text style={{ color: '#fff', fontSize: 13, fontStyle: 'italic', marginTop: 8, lineHeight: 20 }}>💡 საბოლოო რჩევა: {natalReportResult.summary.finalAdvice}</Text>
+          <Text style={{ color: '#888', fontSize: 11, marginTop: 12, textAlign: 'center' }}>*ასტროლოგიური მონაცემები წარმოდგენილია როგორც ინტერპრეტაცია.</Text>
+        </View>
+      </View>
+    )}
+
+
+    
             </View>
           </ScrollView>
 

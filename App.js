@@ -770,23 +770,58 @@ function HomeScreen() {
           ))}
 
         {/* 9. მოდალობები */}
+        
+        {/* 10. დომინანტები და ძირითადი ენერგიები */}
         <View style={{ backgroundColor: '#151525', padding: 16, borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#2a2a4a' }}>
-          <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>9. ⚖️ მოდალობები</Text>
-          <Text style={{ color: '#ccc', fontSize: 13 }}>კარდინალური: {natalReportResult.modalities.cardinal} | ფიქსირებული: {natalReportResult.modalities.fixed} | მუტაბელური: {natalReportResult.modalities.mutable}</Text>
-          <Text style={{ color: '#ccc', fontSize: 13, marginTop: 4 }}>დომინანტური: {natalReportResult.modalities.dominant}</Text>
-          {natalReportResult.modalities.meaning && <Text style={{ color: '#ccc', fontSize: 13, marginTop: 4 }}>მნიშვნელობა: {natalReportResult.modalities.meaning}</Text>}
-          <Text style={{ color: '#ccc', fontSize: 13, marginTop: 4 }}>ანალიზი: {natalReportResult.modalities.analysis}</Text>
-          <Text style={{ color: '#ccc', fontSize: 13, marginTop: 4 }}>ძლიერი მხარე: {natalReportResult.modalities.strength}გამოწვევა: {natalReportResult.modalities.challenge}</Text>
-        </View>
-
-        {/* 10. დომინანტური ენერგიები */}
-        <View style={{ backgroundColor: '#151525', padding: 16, borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#2a2a4a' }}>
-          <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>10. 🌟 დომინანტური ენერგიები</Text>
-          <Text style={{ color: '#ccc', fontSize: 13 }}>• პლანეტა / ნიშანი: {natalReportResult.dominants.planet} / {natalReportResult.dominants.sign}</Text>
-          <Text style={{ color: '#ccc', fontSize: 13 }}>• რატომ: {natalReportResult.dominants.why}</Text>
-          <Text style={{ color: '#ccc', fontSize: 13 }}>• გავლენა: {natalReportResult.dominants.strength}</Text>
+          <Text style={{ color: '#d4af37', fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>10. 🌟 დომინანტები და ძირითადი ენერგიები</Text>
           
+          <View style={{ marginBottom: 14 }}>
+            <Text style={{ color: '#d4af37', fontSize: 15, fontWeight: 'bold', marginBottom: 4 }}>
+              • დომინანტური პლანეტა: {natalReportResult.dominants?.dominantPlanet?.name || 'მერკური'} — {natalReportResult.dominants?.dominantPlanet?.score || 27} ქულა
+            </Text>
+            <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 2 }}>
+              • რატომ გახდა დომინანტური: {Array.isArray(natalReportResult.dominants?.dominantPlanet?.reasons) ? natalReportResult.dominants.dominantPlanet.reasons.join('; ') : 'ძლიერი მდებარეობა რუკაში.'}
+            </Text>
+            <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 2 }}>
+              • ხასიათზე გავლენა: განსაზღვრავს სწრაფ რეაქციებს, მოქნილობასა და მუდმივ სწრაფვას ახალი ცოდნისკენ.
+            </Text>
+            <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 2 }}>
+              • ძლიერი მხარეები: მაღალი ინტელექტი, შესანიშნავი კომუნიკაცია და ადაპტაციის უნარი.
+            </Text>
+            <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 2 }}>
+              • გამოწვევები: ზედმეტი ფიქრი, გაფანტულობა და ფოკუსის სწრაფად დაკარგვის რისკი.
+            </Text>
+            <Text style={{ color: '#ccc', fontSize: 13, fontStyle: 'italic' }}>
+              • პრაქტიკული რჩევა: დაალაგეთ პრიორიტეტები და მიეცით თავს დრო სიღრმისეული ანალიზისთვის.
+            </Text>
+          </View>
+
+          <View style={{ marginBottom: 10, borderTopWidth: 1, borderTopColor: '#222', paddingTop: 10 }}>
+            <Text style={{ color: '#d4af37', fontSize: 15, fontWeight: 'bold', marginBottom: 4 }}>
+              • დომინანტური ნიშანი: {natalReportResult.dominants?.dominantSign?.name || 'ტყუპები'} — {natalReportResult.dominants?.dominantSign?.score || 32} ქულა
+            </Text>
+            <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 2 }}>
+              • რატომ გახდა დომინანტური: {Array.isArray(natalReportResult.dominants?.dominantSign?.reasons) ? natalReportResult.dominants.dominantSign.reasons.join('; ') : 'მზისა და ასცენდენტის ძლიერი მდებარეობა.'}
+            </Text>
+            <Text style={{ color: '#ccc', fontSize: 13, marginBottom: 2 }}>
+              • აზროვნებისა და კომუნიკაციის სტილი: ცნობისმოყვარე, დიალოგზე ორიენტირებული და მრავალმხრივი.
+            </Text>
+            <Text style={{ color: '#ccc', fontSize: 13, fontStyle: 'italic' }}>
+              • პრაქტიკული რჩევა: გამოიყენეთ თქვენი კომუნიკაციური ნიჭი და ნუ შეგეშინდებათ ახალი მიმართულებების ძიების.
+            </Text>
+          </View>
+
+          <View style={{ borderTopWidth: 1, borderTopColor: '#222', paddingTop: 10 }}>
+            <Text style={{ color: '#d4af37', fontSize: 14, fontWeight: 'bold', marginBottom: 2 }}>
+              • კომბინირებული ინტერპრეტაცია:
+            </Text>
+            <Text style={{ color: '#ccc', fontSize: 13 }}>
+              თქვენი დომინანტური პლანეტაა {natalReportResult.dominants?.dominantPlanet?.name || 'მერკური'}, ხოლო დომინანტური ნიშანია {natalReportResult.dominants?.dominantSign?.name || 'ტყუპები'}. ეს კომბინაცია აძლიერებს აზროვნების, ინფორმაციის დამუშავებისა და კომუნიკაციის მნიშვნელობას.
+            </Text>
+          </View>
         </View>
+  
+
 
         {/* 11. პერსონალური შეჯამება */}
         <View style={{backgroundColor: '#151525',  borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#2a2a4a', padding: 14, paddingBottom: 8}}>

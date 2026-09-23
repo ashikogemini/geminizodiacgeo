@@ -1,4 +1,89 @@
 
+// 🌟 დომინანტური პლანეტისა და ნიშნის მრავალფაქტორიანი ქულების სისტემა
+const calculateDominants = (sunSign, moonSign, ascSign, planetsList, housesList) => {
+  // პლანეტების ბაზისური ქულები
+  let planetScores = {
+    'მზე': 0, 'მთვარე': 0, 'მერკური': 0, 'ვენერა': 0, 'მარსი': 0,
+    'იუპიტერი': 0, 'სატურნი': 0, 'ურანი': 0, 'ნეპტუნი': 0, 'პლუტონი': 0
+  };
+
+  let planetReasons = {
+    'მზე': [], 'მთვარე': [], 'მერკური': [], 'ვენერა': [], 'მარსი': [],
+    'იუპიტერი': [], 'სატურნი': [], 'ურანი': [], 'ნეპტუნი': [], 'პლუტონი': []
+  };
+
+  // ნიშნების ბაზისური ქულები
+  let signScores = {
+    'ვერძი': 0, 'კურო': 0, 'ტყუპები': 0, 'კირჩხიბი': 0, 'ლომი': 0, 'ქალწული': 0,
+    'სასწორი': 0, 'მორიელი': 0, 'მშვილდოსანი': 0, 'თხის რქა': 0, 'მერწყული': 0, 'თევზები': 0
+  };
+
+  let signReasons = {
+    'ვერძი': [], 'კურო': [], 'ტყუპები': [], 'კირჩხიბი': [], 'ლომი': [], 'ქალწული': [],
+    'სასწორი': [], 'მორიელი': [], 'მშვილდოსანი': [], 'თხის რქა': [], 'მერწყული': [], 'თევზები': []
+  };
+
+  // მზისა და მთვარის ნიშნების ქულები ნიშანთა სისტემაში
+  if (sunSign && signScores[sunSign] !== undefined) {
+    signScores[sunSign] += 5;
+    signReasons[sunSign].push('მზე მდებარეობს ამ ნიშანში (+5)');
+  }
+  if (moonSign && signScores[moonSign] !== undefined) {
+    signScores[moonSign] += 5;
+    signReasons[moonSign].push('მთვარე მდებარეობს ამ ნიშანში (+5)');
+  }
+  if (ascSign && signScores[ascSign] !== undefined) {
+    signScores[ascSign] += 7;
+    signReasons[ascSign].push('ASC (ასცენდენტი) ამ ნიშანშია (+7)');
+  }
+
+  // პლანეტების დამუშავება
+  if (Array.isArray(planetsList)) {
+    planetsList.forEach(p => {
+      let pName = p.name;
+      // ვათანხმებთ სახელებს
+      if (pName === 'Sun') pName = 'მზე';
+      if (pName === 'Moon') pName = 'მთვარე';
+      if (pName === 'Mercury') pName = 'მერკური';
+      if (pName === 'Venus') pName = 'ვენერა';
+      if (pName === 'Mars') pName = 'მარსი';
+      if (pName === 'Jupiter') pName = 'იუპიტერი';
+      if (pName === 'Saturn') pName = 'სატურნი';
+      if (pName === 'Uranus') pName = 'ურანი';
+      if (pName === 'Neptune') pName = 'ნეპტუნი';
+      if (pName === 'Pluto') pName = 'პლუტონი';
+
+      if (planetScores[pName] !== undefined) {
+        // სახლების შეფასება (I, IV, VII, X)
+        if ([1, 4, 7, 10].includes(p.house)) {
+          planetScores[pName] += 4;
+          planetReasons[pName].push(`მდებარეობს მე-${p.house} (კუთხის) სახლში (+4)`);
+        }
+        // ნიშნების ქულები პლანეტებიდან
+        if (p.sign && signScores[p.sign] !== undefined) {
+          let addScore = pName === 'მერკური' || pName === 'ვენერა' || pName === 'მარსი' ? 3 : (pName === 'იუპიტერი' || pName === 'სატურნი' ? 2 : 1);
+          signScores[p.sign] += addScore;
+          signReasons[p.sign].push(`პლანეტა ${pName} აძლიერებს ამ ნიშანს (+${addScore})`);
+        }
+      }
+    });
+  }
+
+  // ტოპ პლანეტების შერჩევა
+  let sortedPlanets = Object.keys(planetScores).map(k => ({ name: k, score: planetScores[k], reasons: planetReasons[k] })).sort((a, b) => b.score - a.score);
+  let sortedSigns = Object.keys(signScores).map(k => ({ name: k, score: signScores[k], reasons: signReasons[k] })).sort((a, b) => b.score - a.score);
+
+  const dominants = calculateDominants(sunSign, moonSign, ascSign, planets, houses);
+    return {
+      dominants,
+    dominantPlanet: sortedPlanets[0] || { name: 'მერკური', score: 25, reasons: ['ძლიერი სტატუსი რუკაში'] },
+    secondaryPlanets: sortedPlanets.slice(1, 3),
+    dominantSign: sortedSigns[0] || { name: 'ტყუპები', score: 30, reasons: ['მზე და ასცენდენტი ამ ნიშანშია'] },
+    secondarySigns: sortedSigns.slice(1, 3)
+  };
+};
+
+
 
 const getOppositeSign = (sign) => {
       const opposites = {
